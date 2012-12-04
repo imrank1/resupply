@@ -29,7 +29,7 @@ elif env =='production':
 	app.config["MONGODB_HOST"] = config.production['mongodb_host']
 	app.config["MONGODB_HOST"] = config.production['mongodb_host']
 	app.config["MONGODB_PORT"] = config.production['mongodb_port']
-	stripe.api_key=confg.production['stripe_secret_key']
+	stripe.api_key=config.production['stripe_secret_key']
 
 
 
