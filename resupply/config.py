@@ -8,7 +8,7 @@ dev = {
 production = {
 	'stripe_secret_key': 'sk_07vkIYtFhTJY68s2pipRKmlvDtiqk',
 	'stripe_publishable_key': 'pk_07vkx4yqszys5bnTNnHPSAAimkCie',
-	'mongodb_db': 'resupply_production',
+	'mongodb_db': 'resupply_dev',
 	'mongodb_username': 'resupply_dev',
 	'mongodb_password': 'imran',
 	'mongodb_host': 'alex.mongohq.com',
