@@ -5,8 +5,7 @@ dev = {
   'secret_key':'cyrus'
 }
 
-
-production= {
+production = {
 	'stripe_secret_key': 'sk_07vkIYtFhTJY68s2pipRKmlvDtiqk',
 	'stripe_publishable_key': 'pk_07vkx4yqszys5bnTNnHPSAAimkCie',
 	'mongodb_db':'resupply_production',
