@@ -20,15 +20,17 @@ configuration = None
 if env =='development':
 	app.config["MONGODB_DB"] = config.dev['mongodb_db']
 	app.config["SECRET_KEY"] = config.dev['secret_key']
+	app.config["STRIPE_PUBLISHABLE_KEY"] = config.dev['stripe_publishable_key']
 	stripe.api_key=config.dev['stripe_secret_key']
 elif env =='production':
 	app.config["MONGODB_DB"] = config.production['mongodb_db']
-	app.config["SECRET_KEY"] = config.dev['secret_key']
+	app.config["SECRET_KEY"] = config.production['secret_key']
 	app.config["MONGODB_USERNAME"] = config.production['mongodb_username']	
 	app.config["MONGODB_PASSWORD"] = config.production['mongodb_password']
 	app.config["MONGODB_HOST"] = config.production['mongodb_host']
 	app.config["MONGODB_HOST"] = config.production['mongodb_host']
 	app.config["MONGODB_PORT"] = config.production['mongodb_port']
+	app.config["STRIPE_PUBLISHABLE_KEY"] = config.production['stripe_publishable_key']
 	stripe.api_key=config.production['stripe_secret_key']
 
 

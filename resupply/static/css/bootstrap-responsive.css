@@ -867,6 +867,9 @@
   }
 }
 
+
+/*IPHONE*/
+
 @media (max-width: 480px) {
   .nav-collapse {
     -webkit-transform: translate3d(0, 0, 0);
@@ -875,6 +878,34 @@
     display: block;
     line-height: 20px;
   }
+  /*Custom*/
+
+  body{padding-top:5px!important; margin-top:5px!important;}
+
+  .callout{padding:6px!important;}
+
+  .companycallout h1{text-transform: uppercase; font-size:2em!important; line-height:1em!important; color:#fff; text-align: center;}
+
+  nav.primary ul li a{width:180px; margin-left:0!important;}
+
+  .nav-collapse.collapse{background:#000;}
+
+  .nav-collapse .nav > li{width:50%; float:left!important;  margin-bottom: 10px;}
+
+  .nav-collapse .nav > li a{color:#fff; text-shadow:none; font-size:13px;}
+
+  .nav-collapse .nav > li > a, .nav-collapse .dropdown-menu a{color:#fff!important; text-shadow:none!important;  font-size:20px!important;}
+
+  .entry{width:220px;}
+
+
+  #contact-form .input-text{width:200px!important;}
+  #contact-form .input-textarea{width:200px!important;}
+  .navbar .brand img{width:70%;}
+
+
+/*End custom*/
+
   input[type="checkbox"],
   input[type="radio"] {
     border: 1px solid #ccc;
@@ -958,19 +989,14 @@
   }
   .nav-collapse .nav > li > a,
   .nav-collapse .dropdown-menu a {
-    padding: 9px 15px;
+    padding: 9px 5px;
     font-weight: bold;
     color: #777777;
-    -webkit-border-radius: 3px;
-       -moz-border-radius: 3px;
-            border-radius: 3px;
+    font-size:10px;
   }
   .nav-collapse .btn {
     padding: 4px 10px 4px;
     font-weight: normal;
-    -webkit-border-radius: 4px;
-       -moz-border-radius: 4px;
-            border-radius: 4px;
   }
   .nav-collapse .dropdown-menu li + li a {
     margin-bottom: 2px;
@@ -1048,6 +1074,8 @@
     padding-right: 10px;
     padding-left: 10px;
   }
+
+  .navbar .nav > li > a{font:bold 12px/20px; padding:5px;}
 }
 
 @media (min-width: 980px) {

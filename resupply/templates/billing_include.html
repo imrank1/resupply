@@ -1,0 +1,193 @@
+<div class="row" style="margin-left:60px;">
+    <!-- Billing -->
+    <div class="span6">
+        <div class="well">
+
+
+            <h5>Credit Card Information</h5>
+
+
+            <form action="signup-final" method="POST">
+                <div class="control-group">
+                    <div class="controls row">
+                        <div class="span2" style="margin-right: 20px;">
+                            <label class="control-label" for="id_billing_firstname">First Name</label>
+                            <input type="text" name="billing_firstname" class="input-medium" id="id_billing_firstname" value="" />
+
+                        </div>
+                        <div class="span2">
+                            <label class="control-label" for="id_billing_lastname">Last Name</label>
+                            <input type="text" name="billing_lastname" class="input-medium" id="id_billing_lastname" value="" />
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="id_billing_cardnumber">Card Number</label>
+                    <div class="controls">
+                        <input type="text" name="billing_cardnumber" class="input" id="id_billing_cardnumber" value="" />
+
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="id_billing_cvv">CVV</label>
+                    <div class="controls">
+                        <input type="text" name="billing_cvv" class="input-small" id="id_billing_cvv" value="" />
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="span3">
+                        <!-- MONTH -->
+                        <div class="control-group">
+                            <label class="control-label" for="id_billing_month">Month</label>
+                            <div class="controls">
+                                <select name="billing_month" class="input-medium" id="id_billing_month">
+                                    <option value="1">01 - January</option>
+                                    <option value="2">02 - February</option>
+                                    <option value="3">03 - March</option>
+                                    <option value="4">04 - April</option>
+                                    <option value="5">05 - May</option>
+                                    <option value="6">06 - June</option>
+                                    <option value="7">07 - July</option>
+                                    <option value="8">08 - August</option>
+                                    <option value="9">09 - September</option>
+                                    <option value="10">10 - October</option>
+                                    <option value="11">11 - November</option>
+                                    <option value="12">12 - December</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- billing_month -->
+                    </div>
+
+                    <div class="span2">
+                        <!-- YEAR -->
+                        <div class="control-group">
+                            <label class="control-label" for="id_billing_year">Year</label>
+                            <div class="controls">
+                                <select name="billing_year" class="input-small" id="id_billing_year">
+
+                                    <option value="2012">2012</option>
+
+                                    <option value="2013">2013</option>
+
+                                    <option value="2014">2014</option>
+
+                                    <option value="2015">2015</option>
+
+                                    <option value="2016">2016</option>
+
+                                    <option value="2017">2017</option>
+
+                                    <option value="2018">2018</option>
+
+                                    <option value="2019">2019</option>
+
+                                    <option value="2020">2020</option>
+
+                                    <option value="2021">2021</option>
+
+                                    <option value="2022">2022</option>
+
+                                </select>
+
+                            </div>
+                        </div>
+                        <!-- billing_year -->
+                    </div>
+                </div>
+                <!-- end month and year row -->
+
+
+
+
+
+
+
+        </div>
+        <!-- end of well -->
+
+    </div>
+    <!-- container.row.span6 -->
+
+    <div class="span6">
+
+        <div class="well">
+            <!-- BILLING -->
+            <h5>Billing Address</h5>
+
+            <div class="row">
+                <div class="span2">
+                    <!-- ZIPCODE -->
+                    <div class="control-group">
+                        <label class="control-label" for="id_billing_zip">Postal Code</label>
+                        <div class="controls">
+                            <input type="text" name="billing_zip" class="input-small" id="id_billing_zip" value="" />
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="span3">
+                    <!-- COUNTRY -->
+                    <div class="control-group">
+                        <label class="control-label" for="id_billing_country">Country</label>
+                        <div class="controls">
+                            <select name="billing_country" class="input-medium" id="id_billing_country" value="US">
+
+                                <option value="CA" >Canada</option>
+
+                                <option value="US" selected="selected">United States</option>
+
+                            </select>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- end zipcode and country row -->
+
+            <div class="control-group">
+                <div class="controls row">
+                    <div class="span2" style="margin-right: 20px;">
+                        <label class="control-label" for="id_billing_address1">Addresss</label>
+                        <input type="text" name="billing_firstname" class="input-medium" id="id_billing_address1" value="" />
+
+                    </div>
+                    <div class="span2">
+                        <label class="control-label" for="id_billing_address2">Apt/Suite No</label>
+                        <input type="text" name="billing_lastname" class="input-medium" id="id_billing_address2" value="" />
+
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="control-group">
+                <label class="control-label" for="id_billing_city">City</label>
+                <div class="controls">
+                    <input type="text" name="billing_city" class="input" id="id_billing_city" value="" />
+
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="id_billing_state">State/Province</label>
+                <div class="controls">
+                    <input type="text" name="billing_state" class="input" id="id_billing_state" value="" />
+
+                </div>
+            </div>
+
+        </div><!-- end of well -->
+        <input type="submit" id="submitBilling" class="btn " value="Sign me up!" style=""></input>
+
+        </form>
+    </div><!-- .span6 -->
+
+</div><!-- container.row -->

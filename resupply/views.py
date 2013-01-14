@@ -8,14 +8,34 @@ from resupply.services.userservice import *
 from flask.ext.login import LoginManager, UserMixin, \
                                 login_required, login_user, logout_user, current_user
 from flask.ext.mongoengine import DoesNotExist
+import stripe
 
 # import resupply.services.userservice
 
-
+@app.route("/test")
+def test():
+    return render_template('test.html')
 
 # @app.route("/")
 # def home():
 #     return render_template('home.html')
+
+
+@app.route("/charge", methods=['POST'])
+def charge():
+    customer = stripe.Customer.create(
+        email='customer@example.com',
+        card=request.form['stripeToken']
+    )
+
+    charge = stripe.Charge.create(
+        customer=customer.id,
+        amount=5000,
+        currency='usd',
+        description='Flask Charge Example'
+    )
+    return render_template('pricing.html')
+
 
 
 @app.route("/pricing")
@@ -23,9 +43,22 @@ def pricing():
     return render_template('pricing.html')
 
 
-@app.route("/signup")
-def signupStep1():
-    return render_template('signup-step1.html',key=config.stripe_keys['publishable_key'])
+@app.route("/pricing_metro")
+def pricing():
+    return render_template('pricing_metro.html')
+
+#
+#@app.route("/signup")
+#def signupStep1():
+#    return render_template('signup-step1.html',key=config.stripe_keys['publishable_key'])
+
+
+@app.route("/step1", methods =['POST','GET'])
+def step1():
+    print 'whaaat'
+    packageType = request.form['packageType']
+    return render_template('signupStep2.html',packageType=packageType)
+
 
 
 @app.route("/signup-step2")
@@ -153,9 +186,9 @@ def signupSelectPackage():
 	user = current_user
 	user = UserService.updateUserPackage(packageType,user)
 
-	return render_template('signup-step3.html')
+	return render_template('signup-step3.html',key=app.config["STRIPE_PUBLISHABLE_KEY"])
 
-
+#this is where i need to process the credit card information
 @app.route("/signup-final",methods=["POST"])
 @login_required
 def signupSelectPackage():
