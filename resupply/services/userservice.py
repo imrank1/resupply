@@ -3,8 +3,8 @@ from resupply.models import *
 
 class UserService:
 	@staticmethod
-	def createUser(emailAddress,password,gender):
-		user = User(emailAddress=emailAddress,gender=gender)
+	def createUser(emailAddress,password,address,address2,city,zipCode,stripeToken,package,stripeCustomerId):
+		user = User(emailAddress=emailAddress,address=address,address2=address2,city=city,zipCode=zipCode,stripeToken=stripeToken,currentPackage=package,stripeCustomerId=stripeCustomerId)
 		user.set_password(password)
 		user.save()
 		return user

@@ -9,12 +9,33 @@ from flask.ext.login import LoginManager, UserMixin, \
                                 login_required, login_user, logout_user, current_user
 from flask.ext.mongoengine import DoesNotExist
 import stripe
+from flask import make_response 
+from functools import update_wrapper 
 
 # import resupply.services.userservice
+
+def nocache(f): 
+	def new_func(*args, **kwargs): 
+		resp = make_response(f(*args, **kwargs)) 
+		resp.cache_control.no_cache = True 
+		return resp 
+	return update_wrapper(new_func, f) 
+
 
 @app.route("/test")
 def test():
     return render_template('test.html')
+
+
+@app.after_request
+def add_header(response):
+    """
+    Add headers to both force latest IE rendering engine or Chrome Frame,
+    and also to cache the rendered page for 10 minutes.
+    """
+    response.headers['X-UA-Compatible'] = 'IE=Edge,chrome=1'
+    response.headers['Cache-Control'] = 'public, max-age=0'
+    return response
 
 # @app.route("/")
 # def home():
@@ -23,18 +44,45 @@ def test():
 
 @app.route("/charge", methods=['POST'])
 def charge():
-    customer = stripe.Customer.create(
-        email='customer@example.com',
-        card=request.form['stripeToken']
+	email = request.form['email']
+	password = request.form['password']
+	shippingAddress = request.form['shippingAddress']
+	shippingAddress2 = request.form['shippingAddress']
+	city = request.form['shippingCity']
+	zipcode = request.form['shippingZip']
+
+	customer = stripe.Customer.create(
+    	email=request.form['email'],
+    	card=request.form['stripeToken']
     )
 
-    charge = stripe.Charge.create(
-        customer=customer.id,
-        amount=5000,
-        currency='usd',
-        description='Flask Charge Example'
+	packageType = request.form['packageType']
+
+	if packageType == "basic":
+		chargePrice = 1700
+	elif packageType == "basicPlus":
+		chargePrice = 2000
+	elif packageType == "premium":
+		chargePrice = 2500
+	elif packageType == "premiumPlus":
+		chargePrice = 2800
+
+
+	description = "Charging customer with email : " + email + " for " + packageType + " at address :" + shippingAddress + " " + shippingAddress2 + " " + city + " " + zipcode
+
+	charge = stripe.Charge.create(
+    	customer=customer.id,
+    	amount=chargePrice,
+    	currency='usd',
+    	description=description
     )
-    return render_template('pricing.html')
+
+
+
+	createdUser = UserService.createUser(email,password,shippingAddress,shippingAddress2,city,zipcode,request.form['stripeToken'],packageType,customer.id)
+
+	login_user(createdUser)
+	return render_template('pricing.html')
 
 
 
@@ -55,13 +103,13 @@ def pricing():
 
 @app.route("/step1", methods =['POST','GET'])
 def step1():
-    print 'whaaat'
     packageType = request.form['packageType']
     return render_template('signupStep2.html',packageType=packageType)
 
 
 
 @app.route("/signup-step2")
+@nocache
 def signupStep1():
     return render_template('signup-step2.html')
 
@@ -87,11 +135,6 @@ def signupStep2():
 
 	user.current_package = pricingOption
 	user.save()
-
-	print pricingOption
-	print email
-	print gender
-	print zipCode
 	return render_template('pricing.html')
 
 
@@ -127,6 +170,14 @@ def quickSignup():
 
 	return
 
+
+#@app.route("/checkEmail",methods=['GET'])
+#def checkEmail():
+#    request.form['email']
+#    count_of_email = User.objects(emailAddress=email).count()
+#    if(count_of_email > 0 ){
+#
+#    }
 
 # callback to relaad the user object        
 @login_manager.user_loader

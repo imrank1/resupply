@@ -16,6 +16,10 @@
 	clear:both;
 }
 
+.errorState {
+	border-color:red !important;
+}
+
 body {
 	font-family: 'Droid Sans';
 	font-size: 12px;

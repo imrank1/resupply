@@ -1,0 +1,31 @@
+<script type="text/javascript" src="/static/js/ext/parsely.js"></script>
+
+<div class="offset4 span6 well">
+    <legend>Please Enter Account Details: </legend>
+     <div class="alert alert-error" id="signupErrorMessage" class="alert alert-error" style="display:none;">Please check the highlighted fields.
+    </div>
+
+    <div class="alert alert-error" id="passwordMismatchError" class="alert alert-error" style="display:none;">Passwords don't match!
+    </div>
+    <form accept-charset="UTF-8" action="" data-validate="parsley" method="post" id="payment-form">
+        <input class="requiredStuff span3" id="name" name="name" placeholder="Full Name" type="text">
+        <input class="requiredStuff span3" id="email" name="email" data-required="true"placeholder="Email"  data-type="email"  type="text">
+        <input class="requiredStuff span3" id="password" name="password" data-required="true" placeholder="Password" type="password">
+        <input class="requiredStuff span3" id="passwordConfirm" name="passwordConfirm" data-required="true" placeholder="Confirm Password" type="password">
+
+
+        <!--  -->
+        <legend>Shipping Details</legend>
+        <input class="requiredStuff span3" id="shipping-address" name="shipping-address" placeholder="Address" data-required="true" type="text">
+        <input class="span3" id="shipping-address2" name="shipping-address2" placeholder="Address Continued" data-required="true" type="text">
+        <input class="requiredStuff span3" id="shipping-city" name="shipping-city" placeholder="City" data-required="true" type="text">
+        <input class="requiredStuff span3" id="shipping-zipcode" name="shipping-zipcode" placeholder="Zip Code" data-required="true" type="text">
+
+         <input id="packageType" name="packageType" type="hidden" value=<%= packageType %>>
+
+
+        <div style="text-align:center">
+            <button id="finalSignupButton" class="btn btn-warning" type="submit">Checkout Securely!</button>
+        </div>
+    </form>
+</div>

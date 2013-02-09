@@ -127,7 +127,7 @@ h2.explain{line-height:34px;}
 .actionbtn{background:#DD4A38; color: #ECEEF1!important; text-shadow:none; font-weight:bold; margin-right:20px; padding: 15px 25px;}
 .actionbtn:hover{background:#DD4A38; box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25) inset; -webkit-transition:all .3s linear;}
 
-.explain h2{font-weight:200; max-width: 80%; margin:0 auto; text-align:center; margin-bottom:16px;}
+.explain h2{font-weight:200;margin:0 auto; text-align:center; margin-bottom:16px;}
 .contactbtn{background:#712514; color: #ECEEF1!important; text-shadow:none; font-weight:bold; padding: 15px 25px;}
 .contactbtn:hover{background:#96331D; box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25) inset;-webkit-transition:all .3s linear}
 .homecallout{color:#A2A9B4;}

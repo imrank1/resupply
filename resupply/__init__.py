@@ -22,6 +22,7 @@ if env =='development':
 	app.config["SECRET_KEY"] = config.dev['secret_key']
 	app.config["STRIPE_PUBLISHABLE_KEY"] = config.dev['stripe_publishable_key']
 	stripe.api_key=config.dev['stripe_secret_key']
+	app.config["SEND_FILE_MAX_AGE_DEFAULT"] = 0
 elif env =='production':
 	app.config["MONGODB_DB"] = config.production['mongodb_db']
 	app.config["SECRET_KEY"] = config.production['secret_key']
