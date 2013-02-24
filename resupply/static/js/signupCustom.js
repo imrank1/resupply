@@ -11,7 +11,6 @@
 
         processSignup:function(e){
             self = this;
-            debugger;
             e.preventDefault();
             var missingFields = false;
             var error=false;
@@ -74,7 +73,6 @@
         },
 
     stripeResponseHandler :function(response) {
-    debugger;
     if (response.error) {
         alert('somthing went wrong');
         // window.spinner.stop();

@@ -1,5 +1,5 @@
 	<!--start: Wrapper-->
-	<div id="wrapper">
+	<div id="updateShippingSection">
 		<div class="line"></div>
     <div class="row">
       <div class="span4 offset1">
@@ -16,126 +16,126 @@
 
                <input type="submit" class="btn btn-large btn-primary disabled" style="margin-left:69px; margin-top:10px;" name="updateBillingSubmit" id="updateBillingButton" value="Current Package">
              </form>
-              <!-- <a href="#" class="btn btn-large disabled" style="margin-left:69px; margin-top:10px;" >Current Package</a> -->
-            </div>  
-            <form action="/updateShippingAddress" method="POST">
+             <!-- <a href="#" class="btn btn-large disabled" style="margin-left:69px; margin-top:10px;" >Current Package</a> -->
+           </div>  
+           <form action="/updateShippingAddress" method="POST">
             <div class="well well-large ui-state-default" style="float:left;margin-left:30px;">
               <div class="alert alert-success" id="successShippingAddressChange" class="alert alert-error" style="display:none;"> Shipping address updated!
-    </div>
-    <div class="alert alert-error" id="updateBillingFailure" class="alert alert-error" style="display:none;">Sorry we could not update your shipping address. Please contact support. 
-    </div>
+              </div>
+              <div class="alert alert-error" id="updateBillingFailure" class="alert alert-error" style="display:none;">Sorry we could not update your shipping address. Please contact support. 
+              </div>
               <a href="#" class="thumbnail">
                 <img src="http://placehold.it/300x200" alt="">
               </a>
               <input type="submit" id="updateShippingAddress" class="btn btn-large btn-primary" style="margin-left:99px;margin-top:10px;" name="updateBillingSubmit" value="Upgrade!">
             </div>
-            </form> 
-          </div>
-
+          </form> 
         </div>
 
       </div>
-    </div>
 
-          <div class="span7 offset1">
+    </div>
+  </div>
+
+  <div class="span7 offset1">
+    <div class="row">
+
+      <h5>Shipping Address</h5>
+
+      <!-- <div class="well"> -->
+        <!-- BILLING -->
+
+
+        <form action="/updateShippingAddress" method="POST">
+          <div class="well well-large ui-state-default" style="float:left;margin-left:30px;">
+            <div class="alert alert-success" id="successShippingAddressChange" class="alert alert-error" style="display:none;"> Shipping address updated!
+            </div>
+            <div class="alert alert-error" id="updateBillingFailure" class="alert alert-error" style="display:none;">Sorry we could not update your shipping address. Please contact support. 
+            </div>
             <div class="row">
 
-              <h5>Shipping Address</h5>
+              <div class="span3">
+                <!-- COUNTRY -->
+                <div class="control-group">
+                  <label class="control-label" for="id_billing_country">Country</label>
+                  <div class="controls">
+                    <select name="billing_country" class="input-medium" id="id_billing_country" value="US">
+                      <option value="US" selected="selected">United States</option>
+                    </select>
 
-              <div class="well">
-                <!-- BILLING -->
-
-
- <form action="/updateShippingAddress" method="POST">
-            <div class="well well-large ui-state-default" style="float:left;margin-left:30px;">
-              <div class="alert alert-success" id="successShippingAddressChange" class="alert alert-error" style="display:none;"> Shipping address updated!
-    </div>
-    <div class="alert alert-error" id="updateBillingFailure" class="alert alert-error" style="display:none;">Sorry we could not update your shipping address. Please contact support. 
-    </div>
-                <div class="row">
-                  <div class="span2">
-                    <!-- ZIPCODE -->
-                    <div class="control-group">
-                      <label class="control-label" for="id_billing_zip">Postal Code</label>
-                      <div class="controls">
-                        <input type="text" name="shippingZip" class="input-small" id="id_billing_zip" value="{{ zipCode }}" />
-
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="span3">
-                    <!-- COUNTRY -->
-                    <div class="control-group">
-                      <label class="control-label" for="id_billing_country">Country</label>
-                      <div class="controls">
-                        <select name="billing_country" class="input-medium" id="id_billing_country" value="US">
-                          <option value="US" selected="selected">United States</option>
-                        </select>
-
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-
-
-                <div class="controls row">
-                  <div class="span2" style="margin-right: 30px;">
-                    <label class="control-label" for="id_billing_address1">Address</label>
-
-                    <input type="text" name="shippingAddress" class="input" id="id_billing_address1" value="{{ address }}" />
-                  </div>
-                  <div class="span2">
-                    <label class="control-label" for="id_billing_address2">Apt/Suite</label>
-                    <input type="text" name="shippingAddress2" class="input" id="id_billing_address2" value="{{ address2 }}" />
                   </div>
                 </div>
+              </div>
+
+            </div>
 
 
-                <div class="controls row">
-                  <div class="span2" style="margin-right: 30px;">
-                    <label class="control-label" for="id_billing_city">City</label>
+            <div class="controls row">
+              <div class="span2" style="margin-right: 30px;">
+                <label class="control-label" for="id_billing_address1">Address</label>
 
-                    <input type="text" name="shippingCity" class="input" id="id_billing_city" value="{{ city }}" />
-                  </div>
+                <input type="text" name="shippingAddress" class="input" id="shippingAddress" value="{{ address }}" />
+              </div>
+              <div class="span2">
+                <label class="control-label" for="id_billing_address2">Apt/Suite</label>
+                <input type="text" name="shippingAddress2" class="input" id="shippingAddress2" value="{{ address2 }}" />
+              </div>
+            </div>
+
+
+            <div class="controls row">
+              <div class="span2" style="margin-right: 30px;">
+                <label class="control-label" for="id_billing_city">City</label>
+
+                <input type="text" name="shippingCity" class="input" id="shippingCity" value="{{ city }}" />
+              </div>
+            </div>
+
+
+            <div class="span2">
+              <!-- ZIPCODE -->
+              <div class="control-group">
+                <label class="control-label" for="id_billing_zip">Zip Code</label>
+                <div class="controls">
+                  <input type="text" name="shippingZip" class="input-small" id="shippingZip" value="{{ zipCode }}" />
+
                 </div>
+              </div>
+            </div>
 
 
+            <input type="submit" id="updateAddress" class="btn btn-large btn-primary" style="margin-top:10px;" value="Update!"/>
+          </form>
+        </div><!-- end of well -->
 
+      </div>end of well
+      <div class="span6">
 
-                <input type="submit" id="updateAddress" class="btn btn-large btn-primary" style="margin-top:10px;" value="Update!"/>
-</form>
-              </div><!-- end of well -->
-
-            </div><!-- end of well -->
-              <div class="span6">
-
-                <div class="well" style="margin-left:-60px">
-                To change your password we'll send an email confirmation to your registered email where you can reset your password.
-               <div><a href="#" class="btn btn-large btn-primary" style="margin-top:10px;">Change my password!</a></div>
-             </div>
-           </div>
-
-             <div class="span6">
-
-                <div class="well" style="margin-left:-60px">
-                If you want to close your account please click on the button below and we'll send an email confirmation to your registered email.
-               <div><a href="#" class="btn btn-large btn-primary" style="margin-top:10px;">Close my account!</a></div>
-             </div>
-          </div>
-
-
-          </div><!-- .span6 -->
+        <div class="well" style="margin-left:-60px">
+          To change your password we'll send an email confirmation to your registered email where you can reset your password.
+          <div><a href="#" class="btn btn-large btn-primary" style="margin-top:10px;">Change my password!</a></div>
         </div>
-      </div><!-- container.row -->
-    </div>
-  </div>
-  <!-- start: Container -->
-  <div class="container">
+      </div>
+
+      <div class="span6">
+
+        <div class="well" style="margin-left:-60px">
+          If you want to close your account please click on the button below and we'll send an email confirmation to your registered email.
+          <div><a href="#" class="btn btn-large btn-primary" style="margin-top:10px;">Close my account!</a></div>
+        </div>
+      </div>
 
 
+    </div><!-- .span6 -->
   </div>
+</div><!-- container.row -->
+</div>
+</div>
+<!-- start: Container -->
+<div class="container">
+
+
+</div>
 
 
 

@@ -15,24 +15,21 @@
         e.preventDefault();
         var name = $('#name').val();
         var password = $('#password').val();
-        var shippingAddress = $('#shipping-address').val();
-        var shippingAddress2 = $('#shipping-address2').val();
-        var shippingCity = $('#shipping-city').val();
-        var shippingZip = $('#shipping-zipcode').val();
+        var shippingAddress = $('#shippingAddress').val();
+        var shippingAddress2 = $('#shippingAddress2').val();
+        var shippingCity = $('#shippingCity').val();
+        var shippingZip = $('#shippingZip').val();
         $.ajax({
           url: '/updateShippingAddress',
           type: 'POST',
           data: { shippingAddress: shippingAddress,shippingAddress2:shippingAddress2,shippingCity:shippingCity,shippingZip:shippingZip},
           cache: false,
           success: function(){
-            debugger;
             $("#successShippingAddressChange").toggle();
             return;
         },
         error: function(){
-            alert('error');
             $("#updateBillingFailure").show("slow");
-
         }
         });
         return false;
