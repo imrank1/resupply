@@ -14,3 +14,12 @@ class UserService:
 		user.setPackage(packageType)
 		user.save()
 		return user
+
+	@staticmethod
+	def updateUserShippingAddress(user,address,address2,zipcode,city):
+		user.address = address
+		user.address2 = address2
+		user.zipCode = zipcode
+		user.city = city
+		user.save()
+		return user

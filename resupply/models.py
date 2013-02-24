@@ -14,6 +14,14 @@ class User(db.Document,UserMixin):
     password_hash= db.StringField(max_length=255, required=True)
     current_package= db.StringField(max_length=255,required=False)
     gender = db.StringField(max_length=255,required=False)
+    zipCode = db.StringField(max_length=255, required=False)
+    address = db.StringField(max_length=255, required=False)
+    address2 = db.StringField(max_length=255, required=False)
+    city = db.StringField(max_length=255, required=False)
+    stripeCustomerId = db.StringField(max_length=255, required=False)
+    stripeToken = db.StringField(max_length=255, required=False)
+    currentPackage = db.StringField(max_length=255, required=False)
+
 
     def __unicode__(self):
         return self.id

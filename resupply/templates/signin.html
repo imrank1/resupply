@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<!-- start: Meta -->
+	<meta charset="utf-8">
+	<title>Resupp.ly</title> 
+	<meta name="description" content="Your Personal Concierge for home goods"/>
+	<meta name="keywords" content="delivery service, home goods, everyday items" />
+	<meta name="author" content="resupp.ly"/>
+	<!-- end: Meta -->
+	
+	<!-- start: Mobile Specific -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<!-- end: Mobile Specific -->
+	
+	<!-- start: Facebook Open Graph -->
+	<meta property="og:title" content="Resupp.ly"/>
+	<meta property="og:description" content=""/>
+	<meta property="og:type" content="website"/>
+	<meta property="og:url" content="http://wwww.resupp.ly.com"/>
+	<meta property="og:image" content="https://s3.amazonaws.com/rolldelivered-static/images/rolldelivered.png"/>
+	<!-- end: Facebook Open Graph -->
+
+	<!-- start: CSS -->
+	<link href="static/css/bootstrap.css" rel="stylesheet">
+	<link href="static/css/bootstrap-responsive.css" rel="stylesheet">
+	<link href="static/css/style.css" rel="stylesheet">
+	<link href="static/css/parallax-slider.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid+Sans:400,700">
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid+Serif">
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Boogaloo">
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Economica:700,400italic">
+	<!-- end: CSS -->
+
+	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+      <![endif]-->
+	
+ 
+  </head>
+  <body>
+
+  	<!--start: Header -->
+  	<header>
+
+  		<!--start: Container -->
+  		<div class="container">
+
+  			<!--start: Row -->
+  			<div class="row">
+
+  				<!--start: Logo -->
+  				<div class="logo span3">
+
+  					<i class="ico-charts circle"></i><a class="brand" href="#">Re<span>supp.ly</span>.</a>
+
+  				</div>
+  				<!--end: Logo -->
+
+  				<!--start: Navigation -->
+  				<div class="span9">
+
+  					<div class="navbar navbar-inverse">
+  						<div class="navbar-inner">
+  							<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+  								<span class="icon-bar"></span>
+  								<span class="icon-bar"></span>
+  								<span class="icon-bar"></span>
+  							</a>
+  							<div class="nav-collapse collapse">
+  								<ul class="nav">
+  									<li class="active dropdown">
+  										<a href="#" class="dropdown-toggle" data-toggle="dropdown">Home<b class="caret"></b></a>
+  										<ul class="dropdown-menu">
+  											<li><a href="index.html">Home standard</a></li>
+  											<li><a href="index2.html">Home alternative</a></li>
+  											<li><a href="index3.html">Home alternative 2</a></li>
+  											<li><a href="index4.html">Home alternative 3</a></li>
+  										</ul>
+  									</li>
+  									<li><a href="about.html">About</a></li>
+  									<li><a href="pricing">Pricing</a></li>
+  									<li><a href="blog.html">Blog</a></li>
+  									<li><a href="contact.html">Contact</a></li>
+  								</ul>
+  							</div>
+  						</div>
+  					</div>
+
+  				</div>	
+  				<!--end: Navigation -->
+
+  			</div>
+  			<!--end: Row -->
+
+  		</div>
+  		<!--end: Container-->			
+
+  	</header>
+  	<!--end: Header-->
+
+
+  	<!-- end: Slider -->
+
+  	<!--start: Wrapper-->
+  	<div id="wrapper">
+
+  		<!--start: Container -->
+  		<div class="container">
+  		<div class="row" style="margin-top:50px;">
+		<div class="span4 offset4 well">
+			<legend>Please Sign In</legend>
+          	<!-- <div class="alert alert-error">
+                <a class="close" data-dismiss="alert" href="#">×</a>Incorrect Username or Password!
+            </div> -->
+			<form method="POST" action="process-login" accept-charset="UTF-8">
+			<input type="text" id="email" class="span4" name="email" placeholder="Email">
+			<input type="password" id="password" class="span4" name="password" placeholder="Password">
+			<button type="submit" name="submit" class="btn btn-info btn-block">Sign in</button>
+			</form> 
+		</div>
+	</div>
+
+			{% with messages = get_flashed_messages() %}
+				{% if messages %}
+				<div class="row" style="text-align:center">
+					<ul class="alert alert-error">
+						{% for message in messages %}
+						<li>{{ message }}</li>
+						{% endfor %}
+					</ul>
+				</div>
+				{% endif %}
+				{% endwith %} 
+	</div>
+	<!-- end: Row -->
+
+	<hr>
+
+	<hr>
+
+</div>
+<!--end: Container-->
+
+</div>
+<!-- end: Wrapper  -->			
+
+<!-- start: Footer Menu -->
+<div id="footer-menu" class="hidden-tablet hidden-phone">
+
+	<!-- start: Container -->
+	<div class="container">
+
+		<!-- start: Row -->
+		<div class="row">
+
+			<!-- start: Footer Menu Logo -->
+			<div class="span2">
+				<div id="footer-menu-logo">
+					<div id="logo-chart"></div><a class="brand" href="#">Resupp<span>ly</span>.</a>
+				</div>
+			</div>
+			<!-- end: Footer Menu Logo -->
+
+			<!-- start: Footer Menu Links-->
+			<div class="span9">
+
+				<div id="footer-menu-links">
+
+					<ul id="footer-nav">
+
+						<li><a href="index.html">Start</a></li>
+
+						<li><a href="about.html">About</a></li>
+
+						<li><a href="pricing.html">Pricing</a></li>
+
+						<li><a href="contact.html">Contact</a></li>
+
+					</ul>
+
+				</div>
+
+			</div>
+			<!-- end: Footer Menu Links-->
+
+			<!-- start: Footer Menu Back To Top -->
+			<div class="span1">
+
+				<div id="footer-menu-back-to-top">
+					<a href="#"></a>
+				</div>
+				
+			</div>
+			<!-- end: Footer Menu Back To Top -->
+			
+		</div>
+		<!-- end: Row -->
+
+	</div>
+	<!-- end: Container  -->	
+
+</div>	
+<!-- end: Footer Menu -->
+
+<!-- start: Footer -->
+<div id="footer">
+
+	<!-- start: Container -->
+	<div class="container">
+
+		<!-- start: Row -->
+		<div class="row">
+
+			<!-- start: About -->
+			<div class="span3">
+
+				<h3>About Us</h3>
+				<p>
+					We started ReSupp.ly to bring you peace of mind. We are taking the hassle out of buying and transporting everyday household itmes to give you simplicity you can rely on. We are committed to our customers and welcome your comments or concerns!</p>
+
+				</div>
+				<!-- end: About -->
+
+				<!-- start: Photo Stream -->
+				<div class="span3">
+					
+					<h3>We are here!</h3>
+					<div id="small-map-container"><a href="contact.html"></a></div>
+					<iframe id="small-map" width="210" height="210" frameborder="0" scrolling="yes" marginheight="0" marginwidth="0" src="https://maps.google.pl/maps?f=q&amp;source=s_q&amp;hl=pl&amp;geocode=&amp;q=Los+Angeles,+Kalifornia,+Stany+Zjednoczone&amp;aq=0&amp;oq=Los&amp;sll=50.143066,18.85267&amp;sspn=0.057207,0.168915&amp;t=m&amp;ie=UTF8&amp;hq=&amp;hnear=Los+Angeles,+Hrabstwo+Los+Angeles,+Kalifornia,+Stany+Zjednoczone&amp;ll=34.052234,-118.243685&amp;spn=0.036979,0.084457&amp;z=14&amp;iwloc=near&amp;output=embed"></iframe>
+					
+				</div>
+				<!-- end: Photo Stream -->
+
+				<div class="span6">
+
+					<!-- start: Follow Us -->
+					<h3>Follow Us!</h3>
+					<ul class="social-grid">
+						<li>
+							<div class="social-item">				
+								<div class="social-info-wrap">
+									<div class="social-info">
+										<div class="social-info-front social-twitter">
+											<a href="http://twitter.com"></a>
+										</div>
+										<div class="social-info-back social-twitter-hover">
+											<a href="http://twitter.com"></a>
+										</div>	
+									</div>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="social-item">				
+								<div class="social-info-wrap">
+									<div class="social-info">
+										<div class="social-info-front social-facebook">
+											<a href="http://facebook.com"></a>
+										</div>
+										<div class="social-info-back social-facebook-hover">
+											<a href="http://facebook.com"></a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="social-item">				
+								<div class="social-info-wrap">
+									<div class="social-info">
+										<div class="social-info-front social-dribbble">
+											<a href="http://dribbble.com"></a>
+										</div>
+										<div class="social-info-back social-dribbble-hover">
+											<a href="http://dribbble.com"></a>
+										</div>	
+									</div>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="social-item">				
+								<div class="social-info-wrap">
+									<div class="social-info">
+										<div class="social-info-front social-flickr">
+											<a href="http://flickr.com"></a>
+										</div>
+										<div class="social-info-back social-flickr-hover">
+											<a href="http://flickr.com"></a>
+										</div>	
+									</div>
+								</div>
+							</div>
+						</li>
+					</ul>
+					<!-- end: Follow Us -->
+
+					<!-- start: Newsletter -->
+					<form id="newsletter">
+						<h3>Newsletter</h3>
+						<p>Please leave us your email</p>
+						<label for="newsletter_input">@:</label>
+						<input type="text" id="newsletter_input"/>
+						<input type="submit" id="newsletter_submit" value="submit">
+					</form>
+					<!-- end: Newsletter -->
+
+				</div>
+				
+			</div>
+			<!-- end: Row -->	
+			
+		</div>
+		<!-- end: Container  -->
+
+	</div>
+	<!-- end: Footer -->
+
+	<!-- start: Copyright -->
+	<div id="copyright">
+
+		<!-- start: Container -->
+		<div class="container">
+
+			<div class="sixteen columns">
+				<p>
+					&copy; 2012, ReSupply. 
+				</p>
+			</div>
+
+		</div>
+		<!-- end: Container  -->
+		
+	</div>	
+	<!-- end: Copyright -->
+
+	<!-- start: Java Script -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="static/js/jquery-1.8.2.js"></script>
+	<script src="static/js/bootstrap.js"></script>
+	<script src="static/js/isotope.js"></script>
+	<script src="static/js/jquery.imagesloaded.js"></script>
+	<script src="static/js/flexslider.js"></script>
+	<script src="static/js/carousel.js"></script>
+	<script src="static/js/jquery.cslider.js"></script>
+	<script src="static/js/slider.js"></script>
+	<script src="static/js/fancybox.js"></script>
+	<script defer="defer" src="static/js/custom.js"></script>
+ <script>
+ $(document).ready(function() {
+		$("#interestingButton").click(function() {
+			$("#signUpForm").show("slow");
+		});
+	});
+
+  </script>
+
+
+
+	<!-- end: Java Script -->
+
+</body>
+</html>

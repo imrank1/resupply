@@ -10,6 +10,8 @@
         },
 
         processSignup:function(e){
+            self = this;
+            debugger;
             e.preventDefault();
             var missingFields = false;
             var error=false;
@@ -38,26 +40,41 @@
                 return false;
             }
 
-
-            StripeCheckout.open({
-                key:         'pk_07vkx4yqszys5bnTNnHPSAAimkCie',
-                address:     true,
-                amount:      price,
-                name:        'Resupply',
-                description: 'Subscription',
-                panelLabel:  'Subscription Per Month',
-                token:       this.stripeResponseHandler
-            });
-
-                return false;
+            $.ajax({
+            url: '/checkEmail' + '?emailAddress=' + $('#email').val(),
+            type: 'GET',
+            cache: false,
+            statusCode : { 
+                200: function(){
+                StripeCheckout.open({
+                    key:         'pk_07vkx4yqszys5bnTNnHPSAAimkCie',
+                    address:     true,
+                    amount:      price,
+                    name:        'Resupply',
+                    description: 'Subscription',
+                    panelLabel:  'Subscription Per Month',
+                    token:       self.stripeResponseHandler
+                });
+                return this;
+            },
+                500: function(){
+                    $("#emailInUse").show("slow");
+                    return false;
             }
+          }
+        });
 
-            return this;
+
+
+            return false;
+        }
+
+        return this;
 
         },
 
     stripeResponseHandler :function(response) {
-        debugger;
+    debugger;
     if (response.error) {
         alert('somthing went wrong');
         // window.spinner.stop();
@@ -66,6 +83,7 @@
         // $("#paymentErrorMessage").show("slow");
         // $(".submit-button").removeAttr("disabled");
       } else {
+        debugger;
         var form$ = $("#payment-form");
         var token = response['id'];
 
@@ -82,7 +100,12 @@
           data: { name: name,email:e,password:password,shippingAddress:shippingAddress,shippingAddress2:shippingAddress2,shippingCity:shippingCity,shippingZip:shippingZip,stripeToken:token,packageType:window.packageType},
           cache: false,
           success: function(){
-            alert('awesome we got it done')
+            $("#billingDetails").hide();
+            $("#packageHeader").hide();
+            $("#signupSuccess").removeAttr("disabled");
+
+            $("#signupSuccess").toggle();
+            window.location.href = "/account";
             // window.spinner.stop();
             // $("#successMessage").show("slow");
             // $(".submit-button").removeAttr("disabled");
@@ -92,6 +115,7 @@
             ,
           error: function(){
             alert('error');
+            $("#signupFailure").show("slow");
             //   $("#errorMessage").text()
             // $("#errorMessage").show("slow");
           }

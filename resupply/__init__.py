@@ -9,9 +9,7 @@ import os
 import stripe
 
 
-
 app = Flask(__name__)
-
 
 env = os.environ.get('FLASK_ENV', 'development')
 

@@ -81,8 +81,14 @@
 </div>
 
 
-    <div class="offset4 span6 well" style="text-align:center">
-       Your signing up for the {{ packageType}} package at $50 per month!
+    <div id="packageHeader" class="offset4 span6 well" style="text-align:center">
+       Your signing up for the {{ packageType }} package at ${{packagePrice}} per month!
+    </div>
+    <div id="signupSuccess" class="offset4 span6 well alert alert-success" style="text-align:center; display:none">
+       Awesome you've signed up! Look for an email for details on your first delivery!
+    </div>
+     <div id="signupFailure" class="offset4 span6 well alert alert-error" style="text-align:center; display:none">
+       Hmm looks like somthign went wrong with your submission. Please try again or contact support at support at resupp.ly
     </div>
     <div id="billing_container">
 {##}

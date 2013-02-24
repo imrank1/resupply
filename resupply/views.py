@@ -1,18 +1,35 @@
 from flask import Flask, flash, redirect, render_template, \
-     request, url_for,session
+     request, url_for,session,jsonify     
 from flask.ext.mongoengine import MongoEngine
 from resupply import *
 from resupply import config
 from resupply.models import *
 from resupply.services.userservice import *
+from resupply.services.pricingService import *
 from flask.ext.login import LoginManager, UserMixin, \
                                 login_required, login_user, logout_user, current_user
 from flask.ext.mongoengine import DoesNotExist
 import stripe
 from flask import make_response 
 from functools import update_wrapper 
+import requests
 
 # import resupply.services.userservice
+
+
+def send_mail(to_address, from_address, subject, plaintext, html):
+    r = requests.\
+        post("https://api.mailgun.net/v2/%s/messages" % 'resupply.mailgun.org',
+            auth=("api", 'key-0tv5b0tr16dz-86zophipsh5htylj2h2'),
+             data={
+                 "from": from_address,
+                 "to": to_address,
+                 "subject": subject,
+                 "text": plaintext,
+                 "html": html
+             }
+         )
+    return r
 
 def nocache(f): 
 	def new_func(*args, **kwargs): 
@@ -44,33 +61,34 @@ def add_header(response):
 
 @app.route("/charge", methods=['POST'])
 def charge():
-	email = request.form['email']
-	password = request.form['password']
-	shippingAddress = request.form['shippingAddress']
-	shippingAddress2 = request.form['shippingAddress']
-	city = request.form['shippingCity']
-	zipcode = request.form['shippingZip']
+    print "hellooooo"
+    email = request.form['email']
+    password = request.form['password']
+    shippingAddress = request.form['shippingAddress']
+    shippingAddress2 = request.form['shippingAddress']
+    city = request.form['shippingCity']
+    zipcode = request.form['shippingZip']
 
-	customer = stripe.Customer.create(
-    	email=request.form['email'],
-    	card=request.form['stripeToken']
+    customer = stripe.Customer.create(
+        email=request.form['email'],
+        card=request.form['stripeToken']
     )
 
-	packageType = request.form['packageType']
+    packageType = request.form['packageType']
 
-	if packageType == "basic":
-		chargePrice = 1700
-	elif packageType == "basicPlus":
-		chargePrice = 2000
-	elif packageType == "premium":
-		chargePrice = 2500
-	elif packageType == "premiumPlus":
-		chargePrice = 2800
+    if packageType == "basic":
+	    chargePrice = 1700
+    elif packageType == "basicPlus":
+	    chargePrice = 2000
+    elif packageType == "premium":
+        chargePrice = 2500
+    elif packageType == "premiumPlus":
+	    chargePrice = 2800
 
 
-	description = "Charging customer with email : " + email + " for " + packageType + " at address :" + shippingAddress + " " + shippingAddress2 + " " + city + " " + zipcode
+    description = "Charging customer with email : " + email + " for " + packageType + " at address :" + shippingAddress + " " + shippingAddress2 + " " + city + " " + zipcode
 
-	charge = stripe.Charge.create(
+    charge = stripe.Charge.create(
     	customer=customer.id,
     	amount=chargePrice,
     	currency='usd',
@@ -79,10 +97,13 @@ def charge():
 
 
 
-	createdUser = UserService.createUser(email,password,shippingAddress,shippingAddress2,city,zipcode,request.form['stripeToken'],packageType,customer.id)
+    createdUser = UserService.createUser(email,password,shippingAddress,shippingAddress2,city,zipcode,request.form['stripeToken'],packageType,customer.id)
 
-	login_user(createdUser)
-	return render_template('pricing.html')
+    login_user(createdUser)
+
+    send_mail('imrank1@gmail.com','imrank1@gmail.com','test mailgun resupply','plaintext','this is html')
+	
+    return render_template('pricing.html')
 
 
 
@@ -101,10 +122,24 @@ def pricing():
 #    return render_template('signup-step1.html',key=config.stripe_keys['publishable_key'])
 
 
+@app.route("/checkEmail",methods = ['GET'])
+def checkEmail():
+	count_of_email = User.objects(emailAddress=request.args.get('emailAddress')).count()
+	resp = None
+	if count_of_email > 0:
+		data = {'available':False}
+		resp = jsonify(data)
+		resp.status_code = 500
+	else:
+		resp = jsonify({'available':True})
+		resp.status_code = 200
+	return resp
+
+
 @app.route("/step1", methods =['POST','GET'])
 def step1():
     packageType = request.form['packageType']
-    return render_template('signupStep2.html',packageType=packageType)
+    return render_template('signupStep2.html',packageType=packageType,packagePrice=PricingService.getPackagePrice(packageType))
 
 
 
@@ -191,16 +226,15 @@ def register():
 	print "hellooo this is login"
 	return render_template('login.html')
 
-
-@app.route("/login")
-def login():
-	print "hellooo this is login"
-	return render_template('login.html')
-
+@app.route("/signin")
+def signin():
+    return render_template('signin2.html')
 
 @app.route("/account")
+@login_required
 def login():
-	return render_template('account.html')
+	user = current_user
+	return render_template('account_home.html',currentPackage=user.currentPackage,zipCode=user.zipCode,address=user.address,address2=user.address2,city=user.city)
 
 @app.route("/logout")
 @login_required
@@ -223,11 +257,11 @@ def processLogin():
 	if user.check_password(password):
 		print "logging in the user"
 		login_user(user)
-		return render_template('pricing.html')
+		return render_template('account_home.html',currentPackage=user.currentPackage,zipCode=user.zipCode,address=user.address,address2=user.address2,city=user.city)
 	else:
 		print "passwords don't match"
 		flash('Sorry the password you entered does not match. Need to <a href="restPassword"> reset</a> it?')
-		return render_template("login.html",passwordNoMatch=True)
+		return render_template("signin2.html",passwordNoMatch=True)
 
 
 @app.route("/signup-select-package",methods=["POST"])
@@ -247,6 +281,23 @@ def signupSelectPackage():
 	user = current_user
 
 	return render_template('signup-step3.html')
+
+
+@app.route("/updateShippingAddress",methods=["POST"])
+def updateShippingAddress():
+	shippingAddress = request.form['shippingAddress']
+	shippingAddress2 = request.form['shippingAddress2']
+	city = request.form['shippingCity']
+	zipcode = request.form['shippingZip']
+
+	UserService.updateUserShippingAddress(current_user,shippingAddress,shippingAddress2,city,zipcode)
+
+	data = {'updated':True}
+	resp = jsonify(data)
+	resp.status_code = 202
+	return resp
+
+
 
 
 
