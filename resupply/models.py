@@ -52,7 +52,7 @@ class PasswordChangeRequest(db.Document):
     created_at = db.DateTimeField(default=datetime.datetime.now, required=True)
     ownerEmailAddress = db.StringField(max_length=255, required=True)
     linkRef = db.StringField(max_length=255,required=False)
-    passwordReset = db.DateTimeField(required=False)
+    passwordResetAt = db.DateTimeField(required=False)
 
     def __unicode__(self):
         return self.id
@@ -66,7 +66,7 @@ class PasswordChangeRequest(db.Document):
 
     meta = {
         'allow_inheritance': True,
-        'indexes': ['-created_at', 'emailAddress'],
+        'indexes': ['-created_at', 'ownerEmailAddress'],
         'ordering': ['-created_at']
     }
 
