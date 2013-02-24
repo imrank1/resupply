@@ -1,816 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
+    <meta charset="utf-8">
+    <title>Resupp.ly</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-	<!-- start: Meta -->
-	<meta charset="utf-8">
-	<title>Pricing</title> 
-	<meta name="description" content="Smart Bootstrap Theme"/>
-	<meta name="keywords" content="Template, Theme, web, html5, css3, Bootstrap" />
-	<meta name="author" content="Łukasz Holeczek from creativeLabs"/>
-	<!-- end: Meta -->
-	
-	<!-- start: Mobile Specific -->
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<!-- end: Mobile Specific -->
-	
-	<!-- start: Facebook Open Graph -->
-	<meta property="og:title" content=""/>
-	<meta property="og:description" content=""/>
-	<meta property="og:type" content=""/>
-	<meta property="og:url" content=""/>
-	<meta property="og:image" content=""/>
-	<!-- end: Facebook Open Graph -->
-
-    <!-- start: CSS -->
+    <!-- Le styles -->
     <link href="static/css/bootstrap.css" rel="stylesheet">
     <link href="static/css/bootstrap-responsive.css" rel="stylesheet">
-	<!-- <link href="static/css/style.css" rel="stylesheet"> -->
-	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid+Sans:400,700">
-	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Droid+Serif">
-	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Boogaloo">
-	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Economica:700,400italic">
-   <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" />
+    <link href="static/css/m-styles.min.css" rel="stylesheet">
+    <link href="static/css/m-forms.min.css" rel="stylesheet">
+    <link href="static/css/m-buttons.css" rel="stylesheet">
+    <link href="static/css/custom.css" rel="stylesheet">
+    
+    
+    
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
 
-	
-		<link rel="stylesheet" href="static/css/font-awesome.css">
-		<!--[if IE 7]>
-			<link rel="stylesheet" href="css/font-awesome-ie7.css">
-		<![endif]-->
-		<link rel="stylesheet" href="static/css/pt-sans.css">
-
-		<link rel="stylesheet" href="static/css/pricing-global.min.css">
-		<link rel="stylesheet" href="static/css/pricing-style.css">
-
-
-
-    <script src="http://code.jquery.com/jquery-1.8.2.js"></script>
-    <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
-
-	<!-- end: CSS -->
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-  <style>
-    #feedback { font-size: 1.4em; }
-    #selectable .ui-selecting { background: #FECA40; }
-    #selectable .ui-selected { background: #F39814; color: white; }
-    #selectable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
-    #selectable li { margin: 3px; padding: 0.4em; font-size: 1.4em; height: 18px; }
-    </style>
-    <script>
-    $(function() {
-    	 window.runningCost = 0 ;
-    	 window.runningCostSection1 = 0;
-        $( ".selectableSection" ).selectable({
-            stop: function() {
-                var result = $( "#select-result" ).empty();
-                $( ".ui-selected", this ).each(function() {
-                	runningCostSection1 = 0;
-                	$("#runningTotal").html("");
-                    var index = $( "#selectable li" ).index( this );
-                    runningCostSection1 = this.getAttribute('data-cost')*1;
-                    runningCost = runningCostSection1 + runningCostSection2 + runningCostSection3;
-                    result.append( " #" + ( index + 1 ) );
-                    $("#runningTotal").text("Running total:").append(runningCost);
 
-                });
-            }
-        });
-        window.runningCostSection2 = 0;
-         $( ".selectableSection2" ).selectable({
-            stop: function() {
-                var result = $( "#select-result" ).empty();
-                $( ".ui-selected", this ).each(function() {
-                	runningCostSection2 = 0;
-                	$("#runningTotal").html("");
-                    var index = $( "#selectable li" ).index( this );
-                    runningCostSection2 = this.getAttribute('data-cost')*1;
-                    runningCost = runningCostSection1 + runningCostSection2 + runningCostSection3;
-                    result.append( " #" + ( index + 1 ) );
-                    $("#runningTotal").text("Running total:").append(runningCost);
-
-                });
-            }
-        });
-
-         window.runningCostSection3 = 0;
-         $( ".selectableSection3" ).selectable({
-            stop: function() {
-                var result = $( "#select-result" ).empty();
-                $( ".ui-selected", this ).each(function() {
-                	runningCostSection3 = 0;
-                	$("#runningTotal").html("");
-                    var index = $( "#selectable li" ).index( this );
-                    runningCostSection3 = this.getAttribute('data-cost')*1;
-                    runningCost = runningCostSection1 + runningCostSection2 + runningCostSection3;
-                    result.append( " #" + ( index + 1 ) );
-                    $("#runningTotal").text("Running total:").append(runningCost);
-
-                });
-            }
-        });
-    });
-    </script>
-</head>
-<body>
-	
-	<!--start: Header -->
-	<header>
-		
-		<!--start: Container -->
-		<div class="container">
-			
-			<!--start: Row -->
-			<div class="row">
-					
-				<!--start: Logo -->
-				<div class="logo span3">
-						
-					<i class="ico-charts circle"></i><a class="brand" href="#">Sma<span>rt</span>.</a>
-						
-				</div>
-				<!--end: Logo -->
-					
-				<!--start: Navigation -->
-				<div class="span9">
-					
-					<div class="navbar navbar-inverse">
-			    		<div class="navbar-inner">
-			          		<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-			            		<span class="icon-bar"></span>
-			            		<span class="icon-bar"></span>
-			            		<span class="icon-bar"></span>
-			          		</a>
-			          		<div class="nav-collapse collapse">
-			            		<ul class="nav">
-									<li class="dropdown">
-			                			<a href="#" class="dropdown-toggle" data-toggle="dropdown">Home<b class="caret"></b></a>
-			                			<ul class="dropdown-menu">
-											<li><a href="index.html">Home standard</a></li>
-			                  				<li><a href="index2.html">Home alternative</a></li>
-											<li><a href="index3.html">Home alternative 2</a></li>
-											<li><a href="index4.html">Home alternative 3</a></li>
-			                			</ul>
-			              			</li>
-			              			<li><a href="about.html">About</a></li>
-									<li class="dropdown">
-			                			<a href="#" class="dropdown-toggle" data-toggle="dropdown">Features<b class="caret"></b></a>
-			                			<ul class="dropdown-menu">
-			                  				<li><a href="social-icons.html">Social Icons</a></li>
-											<li><a href="icons.html">Icons</a></li>
-											<li><a href="sliders.html">Sliders</a></li>
-											<li><a href="typography.html">Typography</a></li>
-											<li><a href="shortcodes.html">Shortcodes</a></li>
-											<li><a href="list-styles.html">List Styles</a></li>
-			                			</ul>
-			              			</li>
-									<li class="dropdown">
-			                			<a href="#" class="dropdown-toggle" data-toggle="dropdown">Portfolio<b class="caret"></b></a>
-			                			<ul class="dropdown-menu">
-			                  				<li><a href="portfolio3.html">3 Columns</a></li>
-											<li><a href="portfolio4.html">4 Columns</a></li>
-			                			</ul>
-			              			</li>									
-									<li><a href="services.html">Services</a></li>
-									<li class="active"><a href="pricing">Pricing</a></li>
-									<li><a href="blog.html">Blog</a></li>
-			              			<li><a href="contact.html">Contact</a></li>
-			            		</ul>
-			          		</div>
-			        	</div>
-			      	</div>
-					
-				</div>	
-				<!--end: Navigation -->
-					
-			</div>
-			<!--end: Row -->
-			
-		</div>
-		<!--end: Container-->			
-			
-	</header>
-	<!--end: Header-->
-	
-	<!-- start: Page Title -->
-	<div id="page-title">
-
-		<div id="page-title-inner">
-
-			<!-- start: Container -->
-			<div class="container">
-
-				<h2><i class="ico-usd ico-white"></i>Price</h2>
-
-			</div>
-			<!-- end: Container  -->
-
-		</div>	
-
-	</div>
-	<!-- end: Page Title -->
-	
-	<!--start: Wrapper-->
-	<div id="wrapper">
-				<div class="line"></div>
-			<div class="row pricing-black">
-				<div class="span3 pricing-table">
-					<ul>
-						<li class="pricing-header-row-1">
-							<div class="package-title">
-								<h2 class="no-bold">Basic</h2>
-							</div>
-						</li>
-						<li class="pricing-header-row-2">
-							<div class="package-price">
-								<h1 class="no-bold">$19<span class="cents">.99 /mo</span></h1>
-							</div>
-						</li>
-						<li class="pricing-content-row-odd acc" data-toggle="collapse" data-target="#acc-1">
-							Generic Detergent
-							<span style="float: right"><i class="icon-plus"></i></span>
-						</li>
-						<li id="acc-1" class="accordion-body collapse">
-							<span class="acc-inner">
-								A description of the generic detergent. 
-							</span>
-						</li>
-						<li class="pricing-content-row-even acc" data-toggle="collapse" data-target="#acc-2">
-							Generic Dish Washing Detergent
-							<span style="float: right"><i class="icon-plus"></i></span>
-						</li>
-						<li id="acc-2" class="accordion-body collapse">
-							<span class="acc-inner">
-								A description of the generic dish washing detergent. 
-							</span>
-						</li>
-
-						<li class="pricing-content-row-odd">
-							1 Domain
-						</li>
-						<li class="pricing-content-row-even">
-							3 Subdomain
-						</li>
-						<li class="pricing-content-row-odd">
-							5 Email
-						</li>
-						<li class="pricing-content-row-even">
-							$30 Setup Fee
-						</li>
-						<li class="pricing-footer">
-							<button class="btn"><i class="icon-shopping-cart"></i> Sign Up</button>
-						</li>
-					</ul>
-				</div>
-				<div class="span3 pricing-table">
-					<ul>
-						<li class="pricing-header-row-1">
-							<div class="package-title">
-								<h2 class="no-bold">Advanced</h2>
-							</div>
-						</li>
-						<li class="pricing-header-row-2">
-							<div class="package-price">
-								<h1 class="no-bold">$4<span class="cents">.99 /mo</span></h1>
-							</div>
-						</li>
-						<li class="pricing-content-row-odd acc" data-toggle="collapse" data-target="#acc-1">
-							1 GB Diskspace
-							<span style="float: right"><i class="icon-plus"></i></span>
-						</li>
-						<li id="acc-1" class="accordion-body collapse">
-							<span class="acc-inner">
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit
-							</span>
-						</li>
-						<li class="pricing-content-row-even">
-							10 GB Bandwidth
-						</li>
-						<li class="pricing-content-row-odd">
-							1 Domain
-						</li>
-						<li class="pricing-content-row-even">
-							3 Subdomain
-						</li>
-						<li class="pricing-content-row-odd">
-							5 Email
-						</li>
-						<li class="pricing-content-row-even">
-							$30 Setup Fee
-						</li>
-						<li class="pricing-footer">
-							<button class="btn"><i class="icon-shopping-cart"></i> Sign Up</button>
-						</li>
-					</ul>
-				</div>
-				</div>
-			</div>
-		<!-- start: Container -->
-		<div class="container">
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
 
 
-		</div>
+  </head>
 
-	<div class="row">
-	<div class="span11">	 
-    <h3>Detergent</h3>
-   <ol id="selectable" class="selectableSection">
-    	<li class="ui-state-default" data-cost="2">Tide cost 2 </li>
-    	<li class="ui-state-default" data-cost="3">Somthing else cost 3</li>
-    	<li class="ui-state-default" data-cost="4">Somthing else 2 cost 4</li>
-	</ol>
+  <body id="home" data-spy="scroll" data-target=".navbar">
 
-	<h3>Toilet Paper</h3>
-   <ol id="selectable" class="selectableSection2">
-    	<li class="ui-state-default" data-cost="4">Tide cost 4</li>
-    	<li class="ui-state-default" data-cost="5">Somthing else cost 5</li>
-    	<li class="ui-state-default" data-cost="6">Somthing else 2 cost 6</li>
-	</ol>
- 
- <h3>Another Section</h3>
-   <ol id="selectable" class="selectableSection3">
-    	<li class="ui-state-default" data-cost="7">Stuff cost 7 </li>
-    	<li class="ui-state-default" data-cost="8">Somthing else cost 8 </li>
-    	<li class="ui-state-default" data-cost="9">Somthing else 2 cost 9</li>
-	</ol>
+    <!-- HEADER CONTAINER -->
 
-	</div>
-	<div class="span1">
-		<span id="runningTotal"></span>
-	</div>
- </div>
-    <h3>Section 2</h3>
-    <div>
-        <p>
-        Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
-        purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
-        velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
-        suscipit faucibus urna.
-        </p>
-    </div>
-    <h3>Section 3</h3>
-    <div>
-        <p>
-        Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
-        Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero
-        ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis
-        lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.
-        </p>
-        <ul>
-            <li>List item one</li>
-            <li>List item two</li>
-            <li>List item three</li>
-        </ul>
-    </div>
-    <h3>Section 4</h3>
-    <div>
-        <p>
-        Cras dictum. Pellentesque habitant morbi tristique senectus et netus
-        et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in
-        faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia
-        mauris vel est.
-        </p>
-        <p>
-        Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus.
-        Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
-        inceptos himenaeos.
-        </p>
-    </div>
 
-			<!-- start: Table -->
+      <!-- CONTENT -->
+   
 
-			<h4>Table ex. 1</h4>
+<div class="row header">
+   
+  <!-- NAV -->
+    {% include 'nav.html' %}
+  </div>
 
-			<div class="four-tables">
 
-				<div class="pricing-table">
-					<div class="color-cccddd">
-						<h3>Standard</h3>
-						<h4><span class="price">€9.99</span> <span class="time">per month</span></h4>
-						<ul>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-						</ul>
-						<a href="#" class="buy"><span>Buy</span></a>
-					</div>
-				</div>
+{% include 'pricing_include.html'%}
 
-				<div class="pricing-table">
-					<div class="color-666777">
-						<h3>Premium</h3>
-						<h4><span class="price">€29.99</span> <span class="time">per month</span></h4>
-						<ul>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-						</ul>
-						<a href="#" class="buy"><span>Buy</span></a>
-					</div>
-				</div>
 
-				<div class="pricing-table best-option">
-					<div class="color-custom">
-						<h3>Professional</h3>
-						<h4><span class="price">€49.99</span> <span class="time">per month</span></h4>
-						<ul>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-						</ul>
-						<a href="#" class="buy"><span>Buy</span></a>
-					</div>
-				</div>
 
-				<div class="pricing-table">
-					<div class="color-666777">
-						<h3>Ultimate</h3>
-						<h4><span class="price">€99.99</span> <span class="time">per month</span></h4>
-						<ul>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-						</ul>
-						<a href="#" class="buy"><span>Buy</span></a>
-					</div>
-				</div>
+{% include 'about.html' %}
 
-			</div>
-			<!-- end: Table -->
+{% include 'contact.html' %}
+    <div id="form">
+    
+      <div class="container">
+    
+        <div class="row">        
+            <div class="span8" >
+            <h3>Get in touch with us.</h3>
+            
+            <p>Fill out the form below and we will get back to you soon.</p>             
+            
+    
+            <form id="contact-form">
+                               
+            <fieldset>
+            <div class="row"> 
+                        <div class="holder span8"><div class="message"><div class="top"></div>
+                        <div class="contents"><div id="alert"></div></div>
+                        <div class="bottom"></div></div></div>
+                        <div class="field span8">
+                          <input type="text" value="" class="input-text m-wrap m-ctrl-large" id="name" name="name" placeholder="Your Name"/></div>
+                        <div class="field span8">
+                          <input type="text" value="" class="input-text m-wrap m-ctrl-large" id="email" name="email"  placeholder="Your Email Address" />
+                        </div>
+                        <div class="field span8">
+                        <textarea placeholder="Your Message" class="input-textarea m-wrap m-ctrl-large" id="message" name="message"></textarea>
+                        </div>
+                        <div class="field span8">
+                        <input type="submit" class="m-btn green" value="Submit Entry" /></div>
+                      </div>
+                    </fieldset>
+                    </form>
+          </div>
+          
+          <div class="span3 offset1" >
+            <h3>Contact info</h3>
 
-		</div>
-		<!-- end: Container -->
+              <p>121 North Avenue<br>
+                Burlington, VT<br>
+                05454
+                Phone: (123) 456-7890<br>
+                Fax: (123) 456-7890<br>
+                Email: email@address.com<br>
+                Web: companyname.com</p>
+            
+          </div>
+          
+          
+        </div>    
+    
+             
+      </div> <!-- /container -->
+    
+    </div> <!-- /form  -->  
 
-		<!-- start:Container -->
-		<div class="container">
+    <!-- END CONTACT FORM  -->
 
-			<!-- start: Table -->
-			<h4>Table ex. 2</h4>
+  </div> <!-- /container -->
 
-			<div class="three-tables">
 
-				<div class="pricing-table">
-					<div class="color-cccddd">
-						<h3>Standard</h3>
-						<h4><span class="price">€9.99</span> <span class="time">per month</span></h4>
-						<ul>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-						</ul>
-						<a href="#" class="buy"><span>Buy</span></a>
-					</div>
-				</div>
+    
+  <script src="js/jquery.js"></script>
+  <script src="js/jquery.mousewheel-3.0.4.pack.js"></script>
+  <script src="js/jquery.gmap.js"></script>
+  <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+  <script src="js/iso-custom.js"></script>
+  <script src="js/jquery.isotope.min.js"></script> 
+  <script src="js/bootstrap-scrollspy.js"></script>
+  <script src="js/anchor.js" type="text/javascript"></script>
+  <script src="js/bootstrap.js"></script>
 
-				<div class="pricing-table best-option">
-					<div class="color-custom">
-						<h3>Premium</h3>
-						<h4><span class="price">€29.99</span> <span class="time">per month</span></h4>
-						<ul>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-						</ul>
-						<a href="#" class="buy"><span>Buy</span></a>
-					</div>
-				</div>
 
-				<div class="pricing-table">
-					<div class="color-666777">
-						<h3>Professional</h3>
-						<h4><span class="price">€49.99</span> <span class="time">per month</span></h4>
-						<ul>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-						</ul>
-						<a href="#" class="buy"><span>Buy</span></a>
-					</div>
-				</div>
 
-			</div>
-			<!-- end: Table -->
+     <!-- MAP -->
 
-		</div>
-		<!-- end: Container -->
+   <script type="text/javascript">
+  $(document).ready(function(){
+{#    $("#map").gMap({ controls: false,#}
+{#                      scrollwheel: false,#}
+{#                          draggable: true,#}
+{#                      markers: [{ latitude: 44.47698,#}
+{#                                  longitude: 1006.8,#}
+{#                                  icon: { image: "img/pin.png",#}
+{#                                          iconsize: [32, 47],#}
+{#                                          iconanchor: [32,47],#}
+{#                                          infowindowanchor: [12, 0] } }#}
+{#                                ],#}
+{#                      icon: { image: "img/pin.png", #}
+{#                              iconsize: [26, 46],#}
+{#                              iconanchor: [12, 46],#}
+{#                              infowindowanchor: [12, 0] },#}
+{#                      latitude: 44.47698,#}
+{#                      longitude: 1006.8,#}
+{#                      zoom: 15, });#}
 
-		<!-- start:Container -->
-		<div class="container">
-
-			<!-- start: Table -->
-			<h4>Table ex. 3</h4>
-
-			<div class="two-tables">
-
-				<div class="pricing-table">
-					<div class="color-cccddd">
-						<h3>Standard</h3>
-						<h4><span class="price">€9.99</span> <span class="time">per month</span></h4>
-						<ul>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-						</ul>
-						<a href="#" class="buy"><span>Buy</span></a>
-					</div>
-				</div>
-
-				<div class="pricing-table">
-					<div class="color-custom">
-						<h3>Premium</h3>
-						<h4><span class="price">€29.99</span> <span class="time">per month</span></h4>
-						<ul>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-							<li>Custom option</li>
-						</ul>
-						<a href="#" class="buy"><span>Buy</span></a>
-					</div>
-				</div>
-
-			</div>
-			<!-- end: Table -->
-
-		</div>
-		<!-- end: Container -->
-				
-	</div>
-	<!-- end: Wrapper  -->			
-
-    <!-- start: Footer Menu -->
-	<div id="footer-menu" class="hidden-tablet hidden-phone">
-
-		<!-- start: Container -->
-		<div class="container">
-			
-			<!-- start: Row -->
-			<div class="row">
-
-				<!-- start: Footer Menu Logo -->
-				<div class="span2">
-					<div id="footer-menu-logo">
-						<div id="logo-chart"></div><a class="brand" href="#">Sma<span>rt</span>.</a>
-					</div>
-				</div>
-				<!-- end: Footer Menu Logo -->
-
-				<!-- start: Footer Menu Links-->
-				<div class="span9">
-					
-					<div id="footer-menu-links">
-
-						<ul id="footer-nav">
-
-							<li><a href="index.html">Start</a></li>
-
-							<li><a href="about.html">About</a></li>
-
-							<li><a href="services.html">Services</a></li>
-
-							<li><a href="pricing">Pricing</a></li>
-							
-							<li><a href="contact.html">Contact</a></li>
-
-						</ul>
-
-					</div>
-					
-				</div>
-				<!-- end: Footer Menu Links-->
-
-				<!-- start: Footer Menu Back To Top -->
-				<div class="span1">
-						
-					<div id="footer-menu-back-to-top">
-						<a href="#"></a>
-					</div>
-				
-				</div>
-				<!-- end: Footer Menu Back To Top -->
-			
-			</div>
-			<!-- end: Row -->
-			
-		</div>
-		<!-- end: Container  -->	
-
-	</div>	
-	<!-- end: Footer Menu -->
-
-	<!-- start: Footer -->
-	<div id="footer">
-		
-		<!-- start: Container -->
-		<div class="container">
-			
-			<!-- start: Row -->
-			<div class="row">
-
-				<!-- start: About -->
-				<div class="span3">
-					
-					<h3>About Us</h3>
-					<p>
-						Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-					</p>
-						
-				</div>
-				<!-- end: About -->
-
-				<!-- start: Photo Stream -->
-				<div class="span3">
-					
-					<h3>Photo Stream</h3>
-					<div class="flickr-widget">
-							<script type="text/javascript" src="http://www.flickr.com/badge_code_v2.gne?count=9&display=latest&size=s&layout=x&source=user&user=29609591@N08"></script>
-						<div class="clear"></div>
-					</div>
-					
-				</div>
-				<!-- end: Photo Stream -->
-
-				<div class="span6">
-				
-					<!-- start: Follow Us -->
-					<h3>Follow Us!</h3>
-					<ul class="social-grid">
-						<li>
-							<div class="social-item">				
-								<div class="social-info-wrap">
-									<div class="social-info">
-										<div class="social-info-front social-twitter">
-											<a href="http://twitter.com"></a>
-										</div>
-										<div class="social-info-back social-twitter-hover">
-											<a href="http://twitter.com"></a>
-										</div>	
-									</div>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="social-item">				
-								<div class="social-info-wrap">
-									<div class="social-info">
-										<div class="social-info-front social-facebook">
-											<a href="http://facebook.com"></a>
-										</div>
-										<div class="social-info-back social-facebook-hover">
-											<a href="http://facebook.com"></a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="social-item">				
-								<div class="social-info-wrap">
-									<div class="social-info">
-										<div class="social-info-front social-dribbble">
-											<a href="http://dribbble.com"></a>
-										</div>
-										<div class="social-info-back social-dribbble-hover">
-											<a href="http://dribbble.com"></a>
-										</div>	
-									</div>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="social-item">				
-								<div class="social-info-wrap">
-									<div class="social-info">
-										<div class="social-info-front social-flickr">
-											<a href="http://flickr.com"></a>
-										</div>
-										<div class="social-info-back social-flickr-hover">
-											<a href="http://flickr.com"></a>
-										</div>	
-									</div>
-								</div>
-							</div>
-						</li>
-					</ul>
-					<!-- end: Follow Us -->
-				
-					<!-- start: Newsletter -->
-					<form id="newsletter">
-						<h3>Newsletter</h3>
-						<p>Please leave us your email</p>
-						<label for="newsletter_input">@:</label>
-						<input type="text" id="newsletter_input"/>
-						<input type="submit" id="newsletter_submit" value="submit">
-					</form>
-					<!-- end: Newsletter -->
-				
-				</div>
-				
-			</div>
-			<!-- end: Row -->	
-			
-		</div>
-		<!-- end: Container  -->
-
-	</div>
-	<!-- end: Footer -->
-
-	<!-- start: Copyright -->
-	<div id="copyright">
-	
-		<!-- start: Container -->
-		<div class="container">
-		
-			<div class="sixteen columns">
-				<p>
-					&copy; 2012, creativeLabs. Designed by creativeLabs in Poland <img src="static/img/poland2.png" alt="Poland" style="margin-top:-4px">
-				</p>
-			</div>
-	
-		</div>
-		<!-- end: Container  -->
-		
-	</div>	
-	<!-- end: Copyright -->
-
-<!-- start: Java Script -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="static/js/ext/jquery-1.8.2.js"></script>
-<script src="static/js/bootstrap.js"></script>
-<script src="static/js/isotope.js"></script>
-<script src="static/js/ext/jquery.imagesloaded.js"></script>
-<script src="static/js/flexslider.js"></script>
-<script src="static/js/carousel.js"></script>
-<script src="static/js/jquery.cslider.js"></script>
-<script src="static/js/slider.js"></script>
-<script src="static/js/fancybox.js"></script>
-<script defer="defer" src="static/js/custom.js"></script>
-<!-- end: Java Script -->
-
-</body>
+      $("#")
+  });
+  </script>
+  </body>
 </html>

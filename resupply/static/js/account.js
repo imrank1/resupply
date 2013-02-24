@@ -2,7 +2,8 @@
     var TEMPLATE_URL = '/static';
     window.Account = Backbone.View.extend({
         events: {
-            "click #updateAddress": "updateShippingAddress"
+            "click #updateAddress": "updateShippingAddress",
+            "click #passwordChangeRequestButton": "requestPasswordChange"
         },
 
         initialize: function(options) {
@@ -30,6 +31,26 @@
         },
         error: function(){
             $("#updateBillingFailure").show("slow");
+        }
+        });
+        return false;
+      },
+
+      requestPasswordChange:function(e){
+        debugger;
+        self = this;
+        e.preventDefault();
+        $.ajax({
+          url: '/requestPasswordChange',
+          type: 'POST',
+          data: { },
+          cache:false,
+          success: function(){
+            $("#passwordChangeEmailSent").toggle();
+            return;
+        },
+        error: function(){
+            $("#passwordChangeRequestFailure").show("slow");
         }
         });
         return false;

@@ -111,17 +111,6 @@ def charge():
 def pricing():
     return render_template('pricing.html')
 
-
-@app.route("/pricing_metro")
-def pricing():
-    return render_template('pricing_metro.html')
-
-#
-#@app.route("/signup")
-#def signupStep1():
-#    return render_template('signup-step1.html',key=config.stripe_keys['publishable_key'])
-
-
 @app.route("/checkEmail",methods = ['GET'])
 def checkEmail():
 	count_of_email = User.objects(emailAddress=request.args.get('emailAddress')).count()
@@ -284,6 +273,7 @@ def signupSelectPackage():
 
 
 @app.route("/updateShippingAddress",methods=["POST"])
+@login_required
 def updateShippingAddress():
 	shippingAddress = request.form['shippingAddress']
 	shippingAddress2 = request.form['shippingAddress2']
@@ -296,6 +286,19 @@ def updateShippingAddress():
 	resp = jsonify(data)
 	resp.status_code = 202
 	return resp
+
+
+@app.route("/requestPasswordChange",methods=["POST"])
+def requestPasswordChange():
+    user = current_user
+    linkRef = str(user.id)[5:10]
+    link = "http://resupply-staging.heroku.com/passwordChange/" + linkRef;
+    data = {'link':link}
+    resp = jsonify(data)
+    resp.status_code = 202
+    return resp
+
+
 
 
 
