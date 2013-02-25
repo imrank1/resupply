@@ -101,7 +101,7 @@ def charge():
 
     login_user(createdUser)
 
-    send_mail('imrank1@gmail.com','imrank1@gmail.com','test mailgun resupply','plaintext','this is html')
+    send_mail(email,'imrank1@gmail.com','test mailgun resupply signup will create a template for this signup confirmation','plaintext','this is html')
 	
     return render_template('pricing.html')
 
@@ -109,7 +109,7 @@ def charge():
 
 @app.route("/pricing")
 def pricing():
-    return render_template('pricing.html')
+	return render_template('pricing.html')
 
 @app.route("/checkEmail",methods = ['GET'])
 def checkEmail():
