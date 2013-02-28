@@ -21,6 +21,7 @@ if env =='development':
 	app.config["STRIPE_PUBLISHABLE_KEY"] = config.dev['stripe_publishable_key']
 	stripe.api_key=config.dev['stripe_secret_key']
 	app.config["SEND_FILE_MAX_AGE_DEFAULT"] = 0
+	app.config["passwordResetPrefix"] = config.dev['passwordResetPrefix']
 elif env =='production':
 	app.config["MONGODB_DB"] = config.production['mongodb_db']
 	app.config["SECRET_KEY"] = config.production['secret_key']
@@ -30,6 +31,8 @@ elif env =='production':
 	app.config["MONGODB_HOST"] = config.production['mongodb_host']
 	app.config["MONGODB_PORT"] = config.production['mongodb_port']
 	app.config["STRIPE_PUBLISHABLE_KEY"] = config.production['stripe_publishable_key']
+	app.config["passwordResetPrefix"] = config.production['passwordResetPrefix']
+
 	stripe.api_key=config.production['stripe_secret_key']
 
 

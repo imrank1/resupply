@@ -6,6 +6,7 @@ from resupply import config
 from resupply.models import *
 from resupply.services.userservice import *
 from resupply.services.pricingService import *
+from resupply.services.passwordChangeService import *
 from flask.ext.login import LoginManager, UserMixin, \
                                 login_required, login_user, logout_user, current_user
 from flask.ext.mongoengine import DoesNotExist
@@ -109,7 +110,8 @@ def charge():
 
 @app.route("/pricing")
 def pricing():
-	return render_template('pricing.html')
+    app.logger.info('showing the pricing page')
+    return render_template('pricing.html')
 
 @app.route("/checkEmail",methods = ['GET'])
 def checkEmail():
@@ -292,11 +294,34 @@ def updateShippingAddress():
 def requestPasswordChange():
     user = current_user
     linkRef = str(user.id)[5:10]
-    link = "http://resupply-staging.heroku.com/passwordChange/" + linkRef;
+    link = app.config["passwordResetPrefix"] + linkRef;
+    PasswordChangeService.createPasswordChangeRequest(user.emailAddress,linkRef)
     data = {'link':link}
     resp = jsonify(data)
     resp.status_code = 202
     return resp
+
+
+
+@app.route("/passwordChange/<linkRef>", methods=["GET"])
+def getPasswordChangeForm(linkRef):
+	resetRequest = PasswordChangeRequest.objects.get(linkRef = linkRef)
+	user = User.objects.get(emailAddress = resetRequest.ownerEmailAddress)
+	return render_template('resetPassword.html',userEmailAddress=user.emailAddress,linkRef = linkRef)
+
+@app.route("/handlePasswordChange", methods=["POST"])
+@login_required
+def handlePasswordChange():
+	newPassword = request.form['password']
+	linkRef = request.form['linkRef']
+	PasswordChangeService.updateUserPassword(linkRef,current_user,newPassword)
+	res = jsonify({'passwordChanged':True})
+	res.status_code = 202
+	return res
+
+
+
+
 
 
 

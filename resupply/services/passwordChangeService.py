@@ -4,17 +4,17 @@ import datetime
 
 class PasswordChangeService:
     @staticmethod
-    def createPasswordChangeReqest(ownerEmailAddress,linkRef):
+    def createPasswordChangeRequest(ownerEmailAddress,linkRef):
         changeRequest = PasswordChangeRequest(ownerEmailAddress=ownerEmailAddress,linkRef=linkRef)
         changeRequest.save()
         return changeRequest
 
     @staticmethod
     def updateUserPassword(linkRef,user,newPassword):
-        changeRequest =PasswordChangeRequest.objects.get(ownerEmailAddress=user.emailAddress,linkRef = linkRef)
-        user.set_password(user,newPassword)
+        changeRequest = PasswordChangeRequest.objects.get(linkRef = linkRef)
+        user.set_password(newPassword)
         user.save()
-        changeRequest.passwordResetAt(datetime.datetime.now)
+        changeRequest.passwordResetAt = datetime.datetime.now()
         changeRequest.save()
         return user
 
