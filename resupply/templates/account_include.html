@@ -29,8 +29,34 @@
               </a>
               <input type="submit" id="updateShippingAddress" class="btn btn-large btn-primary" style="margin-left:99px;margin-top:10px;" name="updateBillingSubmit" value="Upgrade!">
             </div>
-          </form> 
-        </div>
+          </form>
+
+              <div class="well well-large ui-state-default" style="float:left;height:260px;">
+                  <a href="#" class="thumbnail">
+                      <img src="http://placehold.it/300x200" alt="">
+                  </a>
+                  <form action="/udpateBilling" method="POST">
+
+                      <input type="submit" class="btn btn-large btn-primary disabled" style="margin-left:69px; margin-top:10px;" name="updateBillingSubmit" id="updateBillingButton" value="Current Package">
+                  </form>
+                  <!-- <a href="#" class="btn btn-large disabled" style="margin-left:69px; margin-top:10px;" >Current Package</a> -->
+              </div>
+
+              <div class="well well-large ui-state-default" style="float:left;height:260px;">
+                  <a href="#" class="thumbnail">
+                      <img src="http://placehold.it/300x200" alt="">
+                  </a>
+                  <form action="/udpateBilling" method="POST">
+
+                      <input type="submit" class="btn btn-large btn-primary disabled" style="margin-left:69px; margin-top:10px;" name="updateBillingSubmit" id="updateBillingButton" value="Current Package">
+                  </form>
+                  <!-- <a href="#" class="btn btn-large disabled" style="margin-left:69px; margin-top:10px;" >Current Package</a> -->
+              </div>
+
+
+
+
+          </div>
 
       </div>
 
@@ -121,10 +147,42 @@
 
         <div class="well" style="margin-left:-60px">
           If you want to close your account please click on the button below and we'll send an email confirmation to your registered email.
-          <div><a href="#" class="btn btn-large btn-primary" style="margin-top:10px;">Close my account!</a></div>
+          <div><button id="cancelAccountButton" class="btn btn-large btn-primary" style="margin-top:10px;">Close my account!</button></div>
         </div>
       </div>
+<div id="cancelAccountConfirm" class="modal hide fade">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Cancel Account?</h3>
+  </div>
+  <div class="modal-body">
+    <p>By cancelling your account you will miss out on some great savings. </p>
+  </div>
+  <div class="alert alert-success" id="successCancel"  style="display:none;">We successfully canclelled your account. You'll receive a confirmaiton email shortly. You've been logged out and will be redirected in to the home page in 10 seconds.   
+  </div>
+    <div class="alert alert-error" id="failureCancel"  style="display:none;">We were not able to cancel your account. Sorry for the inconveniance. Please contact support at support@resupply.com  
+  </div>
+  <div class="modal-footer">
+    <button id="confirmCancelButton" class="btn btn-danger">Cancel Account</a>
+  </div>
+</div>
 
+<div id="passwordChangeConfirm" class="modal hide fade">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Request Password Change</h3>
+  </div>
+  <div class="modal-body">
+    <p>Click the confirm button and you'll receive an email link to change your password.  </p>
+  </div>
+  <div class="alert alert-success" id="successCancel"  style="display:none;">We've sent an email with a link to reset your password. Please check your email shortly.   
+  </div>
+    <div class="alert alert-error" id="failureCancel"  style="display:none;">We were not able to process your request to change your password. Please contact support at support@resupply.com  
+  </div>
+  <div class="modal-footer">
+    <button id="confirmPasswordResetButton" class="btn btn-danger">Confirm</a>
+  </div>
+</div>
 
     </div><!-- .span6 -->
   </div>

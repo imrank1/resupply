@@ -28,7 +28,7 @@
             return;
         },
         error: function(){
-                        alert('error changing password!');
+            alert('error changing password!');
 
         }
         });

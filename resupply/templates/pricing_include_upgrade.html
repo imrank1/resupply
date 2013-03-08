@@ -1,0 +1,237 @@
+<div class="row-fluid section" id="pricingInfo">
+    <link rel="stylesheet" type="text/css" href="static/css/main.css"/>
+
+    <!-- pricing table style (style_1.css - style_12.css) -->
+    <link rel="stylesheet" type="text/css" href="static/css/style_5.css"/>
+
+    <div class="container">
+
+        <div class="explain">
+            <h2>Pricing Options for Everyone</h2>
+            <p class="intro">One size does not fit all :) Coose the pack that fits your preferences. <br>Don't worry you can change your package at any time : )</br></p>
+
+            <div class="">
+
+                <div class="p_table offset1 span12">
+
+                    <!-- caption column -->
+                    <div class="caption_column">
+                        <ul>
+                            <!-- column header -->
+                            <li class="header_row_1 align_center radius5_topleft"></li>
+                            <li class="header_row_2"><h4 class="caption">choose <span>your</span> pack</h4></li>
+                            <!-- data rows -->
+                            <li class="row_style_4"><span>Laundry</span></li>
+                            <li class="row_style_2"><span>Dishwasher</span></li>
+                            <li class="row_style_4"><span>Toothbrush</span></li>
+                            <li class="row_style_2"><span>Toothpaste</span></li>
+                            <li class="row_style_4"><span>Floss</span></li>
+                            <li class="row_style_2"><span>Kitchen Bags</span></li>
+                            <li class="row_style_4"><span>Bathroom Tissue</span></li>
+                            <li class="row_style_2"><span>Taxes</span></li>
+                            <li class="row_style_4"><span>Free Shipping</span></li>
+                            <!-- column footer -->
+                            <li class="footer_row align_center"><font color="red">15% cheaper than Amazon.</font></li>
+                        </ul>
+                    </div>
+
+                    <!-- column style 1 -->
+                    <div class="column_1">
+                        <!-- ribbon (optional) -->
+                        <!--<div class="column_ribbon ribbon_style1_new"></div>-->
+                        <!-- /ribbon -->
+
+                        <ul>
+                            <!-- column header -->
+                            <li class="header_row_1 align_center"><h2 class="col1">The Basics</h2></li>
+                            <li class="header_row_2 align_center"><h1 class="col1">$<span>17</span></h1><h3 class="col1">per month</h3></li>
+                            <!-- data rows -->
+                            <li class="row_style_3 align_center"><span>Resupply</span></li>
+                            <li class="row_style_1 align_center"><span>Resupply</span></li>
+                            <li class="row_style_3 align_center"><span><img src="static/img/oralb.png"></span></li>
+
+
+
+                            <li class="row_style_1 align_center"><span><img src="static/img/aquafresh.png"></span></li>
+                            <li class="row_style_3 align_center"><span><img src="static/img/glide.png"></span></li>
+                            <li class="row_style_1 align_center"><span>Resupply</span></li>
+                            <li class="row_style_3 align_center"><span>X</span></li>
+                            <li class="row_style_1 align_center"><span>Included</span></li>
+                            <li class="row_style_3 align_center"><span>Included</span></li>
+                            {% if currentPackage == "basic" %}
+                            <form action="/confirmUpgrade" method="POST">
+                            <li id="signupBasic" class="footer_row">
+                                <button type="submit"  class="sign_up radius3" disabled="disabled">Current Package!</button>
+                            </li>
+                                <input type="hidden" name="packageType" value="basicPlus">
+
+                            </form>
+
+                            {% else %}
+                            <form action="/confirmUpgrade" method="POST">
+                                <li id="signupBasic" class="footer_row"><button type="submit" class="sign_up radius3 disabled">Upgrade Now!</button></li>
+                                <input type="hidden" name="packageType" value="basic">
+
+                            </form><!-- column footer -->
+
+                            {% endif %}
+
+                        </ul>
+                    </div>
+
+                    <!-- column style 2 -->
+                    <div class="column_2">
+                        <!-- ribbon (optional) -->
+                        <!--<div class="column_ribbon ribbon_style1_new"></div>-->
+                        <!-- /ribbon -->
+
+                        <ul>
+                            <!-- column header -->
+                            <li class="header_row_1 align_center"><h2 class="col2">Basics+</h2></li>
+                            <li class="header_row_2 align_center"><h1 class="col2">$<span>20</span></h1><h3 class="col2">per month</h3></li>
+                            <!-- data rows -->
+                            <li class="row_style_3 align_center"><span>Resupply</span></li>
+                            <li class="row_style_1 align_center"><span>Resupply</span></li>
+                            <li class="row_style_3 align_center"><span><img src="static/img/oralb.png"></span></li>
+                            <li class="row_style_1 align_center"><span><img src="static/img/aquafresh.png"></span></li>
+                            <li class="row_style_3 align_center"><span><img src="static/img/glide.png"></span></li>
+                            <li class="row_style_1 align_center"><span>Resupply</span></li>
+                            <li class="row_style_3 align_center"><span>Resupply</span></li>
+                            <li class="row_style_1 align_center"><span>Included</span></li>
+                            <li class="row_style_3 align_center"><span>Included</span></li>
+                      {% if currentPackage == "basicPlus" %}
+                            <form action="/confirmUpgrade" method="POST">
+                            <li id="signupBasic+" class="footer_row">
+                                <button type="submit"  class="sign_up radius3" disabled="disabled">Current Package!</button>
+                            </li>
+                                <input type="hidden" name="packageType" value="basicPlus">
+
+                            </form>
+
+                            {% else %}
+                            <form action="/confirmUpgrade" method="POST">
+                                <li id="signupBasic+" class="footer_row"><button type="submit" class="sign_up radius3 disabled">Upgrade Now!</button></li>
+                                <input type="hidden" name="packageType" value="basicPlus">
+
+                            </form><!-- column footer -->
+                            {% endif %}
+                            
+                        </ul>
+                    </div>
+
+                    <!-- column style 3 -->
+                    <div class="column_3">
+                        <!-- ribbon (optional) -->
+                        <!--<div class="column_ribbon ribbon_style1_new"></div>-->
+                        <!-- /ribbon -->
+
+                        <ul>
+                            <!-- column header -->
+                            <li class="header_row_1 align_center"><h2 class="col3">Premium</h2></li>
+                            <li class="header_row_2 align_center"><h1 class="col3">$<span>25</span></h1><h3 class="col3">per month</h3></li>
+                            <!-- data rows -->
+                            <li class="row_style_3 align_center"><span><img src="static/img/tide.png"></span></li>
+                            <li class="row_style_1 align_center"><span><img src="static/img/cascade.png"></span></li>
+                            <li class="row_style_3 align_center"><span>Electric Oral B</span></li>
+                            <li class="row_style_1 align_center"><span><img src="static/img/senso-small.png"></span></li>
+                            <li class="row_style_3 align_center"><span><img src="static/img/glide.png"></span></li>
+                            <li class="row_style_1 align_center"><span><img src="static/img/glad.png"></span></li>
+                            <li class="row_style_3 align_center"><span>X</span></li>
+                            <li class="row_style_1 align_center"><span>Included</span></li>
+                            <li class="row_style_3 align_center"><span>Included</span></li>
+                      {% if currentPackage == "premium" %}
+                            <form action="/confirmUpgrae" method="POST">
+                            <li id="signupPremium" class="footer_row">
+                                <button type="submit"  class="sign_up radius3" disabled="disabled">Current Package!</button>
+                            </li>
+                                <input type="hidden" name="packageType" value="premium">
+
+                            </form>
+
+                            {% else %}
+                            <form action="/confirmUpgrade" method="POST">
+                                <li id="signupPremium" class="footer_row"><button type="submit" class="sign_up radius3 disabled">Upgrade Now!</button></li>
+                                <input type="hidden" name="packageType" value="premium">
+
+                            </form><!-- column footer -->
+
+                            {% endif %}
+                           
+                        </ul>
+                    </div>
+
+                    <!-- column style 4 -->
+                    <div class="column_4">
+                        <!-- ribbon (optional) -->
+                        <!--<div class="column_ribbon ribbon_style1_new"></div>-->
+                        <!-- /ribbon -->
+
+                        <ul>
+                            <!-- column header -->
+                            <li class="header_row_1 align_center"><h2 class="col4">Premium+</h2></li>
+                            <li class="header_row_2 align_center"><h1 class="col4">$<span>28</span></h1><h3 class="col4">per month</h3></li>
+                            <!-- data rows -->
+                            <li class="row_style_3 align_center"><span><img src="static/img/tide.png"></span></li>
+                            <li class="row_style_1 align_center"><span><img src="static/img/cascade.png"></span></li>
+                            <li class="row_style_3 align_center"><span>Electric Oral B</span></li>
+                            <li class="row_style_1 align_center"><span><img src="static/img/senso-small.png"></span></li>
+                            <li class="row_style_3 align_center"><span><img src="static/img/glide.png"></span></li>
+                            <li class="row_style_1 align_center"><span><img src="static/img/glad.png"></span></li>
+                            <li class="row_style_3 align_center"><span>Resupply</span></li>
+                            <li class="row_style_1 align_center"><span>Included</span></li>
+                            <li class="row_style_3 align_center"><span>Included</span></li>
+                            <!-- column footer -->
+                      {% if currentPackage == "premiumPlus" %}
+                            <form action="/confirmUpgrade" method="POST">
+                            <li id="signupPremium+" class="footer_row">
+                                <button type="submit"  class="sign_up radius3" disabled="disabled">Current Package!</button>
+                            </li>
+                                <input type="hidden" name="packageType" value="premiumPlus">
+
+                            </form>
+
+                            {% else %}
+                            <form action="/confirmUpgrade" method="POST">
+                                <li id="signupPremium+" class="footer_row"><button type="submit" class="sign_up radius3 disabled">Upgrade Now!</button></li>
+                                <input type="hidden" name="packageType" value="premiumPlus">
+
+                            </form><!-- column footer -->
+
+                            {% endif %}
+                        </ul>
+                    </div>
+                    <div class="caption_column">
+                        <!-- ribbon (optional) -->
+                        <!--<div class="column_ribbon ribbon_style1_new"></div>-->
+                        <!-- /ribbon -->
+
+                        <ul>
+                            <!-- column header -->
+                            <li class="header_row_1 align_center radius5_topright"></li>
+                            <li class="header_row_3 align_center"><h2>How much<br>do you get?</h2></li>
+                            <!-- data rows -->
+                            <li class="row_style_3 align_center"><span>120 Loads</span></li>
+                            <li class="row_style_1 align_center"><span>100 Washes</span></li>
+                            <li class="row_style_3 align_center"><span>4 Brushes</span></li>
+                            <li class="row_style_1 align_center"><span>8 7oz Tubes</span></li>
+                            <li class="row_style_3 align_center"><span>4 packs</span></li>
+                            <li class="row_style_1 align_center"><span>108 Bags</span></li>
+                            <li class="row_style_3 align_center"><span>48 double rolls</span></li>
+                            <li class="row_style_1 align_center"><span>Included</span></li>
+                            <li class="row_style_3 align_center"><span>Included</span></li>
+                            <!-- column footer -->
+                            <li class="footer_row align_center">Save 40% vs. <br> your grocery store!</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="offset4 span4">
+                    <h3>Reclaim your Life</h3>
+                    <p>Those who get Resupplied save up to 48 hours in reclaimed shopping time. Time they spend on things that matter, like biking, hiking, cold fusion, etc.</p>
+                    <p>Join us now! Save money, Simplify your life, Enjoy more.</p></p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

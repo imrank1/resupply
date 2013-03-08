@@ -11,11 +11,14 @@ class PasswordChangeService:
 
     @staticmethod
     def updateUserPassword(linkRef,user,newPassword):
-        changeRequest = PasswordChangeRequest.objects.get(linkRef = linkRef)
-        user.set_password(newPassword)
-        user.save()
-        changeRequest.passwordResetAt = datetime.datetime.now()
-        changeRequest.save()
+        changeRequest = PasswordChangeRequest.objects.get(linkRef = linkRef,used=False)
+        if(changeRequest):
+            user.set_password(newPassword)
+            user.save()
+            changeRequest.passwordResetAt = datetime.datetime.now()
+            changeRequest.save()
+        else:
+            raise Exception("change request already used")
         return user
 
     @staticmethod

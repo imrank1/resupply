@@ -60,63 +60,7 @@
       #selectable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
       #selectable li { margin: 3px; padding: 0.4em; font-size: 1.4em; height: 18px; }
       </style>
-      <script>
-      $(function() {
-        $(function() {
-          $( "#selectable" ).selectable();
-        });
-        window.runningCost = 0 ;
-        window.runningCostSection1 = 0;
-        $( ".selectableSection" ).selectable({
-          stop: function() {
-           var result = $( "#select-result" ).empty();
-           $( ".ui-selected", this ).each(function() {
-            runningCostSection1 = 0;
-            $("#runningTotal").html("");
-            var index = $( "#selectable li" ).index( this );
-            runningCostSection1 = this.getAttribute('data-cost')*1;
-            runningCost = runningCostSection1 + runningCostSection2 + runningCostSection3;
-            result.append( " #" + ( index + 1 ) );
-            $("#runningTotal").text("Running total:").append(runningCost);
 
-          });
-         }
-       });
-        window.runningCostSection2 = 0;
-        $( ".selectableSection2" ).selectable({
-          stop: function() {
-           var result = $( "#select-result" ).empty();
-           $( ".ui-selected", this ).each(function() {
-            runningCostSection2 = 0;
-            $("#runningTotal").html("");
-            var index = $( "#selectable li" ).index( this );
-            runningCostSection2 = this.getAttribute('data-cost')*1;
-            runningCost = runningCostSection1 + runningCostSection2 + runningCostSection3;
-            result.append( " #" + ( index + 1 ) );
-            $("#runningTotal").text("Running total:").append(runningCost);
-
-          });
-         }
-       });
-
-        window.runningCostSection3 = 0;
-        $( ".selectableSection3" ).selectable({
-          stop: function() {
-           var result = $( "#select-result" ).empty();
-           $( ".ui-selected", this ).each(function() {
-            runningCostSection3 = 0;
-            $("#runningTotal").html("");
-            var index = $( "#selectable li" ).index( this );
-            runningCostSection3 = this.getAttribute('data-cost')*1;
-            runningCost = runningCostSection1 + runningCostSection2 + runningCostSection3;
-            result.append( " #" + ( index + 1 ) );
-            $("#runningTotal").text("Running total:").append(runningCost);
-
-          });
-         }
-       });
-      });
-</script>
 </head>
 <body>
 	
@@ -246,6 +190,17 @@
             </div>
             </form> 
           </div>
+
+            <div class="well well-large ui-state-default" style="float:left;height:260px;">
+                <a href="#" class="thumbnail">
+                    <img src="http://placehold.it/300x200" alt="">
+                </a>
+                <form action="/udpateBilling" method="POST">
+
+                    <input type="submit" class="btn btn-large btn-primary disabled" style="margin-left:69px; margin-top:10px;" name="updateBillingSubmit" id="updateBillingButton" value="Current Package">
+                </form>
+                <!-- <a href="#" class="btn btn-large disabled" style="margin-left:69px; margin-top:10px;" >Current Package</a> -->
+            </div>
 
         </div>
 
