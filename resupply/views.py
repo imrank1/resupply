@@ -94,7 +94,7 @@ def charge():
     createdUser = UserService.createUser(email, password, shippingAddress, shippingAddress2, city, zipcode,request.form['stripeToken'], packageType, customer.id)
 
     login_user(createdUser)
-    emailHtml = render_template('signupConfirmationEmailTemplate.html',package=subscription,pricePerMonth=chargePrice/100,shippingAddress="fullAddress")
+    emailHtml = render_template('signupConfirmationEmailTemplate.html',package=PricingService.getDisplayPackage(packageType),pricePerMonth=chargePrice/100,shippingAddress="fullAddress")
     send_mail('imrank1@gmail.com', 'imrank1@gmail.com',
               'Confirmation of subscription to Resupp.ly', 'html',
               emailHtml)
@@ -104,7 +104,7 @@ def charge():
 
 @app.route("/testConfirmationEmail")
 def confirmEmailTest():
-    emailHtml = render_template('signupConfirmationEmailTemplate.html',package="premium",pricePerMonth=2000/100,
+    emailHtml = render_template('signupConfirmationEmailTemplate.html',package="Premium",pricePerMonth=2000/100,
                                 shippingAddress="11945 Little Seneca Parkway, Clarksburg , MD, 20871")
     send_mail('imrank1@gmail.com', 'imrank1@gmail.com',
               'Confirmation of subscription to Resupp.ly', 'html',
@@ -151,7 +151,7 @@ def upgradeConfirmation():
     user = current_user
     currentPackage = user.currentPackage
     upgradePackage = request.form['packageType']
-    return render_template('upgradeConfirmation.html',currentPackage=currentPackage,upgradePackage=upgradePackage,currentPrice=PricingService.getPackagePrice(currentPackage),upgradePrice=PricingService.getPackagePrice(upgradePackage))
+    return render_template('upgradeConfirmation.html',currentPackage=PricingService.getDisplayPackage(currentPackage),upgradePackageDisplay=PricingService.getDisplayPackage(upgradePackage),upgradePackage=upgradePackage,currentPrice=PricingService.getPackagePrice(currentPackage),upgradePrice=PricingService.getPackagePrice(upgradePackage))
 
 
 @app.route("/processUpgrade",methods=['POST'])
@@ -159,17 +159,18 @@ def upgradeConfirmation():
 def processUpgrade():
     user = current_user
     packageType = request.form['packageType']
+    prevPackage = user.currentPackage
     chargePrice = None
-    if packageType == "basic":
+    if packageType == "resupplyBasic":
         chargePrice = 1700
         subscription = "resupplyBasic"
-    elif packageType == "basicPlus":
+    elif packageType == "resupplyBasicPlus":
         chargePrice = 2000
         subscription = "resupplyBasicPlus"
-    elif packageType == "premium":
+    elif packageType == "resupplyPremium":
         chargePrice = 2500
         subscription = "resupplyPremium"
-    elif packageType == "premiumPlus":
+    elif packageType == "resupplyPremiumPlus":
         chargePrice = 2800
         subscription = "resupplyPremiumPlus"
 
@@ -177,10 +178,11 @@ def processUpgrade():
     customer.update_subscription(plan=subscription)
     user.currentPackage = subscription
     user.save()
-
+    emailHtml = render_template("upgradeConfirmationEmail.html",newPackage=PricingService.getDisplayPackage(packageType),pricePerMonth=chargePrice/100,
+                                oldPackage=PricingService.getDisplayPackage(prevPackage))
     send_mail('imrank1@gmail.com', 'imrank1@gmail.com',
-        'upgraded user = ' + user.emailAddress + ' to package = '  + subscription, 'plaintext',
-          '' )
+        'Resupply Upgrade Confirmation', 'html',
+        emailHtml)
 
     return render_template('account_home.html', currentPackage=user.currentPackage, zipCode=user.zipCode,
                            address=user.address, address2=user.address2, city=user.city)

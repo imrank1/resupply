@@ -58,19 +58,19 @@
                             <li class="row_style_3 align_center"><span>X</span></li>
                             <li class="row_style_1 align_center"><span>Included</span></li>
                             <li class="row_style_3 align_center"><span>Included</span></li>
-                            {% if currentPackage == "basic" %}
+                            {% if currentPackage == "resupplyBasic" %}
                             <form action="/confirmUpgrade" method="POST">
                             <li id="signupBasic" class="footer_row">
                                 <button type="submit"  class="sign_up radius3" disabled="disabled">Current Package!</button>
                             </li>
-                                <input type="hidden" name="packageType" value="basicPlus">
+                                <input type="hidden" name="packageType" value="resupplyBasic">
 
                             </form>
 
                             {% else %}
                             <form action="/confirmUpgrade" method="POST">
                                 <li id="signupBasic" class="footer_row"><button type="submit" class="sign_up radius3 disabled">Upgrade Now!</button></li>
-                                <input type="hidden" name="packageType" value="basic">
+                                <input type="hidden" name="packageType" value="resupplyBasic">
 
                             </form><!-- column footer -->
 
@@ -99,19 +99,19 @@
                             <li class="row_style_3 align_center"><span>Resupply</span></li>
                             <li class="row_style_1 align_center"><span>Included</span></li>
                             <li class="row_style_3 align_center"><span>Included</span></li>
-                      {% if currentPackage == "basicPlus" %}
+                      {% if currentPackage == "resupplyBasicPlus" %}
                             <form action="/confirmUpgrade" method="POST">
                             <li id="signupBasic+" class="footer_row">
                                 <button type="submit"  class="sign_up radius3" disabled="disabled">Current Package!</button>
                             </li>
-                                <input type="hidden" name="packageType" value="basicPlus">
+                                <input type="hidden" name="packageType" value="resupplyBasicPlus">
 
                             </form>
 
                             {% else %}
                             <form action="/confirmUpgrade" method="POST">
                                 <li id="signupBasic+" class="footer_row"><button type="submit" class="sign_up radius3 disabled">Upgrade Now!</button></li>
-                                <input type="hidden" name="packageType" value="basicPlus">
+                                <input type="hidden" name="packageType" value="resupplyBasicPlus">
 
                             </form><!-- column footer -->
                             {% endif %}
@@ -144,14 +144,14 @@
                             <li id="signupPremium" class="footer_row">
                                 <button type="submit"  class="sign_up radius3" disabled="disabled">Current Package!</button>
                             </li>
-                                <input type="hidden" name="packageType" value="premium">
+                                <input type="hidden" name="packageType" value="resupplyPremium">
 
                             </form>
 
                             {% else %}
                             <form action="/confirmUpgrade" method="POST">
                                 <li id="signupPremium" class="footer_row"><button type="submit" class="sign_up radius3 disabled">Upgrade Now!</button></li>
-                                <input type="hidden" name="packageType" value="premium">
+                                <input type="hidden" name="packageType" value="resupplyPremium">
 
                             </form><!-- column footer -->
 
@@ -186,14 +186,14 @@
                             <li id="signupPremium+" class="footer_row">
                                 <button type="submit"  class="sign_up radius3" disabled="disabled">Current Package!</button>
                             </li>
-                                <input type="hidden" name="packageType" value="premiumPlus">
+                                <input type="hidden" name="packageType" value="resupplyPremiumPlus">
 
                             </form>
 
                             {% else %}
                             <form action="/confirmUpgrade" method="POST">
                                 <li id="signupPremium+" class="footer_row"><button type="submit" class="sign_up radius3 disabled">Upgrade Now!</button></li>
-                                <input type="hidden" name="packageType" value="premiumPlus">
+                                <input type="hidden" name="packageType" value="resupplyPremiumPlus">
 
                             </form><!-- column footer -->
 
