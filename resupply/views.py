@@ -83,35 +83,45 @@ def charge():
         subscription = "resupplyPremiumPlus"
 
     description = "Charging customer with email : " + email + " for " + subscription + " at address :" + shippingAddress + " " + shippingAddress2 + " " + city + " " + zipcode
+    fullAddress = shippingAddress + ',' + shippingAddress2 + ',' + city + ',' + zipcode
 
     customer = stripe.Customer.create(
         email=request.form['email'],
         card=request.form['stripeToken'],
         plan=subscription,
-        description=description
-    )
+        description=description)
 
-    createdUser = UserService.createUser(email, password, shippingAddress, shippingAddress2, city, zipcode,
-                                         request.form['stripeToken'], packageType, customer.id)
+    createdUser = UserService.createUser(email, password, shippingAddress, shippingAddress2, city, zipcode,request.form['stripeToken'], packageType, customer.id)
 
     login_user(createdUser)
-
-    send_mail(email, 'imrank1@gmail.com',
-              'test mailgun resupply signup will create a template for this signup confirmation', 'plaintext',
-              'this is html')
+    emailHtml = render_template('signupConfirmationEmailTemplate.html',package=subscription,pricePerMonth=chargePrice/100,shippingAddress="fullAddress")
+    send_mail('imrank1@gmail.com', 'imrank1@gmail.com',
+              'Confirmation of subscription to Resupp.ly', 'html',
+              emailHtml)
 
     return render_template('pricing.html')
 
 
+@app.route("/testConfirmationEmail")
+def confirmEmailTest():
+    emailHtml = render_template('signupConfirmationEmailTemplate.html',package="premium",pricePerMonth=2000/100,
+                                shippingAddress="11945 Little Seneca Parkway, Clarksburg , MD, 20871")
+    send_mail('imrank1@gmail.com', 'imrank1@gmail.com',
+              'Confirmation of subscription to Resupp.ly', 'html',
+              emailHtml)
+    return render_template("pricing.html")
+
 @app.route("/pricing")
 def pricing():
-	app.logger.info('showing the pricing page')
-	user = current_user
-	if(user):
-		app.logger.info("there is a current user with " + user.currentPackage)
+    app.logger.info('showing the pricing page')
+    user = current_user
+    if(user.is_anonymous()==False):
+        app.logger.info("there is a current user with " + user.currentPackage)
         return render_template('upgrade.html',currentPackage=user.currentPackage)
+    else:
+        return render_template('pricing.html')
 
-	return render_template('pricing.html')
+    return render_template('pricing.html')
 
 
 @app.route("/checkEmail", methods=['GET'])
