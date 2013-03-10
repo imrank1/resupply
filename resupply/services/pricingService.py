@@ -1,13 +1,13 @@
 class PricingService:
 	@staticmethod
 	def getPackagePrice(package):
-		if(package=="basic"):
+		if(package=="resupplyBasic"):
 			return 17
-		elif(package=="basicPlus"):
+		elif(package=="resupplyBasicPlus"):
 			return 20
-		elif(package=="premium"):
+		elif(package=="resupplyPremium"):
 			return 25
-		elif (package=="premiumPlus"):
+		elif (package=="resupplyPremiumPlus"):
 			return 28
 
 	@staticmethod
