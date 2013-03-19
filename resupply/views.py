@@ -59,7 +59,6 @@ def add_header(response):
 
 @app.route("/charge", methods=['POST'])
 def charge():
-    print "hellooooo"
     email = request.form['email']
     password = request.form['password']
     shippingAddress = request.form['shippingAddress']
@@ -69,16 +68,16 @@ def charge():
 
     packageType = request.form['packageType']
     chargePrice = None
-    if packageType == "basic":
+    if packageType == "resupplyBasic":
         chargePrice = 1700
         subscription = "resupplyBasic"
-    elif packageType == "basicPlus":
+    elif packageType == "resupplyBasicPlus":
         chargePrice = 2000
         subscription = "resupplyBasicPlus"
-    elif packageType == "premium":
+    elif packageType == "resupplyPremium":
         chargePrice = 2500
         subscription = "resupplyPremium"
-    elif packageType == "premiumPlus":
+    elif packageType == "resupplyPremiumPlus":
         chargePrice = 2800
         subscription = "resupplyPremiumPlus"
 
