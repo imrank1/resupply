@@ -1,4 +1,4 @@
-from flask import Flask, url_for,redirect,request
+from flask import Flask, url_for,redirect,request,session
 from flask.ext.mongoengine import MongoEngine
 from resupply import *
 from flask import render_template
@@ -8,6 +8,7 @@ def hello():
 	fbParam = request.args.get('fb_ref')
 	if(fbParam):
 		app.logger.info("received fb-ref= " + fbParam)
+		session['refferalCode']=fbParam
 
 	return render_template('index.html')
 

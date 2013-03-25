@@ -6,9 +6,9 @@ from flask import Flask
 
 class UserService:
 	@staticmethod
-	def createUser(emailAddress, password, address, address2, city, zipCode, stripeToken, package, stripeCustomerId):
+	def createUser(emailAddress, password, address, address2, city, zipCode, stripeToken, package, stripeCustomerId,sourceRefferer):
 		user = User(emailAddress=emailAddress, address=address, address2=address2, city=city, zipCode=zipCode,
-					stripeToken=stripeToken, currentPackage=package, stripeCustomerId=stripeCustomerId)
+					stripeToken=stripeToken, currentPackage=package, stripeCustomerId=stripeCustomerId,refferedBy=sourceRefferer,reducedPrice=False)
 		user.set_password(password)
 		user.save()
 		return user

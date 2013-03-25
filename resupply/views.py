@@ -7,6 +7,7 @@ from resupply.models import *
 from resupply.services.userservice import *
 from resupply.services.pricingService import *
 from resupply.services.passwordChangeService import *
+from resupply.services.refferalService import * 
 from flask.ext.login import LoginManager, UserMixin, \
     login_required, login_user, logout_user, current_user
 from flask.ext.mongoengine import DoesNotExist
@@ -65,6 +66,27 @@ def charge():
     shippingAddress2 = request.form['shippingAddress']
     city = request.form['shippingCity']
     zipcode = request.form['shippingZip']
+    refferal = session.get('refferalCode')
+    sourceRefferer = None
+    if(refferal):
+        refferalCode = refferal.split('-')[1]
+        refferalObject = Refferal.objects.get(refferalCode=refferalCode)
+        if(refferalObject):
+            sourceRefferer = refferalObject.originatorEmailAddress
+            refferUser = User.objects.get(emailAddress=refferalObject.originatorEmailAddress)
+            if(refferUser):
+                if(refferUser.reducedPrice==False):
+                    refferStripeCustomer = stripe.Customer.retrieve(refferUser.stripeCustomerId)
+                    if(refferStripeCustomer):
+                        refferStripeCustomer.coupon = "3month25PCTOff"
+                        refferStripeCustomer.save()
+                        refferUser.reducedPrice = True
+                        refferrUser.save()
+                        couponAppliedHtml = render_template('couponApplied.html',amount=25)
+                        send_mail('imrank1@gmail.com', 'imrank1@gmail.com','We\'ve reduced your subscription amount!', 'html',couponAppliedHtml)
+
+
+
 
     packageType = request.form['packageType']
     chargePrice = None
@@ -90,7 +112,9 @@ def charge():
         plan=subscription,
         description=description)
 
-    createdUser = UserService.createUser(email, password, shippingAddress, shippingAddress2, city, zipcode,request.form['stripeToken'], packageType, customer.id)
+    createdUser = UserService.createUser(email, password, shippingAddress, shippingAddress2, city, zipcode,request.form['stripeToken'], packageType, customer.id,sourceRefferer)
+
+    RefferalService.createRefferal(createdUser.emailAddress)
 
     login_user(createdUser)
     emailHtml = render_template('signupConfirmationEmailTemplate.html',package=PricingService.getDisplayPackage(packageType),pricePerMonth=chargePrice/100,shippingAddress="fullAddress")
@@ -113,6 +137,11 @@ def confirmEmailTest():
 @app.route("/pricing")
 def pricing():
     app.logger.info('showing the pricing page')
+    refferalCode = None
+    refferalCode = session.get('refferalCode')
+    if(refferalCode):
+        app.logger.info("refferal in session is  " + refferalCode)
+    
     user = current_user
     if(user.is_anonymous()==False):
         app.logger.info("there is a current user with " + user.currentPackage)
@@ -266,7 +295,6 @@ def load_user(userid):
 
 @app.route("/register")
 def register():
-    print "hellooo this is login"
     return render_template('login.html')
 
 
@@ -279,8 +307,9 @@ def signin():
 @login_required
 def login():
     user = current_user
+    refferal = Refferal.objects.get(originatorEmailAddress=user.emailAddress)
     return render_template('account_home.html', currentPackage=user.currentPackage, zipCode=user.zipCode,
-                           address=user.address, address2=user.address2, city=user.city)
+                           address=user.address, address2=user.address2, city=user.city,refferalCode=refferal.refferalCode)
 
 
 @app.route("/logout")

@@ -22,6 +22,11 @@ class User(db.Document,UserMixin):
 	stripeToken = db.StringField(max_length=255, required=False)
 	currentPackage = db.StringField(max_length=255, required=False)
 	closedAccount = db.BooleanField(required=False)
+	viaRefferal = db.BooleanField(required=False)
+	refferedBy = db.StringField(required=False)
+	reducedPrice = db.BooleanField(required=False)
+
+
 
 	def __unicode__(self):
 		return self.id
@@ -92,6 +97,27 @@ class PasswordChangeRequest(db.Document):
 	meta = {
 		'allow_inheritance': True,
 		'indexes': ['-created_at', 'ownerEmailAddress'],
+		'ordering': ['-created_at']
+	}
+
+class Refferal(db.Document):
+	created_at = db.DateTimeField(default=datetime.datetime.now, required=True)
+	originatorEmailAddress = db.StringField(max_length=255, required=True)
+	refferalCode = db.StringField(max_length=255,required=False)
+	countUsed = db.IntField(required=False)
+	def __unicode__(self):
+		return self.id
+
+	def __repr__(self):
+		return "%s/%s" % (self.id, self.originatorEmailAddress)
+
+
+	# def get_id(self):
+	#     return unicode(self.id)
+
+	meta = {
+		'allow_inheritance': True,
+		'indexes': ['-created_at', 'originatorEmailAddress'],
 		'ordering': ['-created_at']
 	}
 
