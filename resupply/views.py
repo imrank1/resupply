@@ -1,5 +1,7 @@
+
+
 from flask import Flask, flash, redirect, render_template, \
-    request, url_for, session, jsonify
+    request, url_for, session, jsonify, g
 from flask.ext.mongoengine import MongoEngine
 from resupply import *
 from resupply import config
@@ -32,6 +34,11 @@ def send_mail(to_address, from_address, subject, plaintext, html):
              }
     )
     return r
+
+@app.before_request
+def before_request():
+   g.user = current_user
+
 
 
 def nocache(f):
@@ -134,22 +141,39 @@ def confirmEmailTest():
               emailHtml)
     return render_template("pricing.html")
 
+
+@app.route("/newHome")
+def newHome():
+    user = current_user
+    if(user.is_anonymous()==False):
+        app.logger.info("there is a current user with " + user.emailAddress)
+        return render_template('newHome.html',loggedIn=True,emailAddress=user.emailAddress,user=g.user)
+    else:
+        return render_template('newHome.html',loggedIn=False,user=g.user)
+
 @app.route("/pricing")
 def pricing():
-    app.logger.info('showing the pricing page')
+    app.logger.info('showing the pricing page fadfa')
     refferalCode = None
     refferalCode = session.get('refferalCode')
+    targetZipCode = None
+    targetZipCode = session.get('targetZipCode')
+    showGetStarted = False
     if(refferalCode):
         app.logger.info("refferal in session is  " + refferalCode)
+
+    if(targetZipCode==None):
+        showGetStarted=True
+        app.logger.info("showing getStartedModal on pricing screen")    
     
     user = current_user
     if(user.is_anonymous()==False):
         app.logger.info("there is a current user with " + user.currentPackage)
         return render_template('upgrade.html',currentPackage=user.currentPackage)
     else:
-        return render_template('pricing.html')
+        return render_template('pricing.html',showGetStarted=showGetStarted)
 
-    return render_template('pricing.html')
+    return render_template('pricing.html',showGetStarted=showGetStarted)
 
 
 @app.route("/checkEmail", methods=['GET'])
@@ -171,6 +195,26 @@ def step1():
     packageType = request.form['packageType']
     return render_template('signupStep2.html', packageType=packageType,
                            packagePrice=PricingService.getPackagePrice(packageType))
+
+@app.route("/getStarted",methods=['POST'])
+def getStarted():
+    zipCode = request.form['zipCode']
+    houseHoldSize = request.form['numFamily']
+    canShip = True
+    resp = None
+
+    if(zipCode[:1]!= '2'):
+        app.logger.info("We can't ship  to " + zipCode)
+        canShip = False
+        resp = jsonify({'available': canShip})
+        resp.status_code = 500
+        return resp
+    if(zipCode and houseHoldSize):
+        session['targetZipCode'] = zipCode
+        session['houseHoldSize'] = houseHoldSize
+        resp = jsonify({'available': canShip})
+        resp.status_code = 200
+        return resp
 
 
 @app.route("/confirmUpgrade",methods=['POST'])
@@ -309,7 +353,7 @@ def login():
     user = current_user
     refferal = Refferal.objects.get(originatorEmailAddress=user.emailAddress)
     return render_template('account_home.html', currentPackage=user.currentPackage, zipCode=user.zipCode,
-                           address=user.address, address2=user.address2, city=user.city,refferalCode=refferal.refferalCode)
+                           address=user.address, address2=user.address2, city=user.city,refferalCode=refferal.refferalCode,user=g.user)
 
 
 @app.route("/logout")
@@ -335,7 +379,7 @@ def processLogin():
         print "logging in the user"
         login_user(user)
         return render_template('account_home.html', currentPackage=user.currentPackage, zipCode=user.zipCode,
-                               address=user.address, address2=user.address2, city=user.city)
+                               address=user.address, address2=user.address2, city=user.city,user=user)
     else:
         print "passwords don't match"
         flash('Sorry the password you entered does not match. Need to <a href="restPassword"> reset</a> it?')

@@ -1,206 +1,173 @@
-	<!--start: Wrapper-->
-	<div id="updateShippingSection">
-		<div class="line"></div>
+
+	<div id="updateShippingSection" style="margin-top:100px;">
     <div class="row">
       <div class="span4 offset1">
 
         <div class="row">
-          
-            <div class="well well-large ui-state-default" style="float:left;height:260px;">
-              <a href="#" class="thumbnail">
-                <img src="http://placehold.it/300x200" alt="">
-              </a>
-              <form action="/udpateBilling" method="POST">
 
-               <input type="submit" class="btn btn-large btn-primary disabled" style="margin-left:69px; margin-top:10px;" name="updateBillingSubmit" id="updateBillingButton" value="Current Package">
-             </form>
-             <!-- <a href="#" class="btn btn-large disabled" style="margin-left:69px; margin-top:10px;" >Current Package</a> -->
-           </div>  
-           <form action="/updateShippingAddress" method="POST">
-            <div class="well well-large ui-state-default" style="float:left;margin-left:30px;">
-              <div class="alert alert-success" id="successShippingAddressChange" class="alert alert-error" style="display:none;"> Shipping address updated!
-              </div>
-              <div class="alert alert-error" id="updateBillingFailure" class="alert alert-error" style="display:none;">Sorry we could not update your shipping address. Please contact support. 
-              </div>
-              <a href="#" class="thumbnail">
-                <img src="http://placehold.it/300x200" alt="">
-              </a>
-              <input type="submit" id="updateShippingAddress" class="btn btn-large btn-primary" style="margin-left:99px;margin-top:10px;" name="updateBillingSubmit" value="Upgrade!">
-            </div>
-          </form>
-<div class="span12 selectable">   
-<div class="fb-like" data-href="http://resupply-staging.heroku.com" data-send="true" data-ref="rspllySrc-{{refferalCode}}" data-width="450" data-show-faces="true" data-font="verdana" data-action="recommend"></div>
+          <!-- <div class="span12 selectable"> -->
+                      <div class="span7">
 
+          <div class="well well-large ui-state-default" style="width:680px; margin-left:70px">
+          <strong> Share your purchase and get a discount!</strong>
+            <div class="fb-send" data-href="http://resupply-staging.heroku.com" data-send="true" data-ref="rspllySrc-{{refferalCode}}" data-width="450" data-show-faces="true" data-font="verdana" data-action="recommend"></div>
 
-<a href="https://twitter.com/share" class="twitter-share-button" data-lang="en" data-url="url=resupply-staging.heroku.com?rspplySrce={{refferalCode}}" data-text="Just saved loads of money on homegoods via Resupp.ly!">Tweet</a>
-              <div class="well well-large ui-state-default" style="float:left;height:260px;">
-                  <a href="#" class="thumbnail">
-                      <img src="http://placehold.it/300x200" alt="">
-                  </a>
-                  <form action="/udpateBilling" method="POST">
-
-                      <input type="submit" class="btn btn-large btn-primary disabled" style="margin-left:69px; margin-top:10px;" name="updateBillingSubmit" id="updateBillingButton" value="Current Package">
-                  </form>
-                  <!-- <a href="#" class="btn btn-large disabled" style="margin-left:69px; margin-top:10px;" >Current Package</a> -->
-              </div>
-
-              <div class="well well-large ui-state-default" style="float:left;height:260px;">
-                  <a href="#" class="thumbnail">
-                      <img src="http://placehold.it/300x200" alt="">
-                  </a>
-                  <form action="/udpateBilling" method="POST">
-
-                      <input type="submit" class="btn btn-large btn-primary disabled" style="margin-left:69px; margin-top:10px;" name="updateBillingSubmit" id="updateBillingButton" value="Current Package">
-                  </form>
-                  <!-- <a href="#" class="btn btn-large disabled" style="margin-left:69px; margin-top:10px;" >Current Package</a> -->
-              </div>
-
-
-
-
+<!-- 
+<div class="fb-like" data-href="http://resupply-staging.heroku.com" data-send="true" data-ref="rspllySrc-ABCD" data-width="450" data-show-faces="true" data-font="verdana" data-action="recommend"></div>
+ -->
+            <a href="https://twitter.com/share" class="twitter-share-button" data-lang="en" data-url="url=resupply-staging.heroku.com?rspplySrce={{refferalCode}}" data-text="Just saved loads of money on homegoods via Resupp.ly!">Tweet and Get a Discount on your plan!</a>
           </div>
+        </div>
 
-      </div>
+            <div class="span7 offset1">
+              <div class="row">
 
-    </div>
+                <div class="well well-large ui-state-default" style="width:680px;">
+
+                  <form action="/updateShippingAddress" method="POST" class="form-horizontal">
+                    <div class="alert alert-success" id="successShippingAddressChange" class="alert alert-error" style="display:none;"> Shipping address updated!
+                    </div>
+                    <div class="alert alert-error" id="updateBillingFailure" class="alert alert-error" style="display:none;">Sorry we could not update your shipping address. Please contact support. 
+                    </div>
+                    <fieldset>
+
+                      <!-- Form Name -->
+                      <legend>Account</legend>
+                      <label>Shipping Address</label>
+
+                      <!-- Text input-->
+                      <div class="control-group">
+                        <label class="control-label">Address</label>
+                        <div class="controls">
+                          <input id="shippingAddress" name="shippingAddress" type="text" placeholder="placeholder" class="input-xlarge" value="{{ address }}">
+
+                        </div>
+                      </div>
+
+                      <!-- Text input-->
+                      <div class="control-group">
+                        <label class="control-label">Apt/Suite</label>
+                        <div class="controls">
+                          <input id="shippingAddress2" name="shippingAddress2" type="text" placeholder="placeholder" class="input-xlarge"value="{{ address2 }}">
+
+                        </div>
+                      </div>
+
+                      <!-- Text input-->
+                      <div class="control-group">
+                        <label class="control-label">City</label>
+                        <div class="controls">
+                          <input id="shippingCity" name="shippingCity" type="text" placeholder="placeholder" class="input-xlarge" value="{{ city }}">
+
+                        </div>
+                      </div>
+
+                      <!-- Text input-->
+                      <div class="control-group">
+                        <label class="control-label">Zip Code</label>
+                        <div class="controls">
+                          <input id="shippingZip" name="shippingZip" type="text" placeholder="placeholder" class="input-xlarge" value="{{ zipCode }}">
+
+                        </div>
+                      </div>
+
+                      <!-- Button -->
+                      <div class="control-group">
+                        <label class="control-label"></label>
+                        <div class="controls">
+                          <button id="updateAddress" name="updateAddress" class="btn btn-primary">Update Shipping Address</button>
+                        </div>
+                      </div>
+
+                    </fieldset>
+                  </form>
+                  <legend>Password</legend>
+                  <form class="form-horizontal">
+<!-- <fieldset> -->
+
+<!-- Form Name -->
+<!-- <legend></legend>
+ -->
+<!-- Button -->
+<div class="control-group">
+  <label class="control-label"></label>
+  <div class="controls">
+    <button id="passwordChangeRequestButton" name="passwordChangeRequestButton" class="btn btn-primary">Request Password Change</button>
   </div>
+</div>
+</form>
+<form class="form-horizontal">
+<fieldset>
 
-  <div class="span7 offset1">
-    <div class="row">
+<!-- Form Name -->
 
-      <h5>Shipping Address</h5>
+<!-- Button -->
+                  <legend>Cancellation</legend>
 
-      <!-- <div class="well"> -->
-        <!-- BILLING -->
+<div class="control-group">
+  <label class="control-label"></label>
+  <div class="controls">
+    <button id="cancelAccountButton" name="cancelAccountButton" class="btn btn-primary">Close account</button>
+  </div>
+</div>
+
+</fieldset>
+</form>
+</div>
 
 
-        <form action="/updateShippingAddress" method="POST">
-          <div class="well well-large ui-state-default" style="float:left;margin-left:30px;">
-            <div class="alert alert-success" id="successShippingAddressChange" class="alert alert-error" style="display:none;"> Shipping address updated!
-            </div>
-            <div class="alert alert-error" id="updateBillingFailure" class="alert alert-error" style="display:none;">Sorry we could not update your shipping address. Please contact support. 
-            </div>
-            <div class="row">
 
-              <div class="span3">
-                <!-- COUNTRY -->
-                <div class="control-group">
-                  <label class="control-label" for="id_billing_country">Country</label>
-                  <div class="controls">
-                    <select name="billing_country" class="input-medium" id="id_billing_country" value="US">
-                      <option value="US" selected="selected">United States</option>
-                    </select>
 
+
+
+   
+
+
+                 <!--  If you want to close your account please click on the button below and we'll send an email confirmation to your registered email.
+                  <div><button id="cancelAccountButton" class="btn btn-large btn-primary" style="margin-top:10px;">Close my account!</button></div> -->
+                </div>
+              </div>
+              <div id="cancelAccountConfirm" class="modal hide fade">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  <h3>Cancel Account?</h3>
+                </div>
+                <div class="modal-body">
+                  <p>By cancelling your account you will miss out on some great savings. </p>
+                </div>
+                <div class="alert alert-success" id="successCancel"  style="display:none;">We successfully canclelled your account. You'll receive a confirmaiton email shortly. You've been logged out and will be redirected in to the home page in 10 seconds.   
+                </div>
+                <div class="alert alert-error" id="failureCancel"  style="display:none;">We were not able to cancel your account. Sorry for the inconveniance. Please contact support at support@resupply.com  
+                </div>
+                <div class="modal-footer">
+                  <button id="confirmCancelButton" class="btn btn-danger">Cancel Account</a>
                   </div>
                 </div>
+
+                <div id="passwordChangeConfirm" class="modal hide fade">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3>Request Password Change</h3>
+                  </div>
+                  <div class="modal-body">
+                    <p>Click the confirm button and you'll receive an email link to change your password.  </p>
+                  </div>
+                  <div class="alert alert-success" id="successCancel"  style="display:none;">We've sent an email with a link to reset your password. Please check your email shortly.   
+                  </div>
+                  <div class="alert alert-error" id="failureCancel"  style="display:none;">We were not able to process your request to change your password. Please contact support at support@resupply.com  
+                  </div>
+                  <div class="modal-footer">
+                    <button id="confirmPasswordResetButton" class="btn btn-danger">Confirm</a>
+                    </div>
+                  </div>
+
+                </div><!-- .span6 -->
               </div>
-
-            </div>
-
-
-            <div class="controls row">
-              <div class="span2" style="margin-right: 30px;">
-                <label class="control-label" for="id_billing_address1">Address</label>
-
-                <input type="text" name="shippingAddress" class="input" id="shippingAddress" value="{{ address }}" />
-              </div>
-              <div class="span2">
-                <label class="control-label" for="id_billing_address2">Apt/Suite</label>
-                <input type="text" name="shippingAddress2" class="input" id="shippingAddress2" value="{{ address2 }}" />
-              </div>
-            </div>
-
-
-            <div class="controls row">
-              <div class="span2" style="margin-right: 30px;">
-                <label class="control-label" for="id_billing_city">City</label>
-
-                <input type="text" name="shippingCity" class="input" id="shippingCity" value="{{ city }}" />
-              </div>
-            </div>
-
-
-            <div class="span2">
-              <!-- ZIPCODE -->
-              <div class="control-group">
-                <label class="control-label" for="id_billing_zip">Zip Code</label>
-                <div class="controls">
-                  <input type="text" name="shippingZip" class="input-small" id="shippingZip" value="{{ zipCode }}" />
-
-                </div>
-              </div>
-            </div>
-
-
-            <input type="submit" id="updateAddress" class="btn btn-large btn-primary" style="margin-top:10px;" value="Update!"/>
-          </form>
-        </div><!-- end of well -->
-
-        </div><!--end of well -->
-      <div class="span6">
-
-        <div class="well" style="margin-left:-60px">
-          To change your password we'll send an email confirmation to your registered email where you can reset your password.
-          <div><button id="passwordChangeRequestButton" class="btn btn-large btn-primary" style="margin-top:10px;">Change my password!</button></div>
+            </div><!-- container.row -->
+          </div>
         </div>
       </div>
+      <!-- end: Container -->
 
-      <div class="span6">
-
-        <div class="well" style="margin-left:-60px">
-          If you want to close your account please click on the button below and we'll send an email confirmation to your registered email.
-          <div><button id="cancelAccountButton" class="btn btn-large btn-primary" style="margin-top:10px;">Close my account!</button></div>
-        </div>
-      </div>
-<div id="cancelAccountConfirm" class="modal hide fade">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3>Cancel Account?</h3>
-  </div>
-  <div class="modal-body">
-    <p>By cancelling your account you will miss out on some great savings. </p>
-  </div>
-  <div class="alert alert-success" id="successCancel"  style="display:none;">We successfully canclelled your account. You'll receive a confirmaiton email shortly. You've been logged out and will be redirected in to the home page in 10 seconds.   
-  </div>
-    <div class="alert alert-error" id="failureCancel"  style="display:none;">We were not able to cancel your account. Sorry for the inconveniance. Please contact support at support@resupply.com  
-  </div>
-  <div class="modal-footer">
-    <button id="confirmCancelButton" class="btn btn-danger">Cancel Account</a>
-  </div>
-</div>
-
-<div id="passwordChangeConfirm" class="modal hide fade">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3>Request Password Change</h3>
-  </div>
-  <div class="modal-body">
-    <p>Click the confirm button and you'll receive an email link to change your password.  </p>
-  </div>
-  <div class="alert alert-success" id="successCancel"  style="display:none;">We've sent an email with a link to reset your password. Please check your email shortly.   
-  </div>
-    <div class="alert alert-error" id="failureCancel"  style="display:none;">We were not able to process your request to change your password. Please contact support at support@resupply.com  
-  </div>
-  <div class="modal-footer">
-    <button id="confirmPasswordResetButton" class="btn btn-danger">Confirm</a>
-  </div>
-</div>
-
-    </div><!-- .span6 -->
-  </div>
-</div><!-- container.row -->
-</div>
-</div>
-<!-- start: Container -->
-<div class="container">
-
-
-</div>
-
-
-
-</div>
-<!-- end: Container -->
-
-</div>
-<!-- end: Wrapper  -->	
+    </div>
+    <!-- end: Wrapper  -->	

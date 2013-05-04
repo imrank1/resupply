@@ -1,0 +1,66 @@
+<html>
+  <head>
+{% block head %}{% endblock %}
+  </head>
+  <body>
+    <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=385383204902234";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+    <div class="navbar navbar-fixed-top navbar-inverse">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="#">
+           <img src="static/img/bootmetrologo2.png" alt="">
+           </a>
+              {% if user.is_authenticated()  %}
+              <ul class="nav" style="float:right">
+              <li>
+                <a href="/account">
+                  Account: ( {{user.emailAddress}})
+                </a>
+              </li>
+              <li>
+              <a href="/pricing">
+                Upgrade
+              </a>
+            </li>
+            <li>
+              <a href="/logout" >
+                Logout 
+              </a>
+            </li>
+            {% else %}
+            <ul class="nav">
+            <li>
+              <a href="/pricing">
+              Get Started
+              </a>
+            </li>
+            <li>
+            <a href="#">
+              FAQ
+            </a>
+            </li>
+          </ul>
+          <form action="process-login" method="POST" class="navbar-form pull-right">
+            <input name="email" placeholder="Email" class="span2" type="email">
+            <input name="password" placeholder="Password" class="span2" type="password">
+            <button type="submit" class="btn">
+              Sign in
+            </button>
+          </form>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    {% block content %}{% endblock %}
+    <div>
+        &copy; The Resupply Corporation 2012
+      </div
+  </body>
+</html>
