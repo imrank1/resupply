@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <!-- Le styles -->
     <link href="static/css/bootstrap.css" rel="stylesheet">
-	<link href="static/css/flat-ui.css" rel="stylesheet">
+	<!-- <link href="static/css/flat-ui.css" rel="stylesheet"> -->
 	<!-- Rotator Cuff -->
 		<link href='http://fonts.googleapis.com/css?family=Bree+Serif|Open+Sans+Condensed:700,300,300italic' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" type="text/css" href="static/css/demo-r.css" />
@@ -28,7 +28,7 @@
 		<![endif]-->
 	<!-- END Rotator Cuff -->
 	<style>
-      body { padding-top: 60px; /* 60px to make the container go all the way
+      body {/* 60px to make the container go all the way
       to the bottom of the topbar */ }
     </style>
     <link href="static/css/bootstrap-responsive.css" rel="stylesheet">
@@ -46,11 +46,11 @@
     <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
     <style>
     </style>
-                  <script data-main="/static/js/home" src="/static/js/ext/require.js"></script>
+    <script data-main="/static/js/home" src="/static/js/ext/require.js"></script>
 
 {% endblock %}  
 {% block content%}
-    <div class="container">
+    <div class="container" style="padding-top:100px;">
       <div class="resupply-hero hero-unit hero-unit ">
         <div class="row">
 		<div class="span7 resupply-callout">
@@ -131,7 +131,7 @@
 			<li style="display: inline; margin: 1.5%;"><img src="static/img/brand/oralb.png"></li>
 			</ul>
 		</div>
-      <div class="row">
+      <div class="row-fluid">
         <div class="span4">
           <div>
             <h2>
@@ -152,9 +152,7 @@
 			  to lifes inconveniences.-->
             </p>
           </div>
-          <a class="btn" href="#">
-            View details
-          </a>
+
         </div>
         <div class="span4">
           <div>
@@ -169,9 +167,6 @@
 			  We take care of the rest and you get 36 hours of your life back yearly!
             </p>
           </div>
-          <a class="btn" href="#">
-            View details
-          </a>
         </div>
         <div class="span4">
           <div>
@@ -186,14 +181,11 @@
 			  retailers.
             </p>
           </div>
-          <a class="btn" href="#">
-            View details
-          </a>
         </div>
       </div>
       <hr>
       <div>
-        &copy; The Resupply Corporation 2012
+        <center>&copy; The Resupply Corporation 2012</center>
       </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js">

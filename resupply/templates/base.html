@@ -11,17 +11,64 @@
   js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=385383204902234";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
-    <div class="navbar navbar-fixed-top navbar-inverse">
+   
+  <!-- NAV --> 
+  
+<div class="row header">
+   
+  <!-- NAV --> 
+  
+<nav class="navbar navbar-fixed-top" style="
+    height: 79px;
+">
+            <div class="navbar-inner">
+                <div class="container" style="
+    height: 36px;
+">
+
+                    <a class="btn btn-navbar m-btn blue" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+
+
+                    <h1 class="brand">
+                        <a href="index.html">
+                            <img src="static/img/bootmetrologo2.png" alt="">
+                        </a>                            
+                    </h1>
+            
+                    <div class="nav-collapse">
+                        <ul class="nav pull-right">
+                          <li class=""><a href="/about" class="anchorLink">About</a></li>
+                          <li class=""><a href="/pricing" class="anchorLink">Pricing</a></li>
+                          <li class=""><a href="#contact" class="anchorLink">Contact</a></li>
+                          {% if user and user.is_authenticated()  %}
+                          <li><a href="/logout">Logout</a></li>
+                          {% else %}
+                          <li><a href="/signin">Login</a></li>
+                          {% endif %}
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </nav>
+    {% block content %}{% endblock %}
+  </div>  
+    <!-- <div class="navbar navbar-fixed-top navbar-inverse">
       <div class="navbar-inner">
         <div class="container">
           <a class="brand" href="#">
            <img src="static/img/bootmetrologo2.png" alt="">
            </a>
-              {% if user.is_authenticated()  %}
+              {% if user and user.is_authenticated()  %}
               <ul class="nav" style="float:right">
               <li>
                 <a href="/account">
-                  Account: ( {{user.emailAddress}})
+                  Account: ({{user.emailAddress}})
                 </a>
               </li>
               <li>
@@ -58,9 +105,8 @@
         </div>
       </div>
     </div>
-    {% block content %}{% endblock %}
     <div>
         &copy; The Resupply Corporation 2012
-      </div
+      </div -->
   </body>
 </html>

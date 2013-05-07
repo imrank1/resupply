@@ -1,6 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
+{% extends "base.html" %}
+{% block head %}
+
     <meta charset="utf-8">
     <title>Resupp.ly</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,10 +32,9 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
 
+{% endblock %}
+{% block content %}
 
-  </head>
-
-  <body id="home" data-spy="scroll" data-target=".navbar">
 
     <!-- HEADER CONTAINER -->
 
@@ -43,78 +42,15 @@
       <!-- CONTENT -->
    
 
-<div class="row header">
+<div class="row header" style="padding-top:100px;">
    
   <!-- NAV -->
-    {% include 'nav.html' %}
   </div>
 
 
  {% include 'signin_include.html'%} 
 
-{% include 'about.html' %}
-
-{% include 'contact.html' %}
-    <div id="form">
-    
-      <div class="container">
-    
-        <div class="row">        
-            <div class="span8" >
-            <h3>Get in touch with us.</h3>
-            
-            <p>Fill out the form below and we will get back to you soon.</p>             
-            
-    
-            <form id="contact-form">
-                               
-            <fieldset>
-            <div class="row"> 
-                        <div class="holder span8"><div class="message"><div class="top"></div>
-                        <div class="contents"><div id="alert"></div></div>
-                        <div class="bottom"></div></div></div>
-                        <div class="field span8">
-                          <input type="text" value="" class="input-text m-wrap m-ctrl-large" id="name" name="name" placeholder="Your Name"/></div>
-                        <div class="field span8">
-                          <input type="text" value="" class="input-text m-wrap m-ctrl-large" id="email" name="email"  placeholder="Your Email Address" />
-                        </div>
-                        <div class="field span8">
-                        <textarea placeholder="Your Message" class="input-textarea m-wrap m-ctrl-large" id="message" name="message"></textarea>
-                        </div>
-                        <div class="field span8">
-                        <input type="submit" class="m-btn green" value="Submit Entry" /></div>
-                      </div>
-                    </fieldset>
-                    </form>
-          </div>
-          
-          <div class="span3 offset1" >
-            <h3>Contact info</h3>
-
-              <p>121 North Avenue<br>
-                Burlington, VT<br>
-                05454
-                Phone: (123) 456-7890<br>
-                Fax: (123) 456-7890<br>
-                Email: email@address.com<br>
-                Web: companyname.com</p>
-            
-          </div>
-          
-          
-        </div>    
-    
-             
-      </div> <!-- /container -->
-    
-    </div> <!-- /form  -->  
-
-    <!-- END CONTACT FORM  -->
-
-  </div> <!-- /container -->
-
-
-    
+   
   <script src="js/jquery.js"></script>
   <script src="js/jquery.mousewheel-3.0.4.pack.js"></script>
   <script src="js/jquery.gmap.js"></script>
@@ -124,33 +60,4 @@
   <script src="js/bootstrap-scrollspy.js"></script>
   <script src="js/anchor.js" type="text/javascript"></script>
   <script src="js/bootstrap.js"></script>
-
-
-
-     <!-- MAP -->
-
-   <script type="text/javascript">
-  $(document).ready(function(){
-{#    $("#map").gMap({ controls: false,#}
-{#                      scrollwheel: false,#}
-{#                          draggable: true,#}
-{#                      markers: [{ latitude: 44.47698,#}
-{#                                  longitude: 1006.8,#}
-{#                                  icon: { image: "img/pin.png",#}
-{#                                          iconsize: [32, 47],#}
-{#                                          iconanchor: [32,47],#}
-{#                                          infowindowanchor: [12, 0] } }#}
-{#                                ],#}
-{#                      icon: { image: "img/pin.png", #}
-{#                              iconsize: [26, 46],#}
-{#                              iconanchor: [12, 46],#}
-{#                              infowindowanchor: [12, 0] },#}
-{#                      latitude: 44.47698,#}
-{#                      longitude: 1006.8,#}
-{#                      zoom: 15, });#}
-
-      $("#")
-  });
-  </script>
-  </body>
-</html>
+{% endblock %}

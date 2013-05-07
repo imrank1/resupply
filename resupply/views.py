@@ -169,9 +169,9 @@ def pricing():
     user = current_user
     if(user.is_anonymous()==False):
         app.logger.info("there is a current user with " + user.currentPackage)
-        return render_template('upgrade.html',currentPackage=user.currentPackage)
+        return render_template('upgrade.html',currentPackage=user.currentPackage,user=g.user)
     else:
-        return render_template('pricing.html',showGetStarted=showGetStarted)
+        return render_template('pricing.html',showGetStarted=showGetStarted,user=None)
 
     return render_template('pricing.html',showGetStarted=showGetStarted)
 
@@ -344,7 +344,7 @@ def register():
 
 @app.route("/signin")
 def signin():
-    return render_template('signin2.html')
+    return render_template('signin2.html',user=None)
 
 
 @app.route("/account")
