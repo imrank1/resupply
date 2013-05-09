@@ -15,3 +15,53 @@ background-color: #e74c3c;
 .resupply-modal-body p{
 	color:black;
 }
+
+#pricingInfoTop {
+	padding-left:164px;
+}
+
+.resupply-pricing-container ul li {
+	height:75px;
+}
+
+@font-face {
+	font-family: proxima;
+	src: url('../../static/fonts/ProximaNova-Light.otf');
+}
+
+
+.customFont{
+	font-family: proxima;
+	font-weight: 50;
+}
+
+.resupply-ul-list ul li {
+	list-style-type: none;
+	height:75px;
+	margin-top:38px;
+	text-align: center;
+}
+
+.resupply-ul-list {
+	width:93px;
+	margin-left: 0px;
+
+}
+.buyButton {
+	background: #1abc9c  92% center no-repeat;
+	background-size: 16px 16px;
+	border-radius: 0px 0px 6px 6px;
+	color: #34495e;
+	padding: 19px 25px 20px;
+	width:248px;
+	font-size: 18px;
+	font-weight: 200;
+	line-height: 30px;
+	font-style: strong;
+}
+
+.pricingLabels {
+text-align: center;
+color: fff;
+font-size: 35;	
+}

@@ -171,9 +171,9 @@ def pricing():
         app.logger.info("there is a current user with " + user.currentPackage)
         return render_template('upgrade.html',currentPackage=user.currentPackage,user=g.user)
     else:
-        return render_template('pricing.html',showGetStarted=showGetStarted,user=None)
+        return render_template('pricing_new.html',showGetStarted=showGetStarted,user=None)
 
-    return render_template('pricing.html',showGetStarted=showGetStarted)
+    return render_template('pricing_new.html',showGetStarted=showGetStarted)
 
 
 @app.route("/checkEmail", methods=['GET'])
@@ -193,7 +193,7 @@ def checkEmail():
 @app.route("/step1", methods=['POST', 'GET'])
 def step1():
     packageType = request.form['packageType']
-    return render_template('signupStep2.html', packageType=packageType,
+    return render_template('signupStep2_new.html', packageType=packageType,
                            packagePrice=PricingService.getPackagePrice(packageType))
 
 @app.route("/getStarted",methods=['POST'])
