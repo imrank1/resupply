@@ -10,6 +10,7 @@ from resupply.services.userservice import *
 from resupply.services.pricingService import *
 from resupply.services.passwordChangeService import *
 from resupply.services.refferalService import * 
+from resupply.services.taxService import * 
 from flask.ext.login import LoginManager, UserMixin, \
     login_required, login_user, logout_user, current_user
 from flask.ext.mongoengine import DoesNotExist
@@ -63,6 +64,110 @@ def add_header(response):
 # @app.route("/")
 # def home():
 #     return render_template('home.html')
+
+
+@app.route("/stageCharge" ,methods=['POST'])
+def stageCharge():
+    name = request.form['name']
+    email = request.form['email']
+    password = request.form['password']
+    shippingAddress = request.form['shippingAddress']
+    shippingAddress2 = request.form['shippingAddress']
+    city = request.form['shippingCity']
+    zipcode = request.form['shippingZip']
+    refferal = session.get('refferalCode')
+    session['name'] = name
+    session['email']=email
+    session['password'] = password
+    session['shippingAddress'] = shippingAddress
+    session['shippingAddress2'] = shippingAddress2
+    session['city'] = city
+    session['zipCode'] = zipcode
+    session['packageType'] = request.form['packageType']
+    taxRate = TaxService.getSalesTax()
+    taxRateString = '%2f'%taxRate
+    app.logger.info('sales tax for zip' + zipcode + 'determined to be:' + taxRateString)
+
+
+    chargePrice = None
+    taxMultiplier = 1 + taxRate
+
+    app.logger.info('effective tax is:')
+    packageType = request.form['packageType']
+    if packageType == "resupplyBasic":
+        chargePrice = 1700
+        subscription = "resupplyBasic"
+    elif packageType == "resupplyBasicPlus":
+        chargePrice = 2000
+        subscription = "resupplyBasicPlus"
+    elif packageType == "resupplyPremium":
+        chargePrice = 2500
+        subscription = "resupplyPremium"
+    elif packageType == "resupplyPremiumPlus":
+        chargePrice = 2800
+        subscription = "resupplyPremiumPlus"
+
+    finalPrice = chargePrice * taxMultiplier
+    stripePlanIdentifier = subscription + '-' + '%.2f'%chargePrice + '-' + '%.2f'%taxMultiplier +'-' + zipcode
+    currentStripePlans = stripe.Plan.all()
+    targetStripePlan = None
+    for plan in currentStripePlans.data:
+        if plan.name == stripePlanIdentifier:
+            app.logger.info("Found existing stripe plan:" + stripePlanIdentifier)
+            targetStripePlan = plan
+            break
+
+    if targetStripePlan == None:
+        app.logger.info("Creating new stripe plan for:"  + stripePlanIdentifier)
+        stripe.Plan.create(
+            amount='%.0f'%finalPrice,
+            interval='month',
+            name=stripePlanIdentifier,
+            currency='usd',
+            id=stripePlanIdentifier)
+
+    app.logger.info('package price is :' + '%.2f'%chargePrice)
+    app.logger.info('with tax package price is : ' + '%.2f'%finalPrice)
+
+    session['targetStripePlan'] = targetStripePlan
+
+    res = jsonify({'staged':True})
+    res.status_code = 200
+    return res
+
+
+
+
+@app.route("/finalStep",methods=['GET'])
+def finalStep():
+    # name = request.form['name']
+
+
+    # email = request.form['email']
+    # password = request.form['password']
+    # shippingAddress = request.form['shippingAddress']
+    # shippingAddress2 = request.form['shippingAddress']
+    # city = request.form['shippingCity']
+    # zipcode = request.form['shippingZip']
+    # refferal = session.get('refferalCode')
+    # session['name'] = name
+    # session['email'] = email
+    # session['password'] = password
+    # session['shippingAddress'] = shippingAddress
+    # session['shippingAddress2'] = shippingAddress2
+    # session['city'] = city
+    # session['zipCode'] = zipcode
+    # session['packageType'] = request.form['packageType']
+
+    return render_template("checkout.html")
+
+    # , name=name, email=email, shippingAddress=shippingAddress,
+    #                    shippingAddress2=shippingAddress2, city=city, zipcode=zipcode, finalPrice=finalPrice,
+    #                    targetStripePlan=targetStripePlan)
+
+
+
+
 
 
 @app.route("/charge", methods=['POST'])
@@ -198,6 +303,7 @@ def step1():
 
 @app.route("/getStarted",methods=['POST'])
 def getStarted():
+    gender = request.form['gender']
     zipCode = request.form['zipCode']
     houseHoldSize = request.form['numFamily']
     canShip = True
@@ -212,6 +318,7 @@ def getStarted():
     if(zipCode and houseHoldSize):
         session['targetZipCode'] = zipCode
         session['houseHoldSize'] = houseHoldSize
+        session['gender'] = gender
         resp = jsonify({'available': canShip})
         resp.status_code = 200
         return resp
@@ -404,6 +511,11 @@ def signupSelectPackage():
 
     return render_template('signup-step3.html')
 
+@app.route("/infoAboutYou",methods=["GET"])
+def infoAboutYou():
+    user = g.user
+    return render_template('infoStep.html',user=user)
+
 
 @app.route("/updateShippingAddress",methods=["POST"])
 @login_required
@@ -473,6 +585,13 @@ def cancelAccount():
     res.status_code = 202
     return res
 
+@app.route("/addToSubscribe",methods=["POST"])
+def addToSubscribe():
+    email = request.form['email']
+    UserService.addToSubscribe(email)
+    res = jsonify({'addedd':True})
+    res.status_code = 200
+    return res
 
 
 

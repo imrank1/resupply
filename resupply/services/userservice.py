@@ -43,3 +43,8 @@ class UserService:
 		user.save()
 
 		return cancelledAccount
+
+	@staticmethod 
+	def addToSubscribe(email):
+		subscribe = Subscriber(emailAddress=email)
+		subscribe.save()

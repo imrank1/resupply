@@ -12,3 +12,4 @@ pymongo==2.3
 requests==0.13.2
 stripe==1.7.6
 wsgiref==0.1.2
+pyavatax

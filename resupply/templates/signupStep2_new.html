@@ -50,7 +50,7 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
-    <script data-main="/static/js/main" src="/static/js/ext/require.js"></script>
+    <script data-main="/static/js/step2Loader" src="/static/js/ext/require.js"></script>
     <script  src="/static/js/ext/jquery.validate.jsrequire.js"></script>
     <!-- <link href="static/css/style.css" rel="stylesheet"> -->
 
@@ -62,8 +62,8 @@
 <!-- CONTENT -->
 
 
-<div class="container hero-unit">
-<div class="span4" style="padding-top: 100px;">
+<div class="container hero-unit checkout-hero-unit" style="margin-top:100px;">
+<div class="span4 offset4">
     <ul class="breadcrumb">
         <li><a href="/pricing">Package Select</a> <span class="divider">/</span></li>
         <li class="active"><a href="#">Account Details</a> <span class="divider">/</span></li>
@@ -71,8 +71,11 @@
 </div>
 
 
-    <div id="packageHeader" class="offset2 span6 well" style="text-align:center">
-       Your signing up for the {{ packageType }} package at ${{packagePrice}} per month!
+    <div id="packageHeader" class="offset3 span6 well" style="text-align:center">
+       Your signing up for the {{ packageType }} package at ${{packagePrice}}* per month!
+       <br>
+       <span id="salesTax">*Sales Tax: Calculated when you tell us your zip code
+       </span>
     </div>
     <div id="signupSuccess" class="offset4 span6 well alert alert-success" style="text-align:center; display:none">
        Awesome you've signed up! Look for an email for details on your first delivery!
@@ -82,7 +85,7 @@
     </div>
     <div id="billing_container">
 {##}
-{#    <div class="offset4 span6 well">#}
+{#    <div class="offset7 span6 well">#}
 {#        <legend>Please Enter Account Details: </legend>#}
 {#        <form accept-charset="UTF-8" action="" method="post">#}
 {#            <input class="span3" name="name" placeholder="Full Name" type="text">#}
@@ -161,6 +164,9 @@
 {#            </div>#}
 {#        </form>#}
 {#    </div>#}
+
+
+
      </div>
 </div>
 </div>

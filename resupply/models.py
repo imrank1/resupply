@@ -121,3 +121,23 @@ class Refferal(db.Document):
 		'ordering': ['-created_at']
 	}
 
+class Subscriber(db.Document):
+	created_at = db.DateTimeField(default=datetime.datetime.now, required=True)
+	emailAddress = db.StringField(max_length=255, required=True)
+	
+	def __unicode__(self):
+		return self.id
+
+	def __repr__(self):
+		return "%s/%s" % (self.id, self.emailAddress)
+
+
+	# def get_id(self):
+	#     return unicode(self.id)
+
+	meta = {
+		'allow_inheritance': True,
+		'indexes': ['-created_at', 'emailAddress'],
+		'ordering': ['-created_at']
+	}
+

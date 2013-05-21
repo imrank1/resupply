@@ -64,8 +64,9 @@
 		<div class="span4">
 		<img src="static/img/explain.png" alt="" align="right"><p></p></div></div>
 		<div class="row">
-		<div class="span3 offset4">
-          <a href="#getStartedModal" class="btn btn-large btn-block btn-success" data-toggle="modal">Get Started In Seconds!</a>
+		
+    <div class="span3 offset4">
+          <a href="#getStartedModal" class="btn btn-large btn-block btn-success"onclick="javascript:window.location.href='/infoAboutYou'; return false;">Get Started In Seconds!</a>
         </div>
 
         <div id="getStartedModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -94,7 +95,7 @@
   </div>
   <div class="modal-footer">
     <button i class="btn" type="submit"data-dismiss="modal" aria-hidden="true">Close</button>
-    <button id="getStarted" class="btn btn-primary">Go!</button>
+    <button id="infoTrigger" class="btn btn-primary" onclick="javascript:window.location.href='/infoAboutYou.html'; return false;">Go!</button>
   </div>
       </form>
 

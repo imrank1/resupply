@@ -2,6 +2,9 @@
 background-color: #e74c3c;
 }
 
+.errorState {
+    border-color:red !important;
+}
 
 .resupply-callout{
 	color:#fff;
@@ -40,6 +43,7 @@ background-color: #e74c3c;
 	height:75px;
 	margin-top:38px;
 	text-align: center;
+	margin-left:-35px;
 }
 
 .resupply-ul-list {
@@ -65,3 +69,10 @@ text-align: center;
 color: fff;
 font-size: 35;	
 }
+
+.checkout-hero-unit { 
+	background-color:#2ECC71;
+}
+
+.radio .icon-to-fade {
+  background-image: url("../static/images/radio.png"); }

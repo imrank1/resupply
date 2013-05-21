@@ -12,6 +12,7 @@
         processSignup:function(e){
             self = this;
             e.preventDefault();
+            $(".alert-error").hide();
             var missingFields = false;
             var error=false;
             var passwordMatch = true;
@@ -34,8 +35,13 @@
                     passwordMatch = false;
                 }
             }
+
             if(!passwordMatch){
                 $("#passwordMismatchError").show();
+                return false;
+            }
+            if(password.length <= 5){
+                 $("#passwordLengthBad").show();
                 return false;
             }
 
@@ -81,7 +87,6 @@
         // $("#paymentErrorMessage").show("slow");
         // $(".submit-button").removeAttr("disabled");
       } else {
-        debugger;
         var form$ = $("#payment-form");
         var token = response['id'];
 

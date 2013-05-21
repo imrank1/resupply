@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+{% block head %}
+
+    <meta charset="utf-8">
+    <title>Resupp.ly</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="static/css/bootstrap.css" rel="stylesheet">
+    <link href="static/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="static/css/m-styles.min.css" rel="stylesheet">
+    <link href="static/css/m-forms.min.css" rel="stylesheet">
+    <link href="static/css/m-buttons.css" rel="stylesheet">
+
+    <link href="static/css/custom.css" rel="stylesheet">
+   <link href="static/css/bootstrap-responsive.css" rel="stylesheet">
+      <link href="static/css/resupply.css" rel="stylesheet">
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+       <script src="static/js/bootstrap.js"></script>
+
+
+    <script>
+        window.packageType = "{{packageType}}"
+    </script>
+
+
+    <script src="https://checkout.stripe.com/v2/checkout.js"></script>
+
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
+    <script data-main="/static/js/home" src="/static/js/ext/require.js"></script>
+
+    <!-- <link href="static/css/style.css" rel="stylesheet"> -->
+
+      {% endblock %}  
+      {% block content%}
+<!-- HEADER CONTAINER -->
+
+
+<!-- CONTENT -->
+
+
+<div id="infoContainer" class="container hero-unit checkout-hero-unit" style="margin-top:100px;">
+
+
+    <div id="packageHeader" class="offset2 span7 well" style="text-align:center">
+     <div class="modal-body resupply-modal-body">
+    <p>Tell us a little about yourself :) So we can better customize your package.</p>
+    <form class="form-horizontal" >
+    <div class="control-group">
+    <label class="control-label" for="inputEmail">Your Gender</label>
+    <div class="controls">
+   <label class="radio">
+
+
+
+
+  <input type="radio" name="gender" id="optionsRadiosMale" value="male" checked>
+  Male
+</label>
+<label class="radio">
+  <input type="radio" name="gender" id="optionsRadiosFemale" value="male">
+  Female
+</label>    
+    </div>
+  </div>    
+
+    <div class="control-group">
+    <label class="control-label" for="inputEmail">Size of household</label>
+    <div class="controls">
+    <select id="numFamily" style="text-align:center;width:80    px;" name="numFamily">
+          <option value="1">1-2</option>
+          <option value="2">3-5</option>
+          <option value="3">6+</option>
+        </select>    
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="zipCode">Shipping Zip Code</label>
+    <div class="controls">
+      <input type="text" id="zipCode" name="zipCode" placeholder="Zip Code">
+    </div>
+  </div>
+  <div class="alert alert-error" id="cantShipThere" style="display:none;">Sorry we currently do not ship to that area of the country! <br>Please subscribe below to get the latest updates! 
+</div>
+<div class="alert alert-success" id="subscribeBox" style="display:none;">
+   
+<label class="control-label" for="emailAddressSubscribe">Get notified!</label>
+      <input type="text" class="requiredSforSubscribe" id="emailAddressSubscribe" name="emailAddressSubscribe" placeholder="youremail@email.com">
+      <a class="btn " name="subscribe" id="subscribe">Subscribe!</a>
+      <div class="alert alert-success" id="subscribeSuccess" style="display:none;">Thanks! We'll be in touch!
+</div>
+<div class="alert alert-error" id="subscribeError" style="display:none;">Sorry somthign wen't wrong please try again later!
+</div>
+</div>
+  <a class="btn " name="ontoPricing" id="ontoPricing"> Show me the prices!</a>
+</div>
+  </div>
+
+     </div>
+</div>
+</div>
+
+
+{% endblock %}
