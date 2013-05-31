@@ -87,10 +87,11 @@
                 window.location = '/pricing';    
                 return this;
             },
-                500: function(){}
+            500: function(){
                     $("#subscribeBox").show("slow");
                     return false;
             }
+            
           }
         });
 
