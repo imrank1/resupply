@@ -2,7 +2,6 @@
 	<div id="updateShippingSection" style="margin-top:100px;">
     <div class="row">
       <div class="span4 offset1">
-
         <div class="row">
 
           <!-- <div class="span12 selectable"> -->
@@ -12,9 +11,9 @@
           <strong> Share your purchase and get a discount!</strong>
             <div class="fb-send" data-href="http://resupply-staging.heroku.com" data-send="true" data-ref="rspllySrc-{{refferalCode}}" data-width="450" data-show-faces="true" data-font="verdana" data-action="recommend"></div>
 
-<!-- 
+
 <div class="fb-like" data-href="http://resupply-staging.heroku.com" data-send="true" data-ref="rspllySrc-ABCD" data-width="450" data-show-faces="true" data-font="verdana" data-action="recommend"></div>
- -->
+
             <a href="https://twitter.com/share" class="twitter-share-button" data-lang="en" data-url="url=resupply-staging.heroku.com?rspplySrce={{refferalCode}}" data-text="Just saved loads of money on homegoods via Resupp.ly!">Tweet and Get a Discount on your plan!</a>
           </div>
         </div>
@@ -23,6 +22,7 @@
               <div class="row">
 
                 <div class="well well-large ui-state-default" style="width:680px;">
+                  <label>You're currently signed up for the {{currentPackage}} package for household size of {{numFamily}}.<a href="/infoAboutYouUpgrade"> Want to to upgrade? </a></label>
 
                   <form action="/updateShippingAddress" method="POST" class="form-horizontal">
                     <div class="alert alert-success" id="successShippingAddressChange" class="alert alert-error" style="display:none;"> Shipping address updated!
@@ -93,6 +93,8 @@
   <label class="control-label"></label>
   <div class="controls">
     <button id="passwordChangeRequestButton" name="passwordChangeRequestButton" class="btn btn-primary">Request Password Change</button>
+     <div id="passwordChangeEmailSent" class="alert alert-success" id="successCancel"  style="display:none;">We've sent an email with a link to reset your password. Please check your email shortly.  
+    </div>
   </div>
 </div>
 </form>
@@ -109,41 +111,17 @@
   <div class="controls">
     <button id="cancelAccountButton" name="cancelAccountButton" class="btn btn-primary">Close account</button>
   </div>
-</div>
-
-</fieldset>
-</form>
-</div>
-
-
-
-
-
-
-   
-
-
-                 <!--  If you want to close your account please click on the button below and we'll send an email confirmation to your registered email.
-                  <div><button id="cancelAccountButton" class="btn btn-large btn-primary" style="margin-top:10px;">Close my account!</button></div> -->
-                </div>
-              </div>
-              <div id="cancelAccountConfirm" class="modal hide fade">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                  <h3>Cancel Account?</h3>
-                </div>
-                <div class="modal-body">
-                  <p>By cancelling your account you will miss out on some great savings. </p>
+  <div id="cancelAccountConfirm" style="display:none;text-align:center;">
+                By cancelling your account you will miss out on some great savings.
+                
+                <div >
+                  <button id="confirmCancelButton" class="btn btn-danger">Yes Cancel My Account</a>
+                  </div>
                 </div>
                 <div class="alert alert-success" id="successCancel"  style="display:none;">We successfully canclelled your account. You'll receive a confirmaiton email shortly. You've been logged out and will be redirected in to the home page in 10 seconds.   
                 </div>
                 <div class="alert alert-error" id="failureCancel"  style="display:none;">We were not able to cancel your account. Sorry for the inconveniance. Please contact support at support@resupply.com  
                 </div>
-                <div class="modal-footer">
-                  <button id="confirmCancelButton" class="btn btn-danger">Cancel Account</a>
-                  </div>
-                </div>
-
                 <div id="passwordChangeConfirm" class="modal hide fade">
                   <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -162,11 +140,11 @@
                   </div>
 
                 </div><!-- .span6 -->
-              </div>
-            </div><!-- container.row -->
-          </div>
-        </div>
-      </div>
+</div>
+
+</fieldset>
+</form>
+
       <!-- end: Container -->
 
     </div>

@@ -20,11 +20,11 @@
   opacity: 1;
 }
 </style>
-		<!--[if lt IE 9]> 
-			<style>
-				.rw-wrapper{ display: none; } 
-				.rw-sentence-IE{ display: block;  }
-			</style>
+    <!--[if lt IE 9]> 
+      <style>
+        .rw-wrapper{ display: none; } 
+        .rw-sentence-IE{ display: block;  }
+      </style>
       <![endif]-->
       <!-- END Rotator Cuff -->
       <style>
@@ -63,7 +63,7 @@
           <div class="span3">
             <div class="todo mrm">
               <div class="todo-search pricingLabels">
-                $17/month *
+                ${{pricingMap.basicPrice}}/month *
               </div>
               <ul>
                 <li>
@@ -72,7 +72,7 @@
                     <h4 class="todo-name">
                       <img src="static/img/resupply-logo.png" alt="Resupply">  
                     </h4>
-                    10 loads a month
+                    {{pricingMap.basicLaundryAmt}} loads a month
                   </div>
                 </li>
 
@@ -82,7 +82,7 @@
                     <h4 class="todo-name">
                       <img src="static/img/resupply-logo.png" alt="Resupply">  
                     </h4>
-                    10 cycles a month
+                    {{pricingMap.basicDishwasherAmt}} cycles a month
                   </div>
                 </li>
 
@@ -92,7 +92,7 @@
                     <h4 class="todo-name">
                       <img src="static/img/brand/oralb.png" alt="Oral B">
                     </h4>
-                    every 3 months
+                    {{pricingMap.basicToothBrushAmt}} every 3 months
                   </div>
                 </li>
 
@@ -102,7 +102,7 @@
                     <h4 class="todo-name">
                       <img src="static/img/brand/aquafresh.png" alt="Aquafresh">
                     </h4>
-                    every 6 weeks
+                    {{pricingMap.basicToothPasteAmt}} every 6 weeks
                   </div>
                 </li>
                 <li>
@@ -111,7 +111,7 @@
                     <h4 class="todo-name">
                      <img src="static/img/brand/glide.png" alt="Glide Floss">
                    </h4>
-                   every 6 weeks
+                   {{pricingMap.basicFlossAmt}} every 6 weeks
                  </div>
                </li>
                <li>
@@ -120,13 +120,13 @@
                   <h4 class="todo-name">
                     <img src="static/img/resupply-logo.png" alt="Resupply">  
                   </h4>
-                  12 a month
+                  {{pricingMap.basicTrashAmt}} a month
                 </div>
               </li>
             <form action="step1" method="POST">
                      <button id="signupBasic" type="submit" class="buyButton todo-search  pricingLables">Get This!
                                 </button>
-                  <input type="hidden" name="packageType" value="resupplyBasic">
+                  <input type="hidden" name="packageType" value="{{pricingMap.basicResupplyPackageId}}">
                             </form>
 
 <!-- 
@@ -165,7 +165,7 @@
         <div class="span3">
           <div class="todo mrm">
             <div class="todo-search pricingLabels">
-              $25/month *
+              ${{pricingMap.premiumPrice}}/month *
             </div>
             <ul>
               <li>
@@ -175,7 +175,7 @@
                     <img src="static/img/brand/tide-large.png" alt="Tide Pods">
 
                   </h4>
-                  10 loads a month
+                  {{pricingMap.premiumLaundryAmt}} loads a month
                 </div>
               </li>
 
@@ -186,7 +186,7 @@
                    <img src="static/img/brand/cascade.png" alt="Cascade">
 
                  </h4>
-                 10 cycles a month
+                 {{pricingMap.premiumDishwasherAmt}} cycles a month
                </div>
              </li>
 
@@ -196,7 +196,7 @@
                 <h4 class="todo-name">
                   <img src="static/img/brand/oralb.png" alt="Oral B Electric"> &nbsp; Electric
                 </h4>
-                every 3 months
+                {{pricingMap.premiumToothBrushAmt}}  every 3 months
               </div>
             </li>
 
@@ -206,7 +206,7 @@
                 <h4 class="todo-name">
                   <img src="static/img/brand/senso-small.png" alt="Sensodyne">
                 </h4>
-                every 6 weeks
+                {{pricingMap.premiumToothPasteAmt}} every 6 weeks
               </div>
             </li>
             <li>
@@ -215,7 +215,7 @@
                 <h4 class="todo-name">
                   <img src="static/img/brand/glide.png" alt="Glide Floss">
                 </h4>
-                every 6 weeks
+                 {{pricingMap.premiumFlossAmt}} every 6 weeks
               </div>
             </li>
             <li>
@@ -224,14 +224,14 @@
                 <h4 class="todo-name">
                   <img src="static/img/brand/glad.png" alt="Glad Trash Bags">
                 </h4>
-                12 a month
+                {{pricingMap.premiumTrashAmt}} a month
               </div>
             </li>
 
  <form action="step1" method="POST">
                      <button id="signupPremium" type="submit" class="buyButton todo-search  pricingLables">Get This!
                                 </button>
-                  <input type="hidden" name="packageType" value="resupplyPremium">
+                  <input type="hidden" name="packageType" value="{{pricingMap.premiumResupplyPackageId}}">
                             </form>
 
 

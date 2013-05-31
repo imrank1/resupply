@@ -10,6 +10,7 @@
         },
 
         processSignup:function(e){
+            debugger;
             self = this;
             e.preventDefault();
             $(".alert-error").hide();
@@ -62,15 +63,15 @@
         $.ajax({
           url: '/stageCharge',
           type: 'post',
+          async: true,
           data: { name: name,email:e,password:password,shippingAddress:shippingAddress,shippingAddress2:shippingAddress2,shippingCity:shippingCity,shippingZip:shippingZip,packageType:window.packageType},
           cache: false,
           success: function(){
             // $("#billingDetails").hide();
             // $("#packageHeader").hide();
             // $("#signupSuccess").removeAttr("disabled");
-
             // $("#signupSuccess").toggle();
-            window.location.href = "/finalStep";
+            window.location= "/finalStep";
             // window.spinner.stop();
             // $("#successMessage").show("slow");
             // $(".submit-button").removeAttr("disabled");
@@ -145,7 +146,7 @@
             var variables = { packageType: window.packageType };
             $(self.el).template(TEMPLATE_URL + '/templates/billing_include.html', variables);
 
-            return this;
+             return this;
         }
     });
 }());

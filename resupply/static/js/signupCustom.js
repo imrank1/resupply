@@ -10,6 +10,7 @@
         },
 
         processSignup:function(e){
+            debugger;
             self = this;
             e.preventDefault();
             $(".alert-error").hide();
@@ -54,7 +55,7 @@
                 StripeCheckout.open({
                     key:         'pk_07vkx4yqszys5bnTNnHPSAAimkCie',
                     address:     true,
-                    amount:      price,
+                    amount:      window.finalPrice*100,
                     name:        'Resupply',
                     description: 'Subscription',
                     panelLabel:  'Subscription Per Month',
@@ -100,7 +101,7 @@
         $.ajax({
           url: '/charge',
           type: 'post',
-          data: { name: name,email:e,password:password,shippingAddress:shippingAddress,shippingAddress2:shippingAddress2,shippingCity:shippingCity,shippingZip:shippingZip,stripeToken:token,packageType:window.packageType},
+          data: { name: name,email:e,password:password,shippingAddress:shippingAddress,shippingAddress2:shippingAddress2,shippingCity:shippingCity,shippingZip:shippingZip,stripeToken:token,packageType:window.packageType,stripePlanIdentifier:window.stripePlanIdentifier,finalPrice:window.finalPrice},
           cache: false,
           success: function(){
             $("#billingDetails").hide();
@@ -151,9 +152,9 @@
         },
 
         render: function() {
-            var self = this;
-            var variables = { packageType: window.packageType };
-            $(self.el).template(TEMPLATE_URL + '/templates/billing_include.html', variables);
+            // var self = this;
+            // var variables = { packageType: window.packageType };
+            // $(self.el).template(TEMPLATE_URL + '/templates/billing_include.html', variables);
 
             return this;
         }

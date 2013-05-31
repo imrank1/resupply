@@ -5,17 +5,20 @@ import datetime
 class PasswordChangeService:
     @staticmethod
     def createPasswordChangeRequest(ownerEmailAddress,linkRef):
-        changeRequest = PasswordChangeRequest(ownerEmailAddress=ownerEmailAddress,linkRef=linkRef)
+        changeRequest = PasswordChangeRequest(ownerEmailAddress=ownerEmailAddress,linkRef=linkRef,used=False)
         changeRequest.save()
         return changeRequest
 
     @staticmethod
-    def updateUserPassword(linkRef,user,newPassword):
-        changeRequest = PasswordChangeRequest.objects.get(linkRef = linkRef,used=False)
+    def updateUserPassword(linkRef,newPassword):
+        print "linkRef is " + linkRef
+        changeRequest = PasswordChangeRequest.objects.get(linkRef=linkRef,used=False)
         if(changeRequest):
+            user = User.objects.get(emailAddress=changeRequest.ownerEmailAddress)
             user.set_password(newPassword)
             user.save()
             changeRequest.passwordResetAt = datetime.datetime.now()
+            changeRequest.used = True
             changeRequest.save()
         else:
             raise Exception("change request already used")

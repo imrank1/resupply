@@ -3,8 +3,7 @@
     window.Account = Backbone.View.extend({
         events: {
             "click #updateAddress": "updateShippingAddress",
-            "click #passwordChangeRequestButton": "showPasswordRestConfirm",
-            "click #confirmPasswordResetButton" : "requestPasswordChange",
+            "click #passwordChangeRequestButton": "requestPasswordChange",
             "click #cancelAccountButton":"showCancelConfirm",
             "click #confirmCancelButton": "cancelAccount"
         },
@@ -13,13 +12,13 @@
 
         },
     cancelAccount:function(e){
+        e.preventDefault();
          $.ajax({
           url: '/cancelAccount',
           type: 'POST',
           data: { },
           cache: false,
           success: function(){
-            alert("cancelled account");
             $("#successCancel").toggle();
             $('#confirmCancelButton').addClass('disabled');
             setTimeout(function() {
@@ -34,9 +33,11 @@
     },
 
     showCancelConfirm:function(e){
-        $('#cancelAccountConfirm').modal()
+        e.preventDefault();
+        $('#cancelAccountConfirm').toggle();
     },
     showPasswordRestConfirm:function(e){
+      debugger;
         $('#passwordChangeConfirm').modal()
     },
     updateShippingAddress :function(e) {
@@ -85,9 +86,9 @@
       },
 
     render: function() {
-            var self = this;
-            var variables = { packageType: window.packageType };
-            $(self.el).template(TEMPLATE_URL + '/templates/billing_include.html', variables);
+            // var self = this;
+            // var variables = { packageType: window.packageType };
+            // $(self.el).template(TEMPLATE_URL + '/templates/billing_include.html', variables);
 
             return this;
         }

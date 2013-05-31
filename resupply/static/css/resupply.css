@@ -33,6 +33,11 @@ background-color: #e74c3c;
 }
 
 
+#passwordChangeEmailSent {
+	margin-top:25px;
+}
+
+
 .customFont{
 	font-family: proxima;
 	font-weight: 50;

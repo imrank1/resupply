@@ -4,6 +4,7 @@
         events: {
             "click #getStarted": "processGetStarted",
             "click #ontoPricing": "processGetStarted",
+            "click #ontoPricingUpgrade": "processGetStartedUpgrade",
             "click #subscribe": "addToSubscribe"
         },
 
@@ -30,7 +31,6 @@
             var zipCode = $("#zipCode").val();
             var numFamily = $("#numFamily").val();
             var gender = $('input:radio[name=gender]:checked').val();
-  
 
             $.ajax({
             url: '/getStarted',
@@ -39,11 +39,55 @@
             cache: false,
             statusCode : { 
                 200: function(){
-                window.location = '/pricing';
+                window.location = '/pricing';    
                 return this;
             },
                 500: function(){
                     $("#cantShipThere").show("slow");
+                    $("#subscribeBox").show("slow");
+                    return false;
+            }
+          }
+        });
+
+
+
+            return false;
+        }
+
+        return this;
+
+        },
+         processGetStartedUpgrade:function(e){
+            debugger;
+            self = this;
+            e.preventDefault();
+            var missingFields = false;
+            var error=false;
+            $(".requiredStuff").each(function(){
+                if($(this).val()==""){
+                    $(this).addClass("errorState");
+                    missingFields=true;
+                }
+            });
+
+            if(missingFields==true){
+                $("#getStartedErrorMessage").show();
+            }else {
+
+            var numFamily = $("#numFamily").val();
+
+            $.ajax({
+            url: '/getStartedUpgrade',
+            type: 'POST',
+            data:{numFamily:numFamily},
+            cache: false,
+            statusCode : { 
+                200: function(){
+                window.location = '/pricing';    
+                return this;
+            },
+                500: function(){}
                     $("#subscribeBox").show("slow");
                     return false;
             }

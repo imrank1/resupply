@@ -141,3 +141,20 @@ class Subscriber(db.Document):
 		'ordering': ['-created_at']
 	}
 
+class ZipCodeTax(db.Document):
+	created_at = db.DateTimeField(default=datetime.datetime.now, required=True)
+	zipCode = db.IntField(required=True)
+	taxRate = db.FloatField(required=True)
+	def __unicode__(self):
+		return self.id
+
+	def __repr__(self):
+		return "%s/%s" % (self.id, self.zipCode)
+
+
+	meta = {
+		'allow_inheritance': True,
+		'indexes': ['-created_at', 'zipCode'],
+		'ordering': ['-created_at']
+	}	
+
