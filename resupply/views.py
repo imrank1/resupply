@@ -281,6 +281,8 @@ def pricing():
         return render_template('pricingUpgrade.html',currentPackage=currentPackage,user=g.user,pricingMap=pricingMap)
     else:
         numFamily = session.get('houseHoldSize')
+        if(numFamily==None):
+            return redirect("/infoAboutYou")
         app.logger.info(numFamily)
         pricingMap = PricingService.getPricingMap(int(numFamily))
         return render_template('pricing_new.html',showGetStarted=showGetStarted,user=None,pricingMap=pricingMap)
