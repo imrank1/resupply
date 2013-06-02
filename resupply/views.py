@@ -18,9 +18,12 @@ import stripe
 from flask import make_response
 from functools import update_wrapper
 import requests
+import os
 
 # import resupply.services.userservice
 login_manager.login_view = "/index"
+
+env = os.environ.get('FLASK_ENV', 'development')
 
 def send_mail(to_address, from_address, subject, plaintext, html):
     r = requests. \
@@ -135,36 +138,15 @@ def stageCharge():
 
 @app.route("/finalStep",methods=['GET'])
 def finalStep():
-    # name = request.form['name']
-    # session['name'] = name
-    # session['email']=email
-    # session['password'] = password
-    # session['shippingAddress'] = shippingAddress
-    # session['shippingAddress2'] = shippingAddress2
-    # session['city'] = city
-    # session['zipCode'] = zipcode
-    # session['packageType'] = request.form['packageType']
-    # session['password'] = password
-
-    # email = request.form['email']
-    # password = request.form['password']
-    # shippingAddress = request.form['shippingAddress']
-    # shippingAddress2 = request.form['shippingAddress']
-    # city = request.form['shippingCity']
-    # zipcode = request.form['shippingZip']
-    # refferal = session.get('refferalCode')
-    # session['name'] = name
-    # session['email'] = email
-    # session['password'] = password
-    # session['shippingAddress'] = shippingAddress
-    # session['shippingAddress2'] = shippingAddress2
-    # session['city'] = city
-    # session['zipCode'] = zipcode
-    # session['packageType'] = request.form['packageType']
-    #app.logger.info("name of user is " + session.get('name'))
-    app.logger.info('session in finalStep:')
-    app.logger.info(session)
-    return render_template("checkout.html",name=session.get('name'),package=session.get('packageType'),email=session.get('email'),password=session.get('password'),shippingAddress=session.get('shippingAddress'),shippingAddress2=session.get('shippingAddress2'),zipcode=session.get('zipCode'),finalPricePerMonth=session.get('finalPricePerMonth')/100,stripePlanIdentifier=session.get('stripePlanIdentifier'),city=session.get('city'),stripePublishableKey=app.config["STRIPE_PUBLISHABLE_KEY"])
+    if env == "production":
+        checkout = app.config['checkoutRedirect']                                                                                                                                              
+        if request.headers.get('X-Forwarded-Proto', 'http') == 'https':                                                                                                                                             
+            resp = make_response(render_template("checkout.html",name=session.get('name'),package=session.get('packageType'),email=session.get('email'),password=session.get('password'),shippingAddress=session.get('shippingAddress'),shippingAddress2=session.get('shippingAddress2'),zipcode=session.get('zipCode'),finalPricePerMonth=session.get('finalPricePerMonth')/100,stripePlanIdentifier=session.get('stripePlanIdentifier'),city=session.get('city'),stripePublishableKey=app.config["STRIPE_PUBLISHABLE_KEY"])
+)                                                                                                              
+            return set_hsts_header(resp)                                                                                                                                                                            
+        return redirect(checkout, code=302)
+    else:
+        return render_template("checkout.html",name=session.get('name'),package=session.get('packageType'),email=session.get('email'),password=session.get('password'),shippingAddress=session.get('shippingAddress'),shippingAddress2=session.get('shippingAddress2'),zipcode=session.get('zipCode'),finalPricePerMonth=session.get('finalPricePerMonth')/100,stripePlanIdentifier=session.get('stripePlanIdentifier'),city=session.get('city'),stripePublishableKey=app.config["STRIPE_PUBLISHABLE_KEY"])
 
     # , name=name, email=email, shippingAddress=shippingAddress,
     #                    shippingAddress2=shippingAddress2, city=city, zipcode=zipcode, finalPrice=finalPrice,
@@ -725,6 +707,19 @@ def addToSubscribe():
     res.status_code = 200
     return res
 
+
+
+def set_hsts_header(response):                                                                                                                                                                                  
+    """Adds HSTS header to each response."""                                                                                                                                                                    
+    response.headers.setdefault('Strict-Transport-Security', hsts_header)                                                                                                                                       
+    return response                                                                                                                                                                                             
+
+def hsts_header():                                                                                                                                                                                              
+    """Returns the proper HSTS policy."""                                                                                                                                                                       
+    hsts_policy = 'max-age={0}'.format(31536000) #year in seconds                                                                                                                                               
+    if self.hsts_include_subdomains:                                                                                                                                                                            
+        hsts_policy += '; includeSubDomains'                                                                                                                                                                    
+        return hsts_policy 
 
 
 

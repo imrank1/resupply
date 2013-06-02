@@ -8,6 +8,7 @@ from flask.ext.login import LoginManager, UserMixin, \
 import os
 import stripe
 
+from flask_sslify import SSLify
 
 app = Flask(__name__)
 
@@ -27,6 +28,7 @@ if env =='development':
 	app.config["MONGODB_PASSWORD"] = config.dev['mongodb_password']
 	app.config["MONGODB_HOST"] = config.dev['mongodb_host']
 	app.config["MONGODB_PORT"] = config.dev['mongodb_port']
+	app.config["checkoutRedirect"] = config.dev['checkoutRedirect']
 elif env =='production':
 	app.config["MONGODB_DB"] = config.production['mongodb_db']
 	app.config["SECRET_KEY"] = config.production['secret_key']
@@ -37,7 +39,7 @@ elif env =='production':
 	app.config["MONGODB_PORT"] = config.production['mongodb_port']
 	app.config["STRIPE_PUBLISHABLE_KEY"] = config.production['stripe_publishable_key']
 	app.config["passwordResetPrefix"] = config.production['passwordResetPrefix']
-
+	app.config["checkoutRedirect"] = config.production['checkoutRedirect']
 	stripe.api_key=config.production['stripe_secret_key']
 
 
@@ -51,7 +53,7 @@ elif env =='production':
 
 # app.config["MONGODB_DB"] = "my_tumble_log"
 # app.config["SECRET_KEY"] = "p0c0n0$Cyrus"
-
+#sslify = SSLify(app)
 db = MongoEngine(app)
 
 login_manager = LoginManager()
