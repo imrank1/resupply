@@ -138,15 +138,15 @@ def stageCharge():
 
 @app.route("/finalStep",methods=['GET'])
 def finalStep():
-    if env == "production":
-        checkout = app.config['checkoutRedirect']                                                                                                                                              
-        if request.headers.get('X-Forwarded-Proto', 'http') == 'https':                                                                                                                                             
-            resp = make_response(render_template("checkout.html",name=session.get('name'),package=session.get('packageType'),email=session.get('email'),password=session.get('password'),shippingAddress=session.get('shippingAddress'),shippingAddress2=session.get('shippingAddress2'),zipcode=session.get('zipCode'),finalPricePerMonth=session.get('finalPricePerMonth')/100,stripePlanIdentifier=session.get('stripePlanIdentifier'),city=session.get('city'),stripePublishableKey=app.config["STRIPE_PUBLISHABLE_KEY"])
-)                                                                                                              
-            return set_hsts_header(resp)                                                                                                                                                                            
-        return redirect(checkout, code=302)
-    else:
-        return render_template("checkout.html",name=session.get('name'),package=session.get('packageType'),email=session.get('email'),password=session.get('password'),shippingAddress=session.get('shippingAddress'),shippingAddress2=session.get('shippingAddress2'),zipcode=session.get('zipCode'),finalPricePerMonth=session.get('finalPricePerMonth')/100,stripePlanIdentifier=session.get('stripePlanIdentifier'),city=session.get('city'),stripePublishableKey=app.config["STRIPE_PUBLISHABLE_KEY"])
+#     if env == "production":
+#         checkout = app.config['checkoutRedirect']                                                                                                                                              
+#         if request.headers.get('X-Forwarded-Proto', 'http') == 'https':                                                                                                                                             
+#             resp = make_response(render_template("checkout.html",name=session.get('name'),package=session.get('packageType'),email=session.get('email'),password=session.get('password'),shippingAddress=session.get('shippingAddress'),shippingAddress2=session.get('shippingAddress2'),zipcode=session.get('zipCode'),finalPricePerMonth=session.get('finalPricePerMonth')/100,stripePlanIdentifier=session.get('stripePlanIdentifier'),city=session.get('city'),stripePublishableKey=app.config["STRIPE_PUBLISHABLE_KEY"])
+# )                                                                                                              
+#             return set_hsts_header(resp)                                                                                                                                                                            
+#         return redirect(checkout, code=302)
+#     else:
+    return render_template("checkout.html",name=session.get('name'),package=session.get('packageType'),email=session.get('email'),password=session.get('password'),shippingAddress=session.get('shippingAddress'),shippingAddress2=session.get('shippingAddress2'),zipcode=session.get('zipCode'),finalPricePerMonth=session.get('finalPricePerMonth')/100,stripePlanIdentifier=session.get('stripePlanIdentifier'),city=session.get('city'),stripePublishableKey=app.config["STRIPE_PUBLISHABLE_KEY"])
 
     # , name=name, email=email, shippingAddress=shippingAddress,
     #                    shippingAddress2=shippingAddress2, city=city, zipcode=zipcode, finalPrice=finalPrice,
@@ -709,17 +709,17 @@ def addToSubscribe():
 
 
 
-def set_hsts_header(response):                                                                                                                                                                                  
-    """Adds HSTS header to each response."""                                                                                                                                                                    
-    response.headers.setdefault('Strict-Transport-Security', hsts_header)                                                                                                                                       
-    return response                                                                                                                                                                                             
+# def set_hsts_header(response):                                                                                                                                                                                  
+#     """Adds HSTS header to each response."""                                                                                                                                                                    
+#     response.headers.setdefault('Strict-Transport-Security', hsts_header)                                                                                                                                       
+#     return response                                                                                                                                                                                             
 
-def hsts_header():                                                                                                                                                                                              
-    """Returns the proper HSTS policy."""                                                                                                                                                                       
-    hsts_policy = 'max-age={0}'.format(31536000) #year in seconds                                                                                                                                               
-    if self.hsts_include_subdomains:                                                                                                                                                                            
-        hsts_policy += '; includeSubDomains'                                                                                                                                                                    
-        return hsts_policy 
+# def hsts_header():                                                                                                                                                                                              
+#     """Returns the proper HSTS policy."""                                                                                                                                                                       
+#     hsts_policy = 'max-age={0}'.format(31536000) #year in seconds                                                                                                                                               
+#     if self.hsts_include_subdomains:                                                                                                                                                                            
+#         hsts_policy += '; includeSubDomains'                                                                                                                                                                    
+#         return hsts_policy 
 
 
 
