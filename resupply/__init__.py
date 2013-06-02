@@ -8,8 +8,6 @@ from flask.ext.login import LoginManager, UserMixin, \
 import os
 import stripe
 
-from flask_sslify import SSLify
-
 app = Flask(__name__)
 
 env = os.environ.get('FLASK_ENV', 'development')
@@ -53,7 +51,6 @@ elif env =='production':
 
 # app.config["MONGODB_DB"] = "my_tumble_log"
 # app.config["SECRET_KEY"] = "p0c0n0$Cyrus"
-#sslify = SSLify(app)
 db = MongoEngine(app)
 
 login_manager = LoginManager()
