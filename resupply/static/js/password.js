@@ -11,8 +11,6 @@
 
 
     updatePassword :function(e) {
-        alert('what is going on!');
-        debugger;
         self = this;
         e.preventDefault();
         var newPassword = $('#password1').val();
@@ -30,7 +28,6 @@
         },
         error: function(){
             alert('error changing password!');
-
         }
         });
         return false;

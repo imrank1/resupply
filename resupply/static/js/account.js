@@ -66,7 +66,6 @@
       },
 
       requestPasswordChange:function(e){
-        debugger;
         self = this;
         e.preventDefault();
         $.ajax({

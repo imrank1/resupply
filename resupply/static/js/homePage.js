@@ -59,7 +59,6 @@
 
         },
          processGetStartedUpgrade:function(e){
-            debugger;
             self = this;
             e.preventDefault();
             var missingFields = false;
@@ -91,7 +90,7 @@
                     $("#subscribeBox").show("slow");
                     return false;
             }
-            
+
           }
         });
 
@@ -104,7 +103,6 @@
 
         },
         addToSubscribe:function(e){
-            debugger;
             self = this;
             e.preventDefault();
             var missingFields = false;

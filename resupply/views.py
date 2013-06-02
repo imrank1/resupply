@@ -164,7 +164,7 @@ def finalStep():
     #app.logger.info("name of user is " + session.get('name'))
     app.logger.info('session in finalStep:')
     app.logger.info(session)
-    return render_template("checkout.html",name=session.get('name'),package=session.get('packageType'),email=session.get('email'),password=session.get('password'),shippingAddress=session.get('shippingAddress'),shippingAddress2=session.get('shippingAddress2'),zipcode=session.get('zipCode'),finalPricePerMonth=session.get('finalPricePerMonth')/100,stripePlanIdentifier=session.get('stripePlanIdentifier'),city=session.get('city'))
+    return render_template("checkout.html",name=session.get('name'),package=session.get('packageType'),email=session.get('email'),password=session.get('password'),shippingAddress=session.get('shippingAddress'),shippingAddress2=session.get('shippingAddress2'),zipcode=session.get('zipCode'),finalPricePerMonth=session.get('finalPricePerMonth')/100,stripePlanIdentifier=session.get('stripePlanIdentifier'),city=session.get('city'),stripePublishableKey=app.config["STRIPE_PUBLISHABLE_KEY"])
 
     # , name=name, email=email, shippingAddress=shippingAddress,
     #                    shippingAddress2=shippingAddress2, city=city, zipcode=zipcode, finalPrice=finalPrice,
@@ -320,11 +320,11 @@ def checkEmail():
 @app.route("/step1", methods=['POST', 'GET'])
 def step1():
     packageType = request.form['packageType']
-    app.logger.info('in step1 the package selected is:' + packageType)
+    app.logger.info('in step1 the package selected is:' + packageType + 'zip code is :' + session.get('targetZipCode'))
     session['packageType'] = packageType
 
     return render_template('signupStep2_new.html',name=session.get('name'),package=session.get('packageType'),email=session.get('email'),password=session.get('password'),shippingAddress=session.get('shippingAddress'),
-    shippingAddress2=session.get('shippingAddress2'),zipcode=session.get('zipCode'),finalPricePerMonth=session.get('finalPricePerMonth'),city=session.get('city'),packageType=PricingService.getDisplayPackage(packageType),packagePrice=PricingService.getPackagePrice(packageType))
+    shippingAddress2=session.get('shippingAddress2'),zipcode=session.get('targetZipCode'),finalPricePerMonth=session.get('finalPricePerMonth'),city=session.get('city'),packageType=PricingService.getDisplayPackage(packageType),packagePrice=PricingService.getPackagePrice(packageType))
     #return render_template('signupStep2_new.html', packageType=packageType,packagePrice=PricingService.getPackagePrice(packageType))
 
 @app.route("/getStarted",methods=['POST'])
@@ -334,21 +334,27 @@ def getStarted():
     houseHoldSize = request.form['numFamily']
     canShip = True
     resp = None
-
-    if(zipCode[:1]!= '2'):
-        app.logger.info("We can't ship  to " + zipCode)
+    try:
+        firstZip = int(zipCode[:1])
+        if(UserService.canShip(firstZip)==False):
+            app.logger.info("We can't ship  to " + zipCode)
+            canShip = False
+            resp = jsonify({'available': canShip})
+            resp.status_code = 500
+            return resp
+        if(zipCode and houseHoldSize):
+            session['targetZipCode'] = zipCode
+            session['houseHoldSize'] = houseHoldSize
+            session['gender'] = gender
+            resp = jsonify({'available': canShip})
+            resp.status_code = 200
+            return resp
+    except Exception:
         canShip = False
         resp = jsonify({'available': canShip})
         resp.status_code = 500
         return resp
-    if(zipCode and houseHoldSize):
-        session['targetZipCode'] = zipCode
-        session['houseHoldSize'] = houseHoldSize
-        session['gender'] = gender
-
-        resp = jsonify({'available': canShip})
-        resp.status_code = 200
-        return resp
+    
 
 
 @app.route("/getStartedUpgrade",methods=['POST'])
@@ -582,6 +588,7 @@ def signupSelectPackage():
 @app.route("/infoAboutYou",methods=["GET"])
 def infoAboutYou():
     user = g.user
+    session.clear()
     return render_template('infoStep.html',user=user)
 
 

@@ -5,6 +5,8 @@ from flask import Flask
 
 
 class UserService:
+	
+
 	@staticmethod
 	def createUser(emailAddress, password, address, address2, city, zipCode, stripeToken, package, stripeCustomerId,sourceRefferer):
 		user = User(emailAddress=emailAddress, address=address, address2=address2, city=city, zipCode=zipCode,
@@ -48,3 +50,13 @@ class UserService:
 	def addToSubscribe(email):
 		subscribe = Subscriber(emailAddress=email)
 		subscribe.save()
+
+
+	@staticmethod
+	def canShip(firstZip):
+		validZipPrefixes = [0,1,2]
+		if(firstZip in validZipPrefixes):
+			return True
+		else:
+			return False
+

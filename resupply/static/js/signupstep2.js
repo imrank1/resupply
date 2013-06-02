@@ -142,11 +142,11 @@
         },
 
         render: function() {
-            var self = this;
-            var variables = { packageType: window.packageType };
-            $(self.el).template(TEMPLATE_URL + '/templates/billing_include.html', variables);
+            // var self = this;
+            // var variables = { packageType: window.packageType };
+            // $(self.el).template(TEMPLATE_URL + '/templates/billing_include.html', variables);
 
-             return this;
+            //  return this;
         }
     });
 }());

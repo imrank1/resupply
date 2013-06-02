@@ -10,7 +10,6 @@
         },
 
         processSignup:function(e){
-            debugger;
             self = this;
             e.preventDefault();
             $(".alert-error").hide();
@@ -53,7 +52,7 @@
             statusCode : { 
                 200: function(){
                 StripeCheckout.open({
-                    key:         'pk_07vkx4yqszys5bnTNnHPSAAimkCie',
+                    key:         window.stripePublishableKey,
                     address:     true,
                     amount:      window.finalPrice*100,
                     name:        'Resupply',
@@ -64,7 +63,7 @@
                 return this;
             },
                 500: function(){
-                    $("#emailInUse").show("slow");
+                    $("#errorProcessingPayment").show("slow");
                     return false;
             }
           }
@@ -81,7 +80,7 @@
 
     stripeResponseHandler :function(response) {
     if (response.error) {
-        alert('somthing went wrong');
+     
         // window.spinner.stop();
 
         // // show the errors on the form
