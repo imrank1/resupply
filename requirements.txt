@@ -17,3 +17,4 @@ Flask-KVSession
 flask-mongo-sessions
 Flask-Cache
 python-memcached
+Flask-SSLify
