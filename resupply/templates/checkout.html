@@ -33,6 +33,7 @@
         window.packageType = "{{packageType}}"
         window.finalPrice = "{{finalPricePerMonth}}"
         window.stripePlanIdentifier = "{{stripePlanIdentifier}}"
+        window.stripePublishableKey ="{{stripePublishableKey}}"
     </script>
 
 
@@ -64,7 +65,7 @@
 <!-- CONTENT -->
 
 
-<div class="container hero-unit checkout-hero-unit" style="margin-top:100px;">
+<div class="container hero-unit " style="margin-top:100px;">
 <div class="span4 offset4">
     <ul class="breadcrumb">
         <li><a href="/pricing">Package Select</a> <span class="divider">/</span></li>
@@ -79,7 +80,7 @@
        </span>
     </div>
     <div id="packageHeader" class="offset3 span6 well" style="text-align:center">
-       Your signing up for the {{ packageType }} package at ${{finalPricePerMonth}} (includes sales tax ) per month!
+       Your signing up for the {{ packageType }} package at ${{finalPricePerMonth}} per month!
        <br>
     </div>
     <div id="signupSuccess" class="offset4 span6 well alert alert-success" style="text-align:center; display:none">
@@ -113,7 +114,7 @@
         <input class="requiredStuff span3" id="shipping-address" value="{{ shippingAddress }}" name="shipping-address" placeholder="Address" data-required="true" type="text">
         <input class="span3" id="shipping-address2" name="shipping-address2"  value="{{ shippingAddress2 }}" placeholder="Address Continued" data-required="true" type="text">
         <input class="requiredStuff span3" id="shipping-city" name="shipping-city" value="{{ city }}" placeholder="City" data-required="true" type="text">
-        <input class="requiredStuff span3" id="shipping-zipcode" name="shipping-zipcode" value="{{ zipcode }}" placeholder="Zip Code" data-required="true" type="text">
+        <input class="requiredStuff span3" id="shipping-zipcode" disabled="disabled" name="shipping-zipcode" value="{{ zipcode }}" placeholder="Zip Code" data-required="true" type="text">
 
          <input id="packageType" name="packageType" type="hidden" value=<%= packageType %>
 
