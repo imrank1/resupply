@@ -1,4 +1,4 @@
-(function() {
+define(['jquery','underscore','backbone'], function($,_,Backbone) {
     var TEMPLATE_URL = '/static';
     window.Account = Backbone.View.extend({
         events: {
@@ -90,6 +90,5 @@
             // $(self.el).template(TEMPLATE_URL + '/templates/billing_include.html', variables);
 
             return this;
-        }
-    });
-}());
+    }
+})});

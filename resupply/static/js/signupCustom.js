@@ -1,4 +1,4 @@
-(function() {
+define(['jquery','underscore','backbone'], function($,_,Backbone) {
     var TEMPLATE_URL = '/static';
     window.Signup = Backbone.View.extend({
         events: {
@@ -157,5 +157,5 @@
 
             return this;
         }
-    });
-}());
+})});
+   

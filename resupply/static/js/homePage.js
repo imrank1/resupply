@@ -1,5 +1,5 @@
-(function() {
-    var TEMPLATE_URL = '/static';
+define(['jquery','underscore','backbone'], function($,_,Backbone) {
+  var TEMPLATE_URL = '/static';
     window.HomePage = Backbone.View.extend({
         events: {
             "click #getStarted": "processGetStarted",
@@ -150,5 +150,6 @@
         isNumber:function(n) {
             return !isNaN(parseFloat(n)) && isFinite(n);
         }
-    });
-}());
+});
+    return HomePage; 
+});

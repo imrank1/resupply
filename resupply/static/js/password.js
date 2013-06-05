@@ -1,4 +1,4 @@
-(function() {
+define(['jquery','underscore','backbone'], function($,_,Backbone) {
     var TEMPLATE_URL = '/static';
     window.Password = Backbone.View.extend({
         events: {
@@ -40,5 +40,4 @@
 
             // return this;
         }
-    });
-}());
+})});
