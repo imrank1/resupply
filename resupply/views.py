@@ -648,7 +648,7 @@ def processForgotPasswordChange():
 
         email =  render_template ("/passwordResetEmail.html",link=link)
 
-        send_mail(user.emailAddress,'support@resupp.ly',Resupply Password Reset', 'html',email)
+        send_mail(user.emailAddress,'support@resupp.ly','Resupply Password Reset', 'html',email)
 
         send_mail('imrank1@gmail.com', 'support@resupp.ly','Resupply Password Reset', 'html',email)
 
@@ -701,7 +701,7 @@ def cancelAccount():
 
     email =  render_template ("/cancelAccountConfirmationEmail.html")
 
-    send_mail(user.emailAddress,'support@resupp.ly',Resupply Account Cancellation Confirmation', 'html',email)
+    send_mail(user.emailAddress,'support@resupp.ly','Resupply Account Cancellation Confirmation', 'html',email)
 
     send_mail('imrank1@gmail.com', 'support@resupp.ly','Resupply Account Cancellation Confirmation', 'html',email)
 
