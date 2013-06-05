@@ -183,10 +183,10 @@ def charge():
                         refferUser.reducedPrice = True
                         refferrUser.save()
                         couponAppliedHtml = render_template('couponApplied.html',amount=25)
-                        send_mail('imrank1@gmail.com', 'imrank1@gmail.com','We\'ve reduced your subscription amount!', 'html',couponAppliedHtml)
+                        send_mail(refferalObject.originatorEmailAddress, 'support@resupp.ly','We\'ve reduced your subscription amount!', 'html',couponAppliedHtml)
+                        send_mail('imrank1@gmail.com', 'support@resupp.ly','We\'ve reduced your subscription amount!', 'html',couponAppliedHtml)
 
 
-    app.logger.info("after refferal stuff")
     stripePlanIdentifier = session.get('stripePlanIdentifier')
 
     #packageType = request.form['packageType']
@@ -214,7 +214,10 @@ def charge():
     RefferalService.createRefferal(createdUser.emailAddress)
     login_user(createdUser)
     emailHtml = render_template('signupConfirmationEmailTemplate.html',package=PricingService.getDisplayPackage(stripePlanIdentifier),pricePerMonth=chargePrice,shippingAddress=fullAddress)
-    send_mail('imrank1@gmail.com', 'imrank1@gmail.com',
+    send_mail(createdUser.emailAddress, 'support@resupp.ly',
+              'Confirmation of subscription to Resupp.ly', 'html',
+              emailHtml)
+    send_mail('imrank1@gmail.com', 'support@resupp.ly',
               'Confirmation of subscription to Resupp.ly', 'html',
               emailHtml)
 
@@ -235,7 +238,6 @@ def confirmEmailTest():
 def newHome():
     user = current_user
     if(user.is_anonymous()==False):
-        app.logger.info("there is a current user with " + user.emailAddress)
         return render_template('newHome.html',loggedIn=True,emailAddress=user.emailAddress,user=g.user)
     else:
         return render_template('newHome.html',loggedIn=False,user=g.user)
@@ -406,7 +408,10 @@ def processUpgrade():
     user.save()
     emailHtml = render_template("upgradeConfirmationEmail.html",newPackage=PricingService.getDisplayPackage(packageType),pricePerMonth=chargePrice/100,
                                 oldPackage=PricingService.getDisplayPackage(prevPackage.split("-",1)[0]))
-    send_mail('imrank1@gmail.com', 'imrank1@gmail.com',
+    send_mail(user.emailAddress, 'support@resupp.ly',
+        'Resupply Upgrade Confirmation', 'html',
+        emailHtml)
+    send_mail(user.emailAddress, 'imrank1@gmail.com',
         'Resupply Upgrade Confirmation', 'html',
         emailHtml)
     return redirect('/account')
@@ -641,10 +646,12 @@ def processForgotPasswordChange():
         link = app.config["passwordResetPrefix"] + linkRef;
         PasswordChangeService.createPasswordChangeRequest(user.emailAddress,linkRef)
 
+        email =  render_template ("/passwordResetEmail.html",link=link)
 
-        send_mail('imrank1@gmail.com', 'imrank1@gmail.com',
-        'Resupply Password Reset', 'plaintext',
-          'Click the folowing link following link to reset your Resupply password ' + link)
+        send_mail(user.emailAddress,'support@resupp.ly',Resupply Password Reset', 'html',email)
+
+        send_mail('imrank1@gmail.com', 'support@resupp.ly','Resupply Password Reset', 'html',email)
+
         return render_template ("/forgotPassword.html",userNotFound=False,emailSent=True)
 
 
@@ -660,9 +667,14 @@ def requestPasswordChange():
     PasswordChangeService.createPasswordChangeRequest(user.emailAddress,linkRef)
 
 
-    send_mail('imrank1@gmail.com', 'imrank1@gmail.com',
-        'test mailgun resupply passowrd reset', 'plaintext',
-          'Click the folowing link ' + link)
+    send_mail(user.emailAddress, 'support@resupp.ly',
+        'Resupply Password Link', 'plaintext',
+          'Click the folowing link to reset your password' + link)
+
+
+    send_mail('imrank1@gmail.com', 'support@resupp.ly',
+        'Resupply Password Link', 'plaintext',
+          'Click the folowing link to reset your password' + link)
 
     data = {'link':link}
     resp = jsonify(data)
@@ -687,10 +699,11 @@ def cancelAccount():
     user = current_user
     UserService.cancelAccount(user)
 
-    emailHtml = render_template("cancelAccountConfirmationEmail.html")
-    send_mail('imrank1@gmail.com', 'imrank1@gmail.com',
-        'Resupply Account Cancellation Confirmation', 'html',
-        emailHtml)
+    email =  render_template ("/cancelAccountConfirmationEmail.html")
+
+    send_mail(user.emailAddress,'support@resupp.ly',Resupply Account Cancellation Confirmation', 'html',email)
+
+    send_mail('imrank1@gmail.com', 'support@resupp.ly','Resupply Account Cancellation Confirmation', 'html',email)
 
     user.delete()
     logout_user()
