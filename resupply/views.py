@@ -1,5 +1,4 @@
 
-
 from flask import Flask, flash, redirect, render_template, \
     request, url_for, session, jsonify, g
 from flask.ext.mongoengine import MongoEngine
@@ -64,10 +63,6 @@ def add_header(response):
     response.headers['Cache-Control'] = 'public, max-age=0'
     return response
 
-# @app.route("/")
-# def home():
-#     return render_template('home.html')
-
 
 @app.route("/stageCharge" ,methods=['POST'])
 def stageCharge():
@@ -86,7 +81,6 @@ def stageCharge():
     session['shippingAddress2'] = shippingAddress2
     session['city'] = city
     session['zipCode'] = zipcode
-    #session['packageType'] = request.form['packageType']
     session['password'] = password
 
     taxRate = TaxService.getSalesTax(zipcode)
@@ -138,21 +132,7 @@ def stageCharge():
 
 @app.route("/finalStep",methods=['GET'])
 def finalStep():
-#     if env == "production":
-#         checkout = app.config['checkoutRedirect']                                                                                                                                              
-#         if request.headers.get('X-Forwarded-Proto', 'http') == 'https':                                                                                                                                             
-#             resp = make_response(render_template("checkout.html",name=session.get('name'),package=session.get('packageType'),email=session.get('email'),password=session.get('password'),shippingAddress=session.get('shippingAddress'),shippingAddress2=session.get('shippingAddress2'),zipcode=session.get('zipCode'),finalPricePerMonth=session.get('finalPricePerMonth')/100,stripePlanIdentifier=session.get('stripePlanIdentifier'),city=session.get('city'),stripePublishableKey=app.config["STRIPE_PUBLISHABLE_KEY"])
-# )                                                                                                              
-#             return set_hsts_header(resp)                                                                                                                                                                            
-#         return redirect(checkout, code=302)
-#     else:
     return render_template("checkout.html",name=session.get('name'),package=session.get('packageType'),email=session.get('email'),password=session.get('password'),shippingAddress=session.get('shippingAddress'),shippingAddress2=session.get('shippingAddress2'),zipcode=session.get('zipCode'),finalPricePerMonth=session.get('finalPricePerMonth')/100,stripePlanIdentifier=session.get('stripePlanIdentifier'),city=session.get('city'),stripePublishableKey=app.config["STRIPE_PUBLISHABLE_KEY"])
-
-    # , name=name, email=email, shippingAddress=shippingAddress,
-    #                    shippingAddress2=shippingAddress2, city=city, zipcode=zipcode, finalPrice=finalPrice,
-    #                    targetStripePlan=targetStripePlan)
-
-
 
 
 
@@ -189,7 +169,6 @@ def charge():
 
     stripePlanIdentifier = session.get('stripePlanIdentifier')
 
-    #packageType = request.form['packageType']
     packageType = stripePlanIdentifier
     chargePrice = request.form['finalPrice']
 
@@ -416,19 +395,6 @@ def processUpgrade():
         emailHtml)
     return redirect('/account')
 
-    # return render_template('account_home.html', currentPackage=user.currentPackage, zipCode=user.zipCode,
-    #                        address=user.address, address2=user.address2, city=user.city)
-
-
-
-
-
-
-
-
-
-
-
 
 @app.route("/signup-step2")
 @nocache
@@ -546,8 +512,6 @@ def processLogin():
         print "logging in the user"
         login_user(user)
         return redirect("/account")
-        # return render_template('account_home.html', currentPackage=user.currentPackage, zipCode=user.zipCode,
-        #                        address=user.address, address2=user.address2, city=user.city,user=user)
     else:
         print "passwords don't match"
         flash('Sorry the password you entered does not match. Need to <a href="restPassword"> reset</a> it?')
@@ -719,23 +683,6 @@ def addToSubscribe():
     res = jsonify({'addedd':True})
     res.status_code = 200
     return res
-
-
-
-# def set_hsts_header(response):                                                                                                                                                                                  
-#     """Adds HSTS header to each response."""                                                                                                                                                                    
-#     response.headers.setdefault('Strict-Transport-Security', hsts_header)                                                                                                                                       
-#     return response                                                                                                                                                                                             
-
-# def hsts_header():                                                                                                                                                                                              
-#     """Returns the proper HSTS policy."""                                                                                                                                                                       
-#     hsts_policy = 'max-age={0}'.format(31536000) #year in seconds                                                                                                                                               
-#     if self.hsts_include_subdomains:                                                                                                                                                                            
-#         hsts_policy += '; includeSubDomains'                                                                                                                                                                    
-#         return hsts_policy 
-
-
-
 
 
 
