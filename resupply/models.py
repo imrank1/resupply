@@ -43,10 +43,6 @@ class User(db.Document,UserMixin):
 	def __repr__(self):
 		return "%s/%s" % (self.id, self.emailAddress)
 
-
-	# def get_id(self):
-	#     return unicode(self.id)
-
 	meta = {
 		'allow_inheritance': True,
 		'indexes': ['-created_at', 'emailAddress'],
@@ -63,10 +59,6 @@ class CancelledAccount(db.Document):
 
 	def __repr__(self):
 		return "%s/%s" % (self.id, self.emailAddress)
-
-
-	# def get_id(self):
-	#     return unicode(self.id)
 
 	meta = {
 		'allow_inheritance': True,
@@ -91,9 +83,6 @@ class PasswordChangeRequest(db.Document):
 		return "%s/%s" % (self.id, self.ownerEmailAddress)
 
 
-	# def get_id(self):
-	#     return unicode(self.id)
-
 	meta = {
 		'allow_inheritance': True,
 		'indexes': ['-created_at', 'ownerEmailAddress'],
@@ -111,10 +100,6 @@ class Refferal(db.Document):
 	def __repr__(self):
 		return "%s/%s" % (self.id, self.originatorEmailAddress)
 
-
-	# def get_id(self):
-	#     return unicode(self.id)
-
 	meta = {
 		'allow_inheritance': True,
 		'indexes': ['-created_at', 'originatorEmailAddress'],
@@ -130,10 +115,6 @@ class Subscriber(db.Document):
 
 	def __repr__(self):
 		return "%s/%s" % (self.id, self.emailAddress)
-
-
-	# def get_id(self):
-	#     return unicode(self.id)
 
 	meta = {
 		'allow_inheritance': True,
