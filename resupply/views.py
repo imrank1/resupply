@@ -15,7 +15,7 @@ from flask.ext.login import LoginManager, UserMixin, \
 from flask.ext.mongoengine import DoesNotExist
 import stripe
 from flask import make_response
-from functools import update_wrapper
+from functools import update_wrapper 
 import requests
 import os
 
@@ -41,8 +41,6 @@ def send_mail(to_address, from_address, subject, plaintext, html):
 @app.before_request
 def before_request():
    g.user = current_user
-
-
 
 def nocache(f):
     def new_func(*args, **kwargs):
@@ -185,8 +183,6 @@ def charge():
         card=request.form['stripeToken'],
         plan=stripePlanIdentifier,
         description=description)
-
-    app.logger.info("got here in charge!!")
 
     createdUser = UserService.createUser(email, password, shippingAddress, shippingAddress2, city, zipcode,request.form['stripeToken'], stripePlanIdentifier, customer.id,sourceRefferer)
 
@@ -463,14 +459,10 @@ def load_user(userid):
     return User.objects.get(id=userid)
 
 
-@app.route("/register")
-def register():
-    return render_template('login.html')
-
 
 @app.route("/signin")
 def signin():
-    return render_template('signin2.html',user=None)
+    return render_template('login.html',user=None)
 
 
 
@@ -504,37 +496,18 @@ def processLogin():
     try:
         user = User.objects.get(emailAddress=email)
     except DoesNotExist:
-        print "user does not exist"
+        app.logger.info("Failed attempt to login for email:" + email)
         flash('Hmm looks like there is no user with that email. Have you signed up?')
         return render_template("login.html", userNotFound=True)
 
     if user.check_password(password):
-        print "logging in the user"
+        app.logger.info("logging in the user:" + user.emailAddress)
         login_user(user)
         return redirect("/account")
     else:
-        print "passwords don't match"
-        flash('Sorry the password you entered does not match. Need to <a href="restPassword"> reset</a> it?')
-        return render_template("signin2.html", passwordNoMatch=True)
-
-
-@app.route("/signup-select-package", methods=["POST"])
-@login_required
-def signupSelectPackage():
-    packageType = request.form['packageType']
-    user = current_user
-    user = UserService.updateUserPackage(packageType, user)
-
-    return render_template('signup-step3.html', key=app.config["STRIPE_PUBLISHABLE_KEY"])
-
-#this is where i need to process the credit card information
-@app.route("/signup-final", methods=["POST"])
-@login_required
-def signupSelectPackage():
-    print "final signup process"
-    user = current_user
-
-    return render_template('signup-step3.html')
+        app.logger.info("Bad password supplied for user:" + email)
+        flash('Sorry the password you entered does not match. Need to <a href="/resetPassword"> reset</a> it?')
+        return render_template("login.html", passwordNoMatch=True)
 
 @app.route("/infoAboutYou",methods=["GET"])
 def infoAboutYou():

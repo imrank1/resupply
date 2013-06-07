@@ -43,17 +43,6 @@ elif env =='production':
 	stripe.api_key=config.production['stripe_secret_key']
 
 
-
-# app.config.stripe_keys = {
-#   'secret_key': 'sk_07vkIYtFhTJY68s2pipRKmlvDtiqk',
-#   'publishable_key': 'pk_07vkx4yqszys5bnTNnHPSAAimkCie'
-# }
-
-# stripe.api_key = config.stripe_keys['secret_key'] 
-
-# app.config["MONGODB_DB"] = "my_tumble_log"
-# app.config["SECRET_KEY"] = "p0c0n0$Cyrus"
-
 sslify = SSLify(app)
 
 db = MongoEngine(app)
