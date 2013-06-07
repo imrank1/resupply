@@ -1758,7 +1758,7 @@ textarea,
     margin: 0;
     list-style-type: none; }
   .todo li {
-    background: #ecf0f1 url("../images/todo/todo.png") 92% center no-repeat;
+    background: #ecf0f1 url("../images/todo/done.png") 92% center no-repeat;
     background-size: 20px 20px;
     cursor: pointer;
     margin-top: 2px;

@@ -25,7 +25,7 @@ class PricingService:
 	def getDisplayPackage(package):
 		print "in getdisplaypackage package received:" + package
 		if(package=="resupplyBasic" or package =="resupplyBasic2" or package =="resupplyBasic3" or package =="resupplyBasic4"):
-			return "The Basics"
+			return "Basic"
 		else:
 			return "Premium"
 

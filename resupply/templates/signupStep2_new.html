@@ -58,22 +58,23 @@
 <div class="container hero-unit" style="margin-top:100px;">
 <div class="span4 offset4">
     <ul class="breadcrumb">
-        <li><a href="/pricing">Package Select</a> <span class="divider">/</span></li>
+        <li><a href="/pricing">Package Selection</a> <span class="divider">/</span></li>
         <li class="active"><a href="#">Account Details</a> <span class="divider">/</span></li>
     </ul>
 </div>
 
 
     <div id="packageHeader" class="offset3 span6 well" style="text-align:center">
-       Your signing up for the {{ packageType }} package at ${{packagePrice}}* per month!
-       <br>
+       <div class="signup-info">You are signing up for the {{ packageType }} package at ${{packagePrice}} per month!
+       <br></div>
+	   <div class="cancel-info">Don't forget, we have a 1 click cancel process.</div>
        </span>
     </div>
     <div id="signupSuccess" class="offset4 span6 well alert alert-success" style="text-align:center; display:none">
        Awesome you've signed up! Look for an email for details on your first delivery!
     </div>
      <div id="signupFailure" class="offset4 span6 well alert alert-error" style="text-align:center; display:none">
-       Hmm looks like somthign went wrong with your submission. Please try again or contact support at support at resupp.ly
+       Hmm looks like somthing went wrong with your submission. Please try again or contact support at <a href="mailto:support@resupp.ly">support@resupp.ly</a>
     </div>
     <div id="billing_container">
 

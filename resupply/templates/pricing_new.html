@@ -54,8 +54,8 @@
        <div class="hero-unit">  
         <div class="row-fluid">
           <div class="span1"></div>
-          <div class="span10">  
-            <img id="pricingInfoTop" src="static/img/pricing-header.png" alt="basic info on you" align=""><p></p>
+          <div class="span10 hidden-phone">  
+            <img id="pricingInfoTop" src="static/img/pricing-header.png" alt="Resupply saves you time and money!" align=""><p></p>
           </div>
           <div class="span1"></div>
           <div class="span2">
@@ -63,7 +63,7 @@
           <div class="span3">
             <div class="todo mrm">
               <div class="todo-search pricingLabels">
-                ${{pricingMap.basicPrice}}/month *
+                ${{pricingMap.basicPrice}}/month
               </div>
               <ul>
                 <li>
@@ -137,14 +137,14 @@
             </ul>
           </div>
         </div> <!-- /todo list -->
-        <div class=".hidden-phone span2 resupply-ul-list customFont" style="padding-top:70px;width:93px;">
+        <div class="hidden-phone span2 resupply-ul-list customFont" style="padding-top:70px;width:93px;">
           <ul>
                 <li>
                   laundry
                 </li>
 
                 <li >
-                 Dishwasher
+                 dishwasher
                 </li>
 
                 <li>
@@ -165,7 +165,7 @@
         <div class="span3">
           <div class="todo mrm">
             <div class="todo-search pricingLabels">
-              ${{pricingMap.premiumPrice}}/month *
+              ${{pricingMap.premiumPrice}}/month
             </div>
             <ul>
               <li>
@@ -244,7 +244,7 @@
 
     </div>
       <div style="text-align:center">
-    * Price indicated does not include sales tax which will be displayed at checkout
+    <!--Price indicated does not include sales tax which will be displayed at checkout-->
   </div>
   </div>
 

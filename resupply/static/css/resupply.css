@@ -62,7 +62,7 @@ background-color: #e74c3c;
 	border-radius: 0px 0px 6px 6px;
 	color: #34495e;
 	padding: 19px 25px 20px;
-	width:248px;
+	width:100%;
 	font-size: 18px;
 	font-weight: 200;
 	line-height: 30px;
@@ -81,3 +81,12 @@ font-size: 35;
 
 .radio .icon-to-fade {
   background-image: url("../static/images/radio.png"); }
+
+ .signup-info {
+ font-size: 18;
+ color: #27ae60;
+ }
+ .cancel-info {
+ font-size: 12;
+ color: #e67e22;
+ }
