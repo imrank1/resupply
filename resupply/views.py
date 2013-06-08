@@ -1,4 +1,3 @@
-
 from flask import Flask, flash, redirect, render_template, \
     request, url_for, session, jsonify, g
 from flask.ext.mongoengine import MongoEngine
@@ -72,7 +71,7 @@ def stageCharge():
     city = request.form['shippingCity']
     zipcode = request.form['shippingZip']
     refferal = session.get('refferalCode')
-    session['name'] = 'imran'
+    session['name'] = name
     session['email']=email
     session['password'] = password
     session['shippingAddress'] = shippingAddress
