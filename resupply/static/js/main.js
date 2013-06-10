@@ -13,7 +13,7 @@ require.config({
     jquery: 'ext/jquery',
     underscore: 'ext/underscore',
     backbone: 'ext/backbone',
-    templates: '../templates'
+    templates: '../templates',
   }
 
 });

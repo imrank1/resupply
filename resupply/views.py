@@ -70,6 +70,8 @@ def stageCharge():
     city = request.form['shippingCity']
     zipcode = request.form['shippingZip']
     refferal = session.get('refferalCode')
+    phone = request.form['shippingPhone']
+    shippingState = request.form['shippingState']
     session['name'] = name
     session['email']=email
     session['password'] = password
@@ -78,8 +80,15 @@ def stageCharge():
     session['city'] = city
     session['zipCode'] = zipcode
     session['password'] = password
+    session['phone'] = phone
+    session['state'] = shippingState
 
-    taxRate = TaxService.getSalesTax(zipcode)
+    taxRate = None
+    if shippingState == 'VA':
+        taxRate = 0.06
+    else:
+        taxRate = 0.0
+#    taxRate = TaxService.getSalesTax(zipcode)
     taxRateString = '%2f'%taxRate
     app.logger.info('sales tax for zip' + zipcode + 'determined to be:' + taxRateString)
 
@@ -91,7 +100,7 @@ def stageCharge():
     app.logger.info('packageType is:' + packageType)
     chargePrice = PricingService.getPackagePrice(packageType)*100
     finalPrice = chargePrice * taxMultiplier
-    stripePlanIdentifier = packageType + '-' + '%.2f'%chargePrice + '-' + '%.2f'%taxMultiplier +'-' + zipcode
+    stripePlanIdentifier = packageType + '-' + '%.2f'%chargePrice + '-' + '%.2f'%taxMultiplier +'-' + zipcode + '-' + shippingState
     currentStripePlans = stripe.Plan.all()
     targetStripePlan = None
     for plan in currentStripePlans.data:
@@ -115,8 +124,6 @@ def stageCharge():
     session['stripePlanIdentifier'] = stripePlanIdentifier
     session['finalPricePerMonth'] = round(finalPrice,2)
     session.modified = True
-    app.logger.info("name of user  in session is " + session.get('name'))
-    app.logger.info('session in stage charge:')
     app.logger.info(session)
 
     res = jsonify({'staged':True})
@@ -128,7 +135,7 @@ def stageCharge():
 
 @app.route("/finalStep",methods=['GET'])
 def finalStep():
-    return render_template("checkout.html",name=session.get('name'),package=session.get('packageType'),email=session.get('email'),password=session.get('password'),shippingAddress=session.get('shippingAddress'),shippingAddress2=session.get('shippingAddress2'),zipcode=session.get('zipCode'),finalPricePerMonth=session.get('finalPricePerMonth')/100,stripePlanIdentifier=session.get('stripePlanIdentifier'),city=session.get('city'),stripePublishableKey=app.config["STRIPE_PUBLISHABLE_KEY"])
+    return render_template("checkout.html",name=session.get('name'),package=session.get('packageType'),email=session.get('email'),password=session.get('password'),shippingAddress=session.get('shippingAddress'),shippingAddress2=session.get('shippingAddress2'),shippingCity=session.get('city'),zipcode=session.get('zipCode'),finalPricePerMonth=session.get('finalPricePerMonth')/100,stripePlanIdentifier=session.get('stripePlanIdentifier'),city=session.get('city'),state=session.get('state'),phone=session.get('phone'),stripePublishableKey=app.config["STRIPE_PUBLISHABLE_KEY"])
 
 
 
@@ -139,10 +146,12 @@ def charge():
     email = request.form['email']
     password = request.form['password']
     shippingAddress = request.form['shippingAddress']
-    shippingAddress2 = request.form['shippingAddress']
-    city = request.form['shippingCity']
+    shippingAddress2 = request.form['shippingAddress2']
     zipcode = request.form['shippingZip']
     refferal = session.get('refferalCode')
+    phone = request.form['shippingPhone']
+    shippingState = request.form['shippingState']
+    shippingPhone = request.form['shippingPhone']
     sourceRefferer = None
     if(refferal):
         refferalCode = refferal.split('-')[1]
@@ -168,13 +177,13 @@ def charge():
     packageType = stripePlanIdentifier
     chargePrice = request.form['finalPrice']
 
-    description = "Charging customer with email : " + email + " for " + packageType + " at address :" + shippingAddress + " " + shippingAddress2 + " " + city + " " + zipcode
+    description = "Charging customer with email : " + email + " for " + packageType + " at address :" + shippingAddress + " " + shippingAddress2  + " " + zipcode
     fullAddress = shippingAddress + ',' 
     if shippingAddress2 != None :
         fullAddress = fullAddress + shippingAddress2
   
 
-    fullAddress = ',' + fullAddress +  ',' + city + ',' + zipcode
+    fullAddress = ',' + fullAddress  + ',' + zipcode
 
     customer = stripe.Customer.create(
         email=request.form['email'],
@@ -182,7 +191,7 @@ def charge():
         plan=stripePlanIdentifier,
         description=description)
 
-    createdUser = UserService.createUser(email, password, shippingAddress, shippingAddress2, city, zipcode,request.form['stripeToken'], stripePlanIdentifier, customer.id,sourceRefferer)
+    createdUser = UserService.createUser(email, password, shippingAddress, shippingAddress2, shippingState,shippingPhone,zipcode,request.form['stripeToken'], stripePlanIdentifier, customer.id,sourceRefferer)
 
     RefferalService.createRefferal(createdUser.emailAddress)
     login_user(createdUser)
@@ -538,10 +547,9 @@ def processIntroUpgrade():
 def updateShippingAddress():
     shippingAddress = request.form['shippingAddress']
     shippingAddress2 = request.form['shippingAddress2']
-    city = request.form['shippingCity']
     zipcode = request.form['shippingZip']
 
-    UserService.updateUserShippingAddress(current_user,shippingAddress,shippingAddress2,city,zipcode)
+    UserService.updateUserShippingAddress(current_user,shippingAddress,shippingAddress2,zipcode)
 
     data = {'updated':True}
     resp = jsonify(data)

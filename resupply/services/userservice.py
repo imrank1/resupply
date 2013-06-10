@@ -8,8 +8,8 @@ class UserService:
 	
 
 	@staticmethod
-	def createUser(emailAddress, password, address, address2, city, zipCode, stripeToken, package, stripeCustomerId,sourceRefferer):
-		user = User(emailAddress=emailAddress, address=address, address2=address2, city=city, zipCode=zipCode,
+	def createUser(emailAddress, password, address, address2, state,phone, zipCode, stripeToken, package, stripeCustomerId,sourceRefferer):
+		user = User(emailAddress=emailAddress, address=address, address2=address2, state=state,phone=phone, zipCode=zipCode,
 					stripeToken=stripeToken, currentPackage=package, stripeCustomerId=stripeCustomerId,refferedBy=sourceRefferer,reducedPrice=False)
 		user.set_password(password)
 		user.save()
@@ -22,11 +22,10 @@ class UserService:
 		return user
 
 	@staticmethod
-	def updateUserShippingAddress(user, address, address2, zipcode, city):
+	def updateUserShippingAddress(user, address, address2, zipcode):
 		user.address = address
 		user.address2 = address2
 		user.zipCode = zipcode
-		user.city = city
 		user.save()
 		return user
 

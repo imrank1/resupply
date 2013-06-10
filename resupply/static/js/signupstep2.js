@@ -11,7 +11,7 @@ define(['jquery','underscore','backbone'], function($,_,Backbone) {
         },
 
         processSignup:function(e){
-            debugger;
+
             self = this;
             e.preventDefault();
             $(".alert-error").hide();
@@ -53,55 +53,33 @@ define(['jquery','underscore','backbone'], function($,_,Backbone) {
             cache: false,
             statusCode : { 
                 200: function(){
+                    debugger;
+                    var name = $('#name').val();
+                    var e = $('#email').val();
+                    var password = $('#password').val();
+                    var shippingAddress = $('#shipping-address').val();
+                    var shippingAddress2 = $('#shipping-address2').val();
+                    var shippingCity = $('#shipping-city').val();
+                    var shippingZip = $('#shipping-zipcode').val();
+                    var shippingState = $('#shipping-state').val();
+                    var phone = $('#shipping-phone').val();
+                    $.ajax({
+                      url: '/stageCharge',
+                      type: 'post',
+                      async: true,
+                      data: { name: name,email:e,password:password,shippingAddress:shippingAddress,shippingAddress2:shippingAddress2,shippingCity:shippingCity,shippingZip:shippingZip,shippingState:shippingState,shippingPhone:phone,packageType:window.packageType},
+                      cache: false,
+                      success: function(){
 
-        var name = $('#name').val();
-        var e = $('#email').val();
-        var password = $('#password').val();
-        var shippingAddress = $('#shipping-address').val();
-        var shippingAddress2 = $('#shipping-address2').val();
-        var shippingCity = $('#shipping-city').val();
-        var shippingZip = $('#shipping-zipcode').val();
-        $.ajax({
-          url: '/stageCharge',
-          type: 'post',
-          async: true,
-          data: { name: name,email:e,password:password,shippingAddress:shippingAddress,shippingAddress2:shippingAddress2,shippingCity:shippingCity,shippingZip:shippingZip,packageType:window.packageType},
-          cache: false,
-          success: function(){
-            // $("#billingDetails").hide();
-            // $("#packageHeader").hide();
-            // $("#signupSuccess").removeAttr("disabled");
-            // $("#signupSuccess").toggle();
-            window.location= "/finalStep";
-            // window.spinner.stop();
-            // $("#successMessage").show("slow");
-            // $(".submit-button").removeAttr("disabled");
-            // $("#payment-form").find('input:text, input:password, input:file, select, textarea').val('');
-            // $("#payment-form").find('input:radio, input:checkbox').removeAttr('checked').removeAttr('selected');          
-        }   
-            ,
-          error: function(){
-            alert('error');
-            $("#signupFailure").show("slow");
-            //   $("#errorMessage").text()
-            // $("#errorMessage").show("slow");
-          }
-        });
+                        window.location= "/finalStep";
+                             }   
+                        ,
+                      error: function(){
+                        alert('error');
+                        $("#signupFailure").show("slow");
+                        }
+                    });
 
-
-
-
-
-
-                // StripeCheckout.open({
-                //     key:         'pk_07vkx4yqszys5bnTNnHPSAAimkCie',
-                //     address:     true,
-                //     amount:      price,
-                //     name:        'Resupply',
-                //     description: 'Subscription',
-                //     panelLabel:  'Subscription Per Month',
-                //     token:       self.stripeResponseHandler
-                // });
                 return this;
             },
                 500: function(){
