@@ -45,28 +45,12 @@ define(['jquery','underscore','backbone'], function($,_,Backbone) {
                  $("#passwordLengthBad").show();
                 return false;
             }
-
-
-            // var cardNumber = $('.card-number').val();
-            // if(!Stripe.card.validateCardNumber(cardNumber));
-            // {
-            //     $("#badCardNumber").show();
-            //     return false;
-            // }
-
-            // var cardCVC = $('.card-cvc').val();
-            // if(!Stripe.card.validateCVC(cardCVC)){
-            //     $("#badCardCVC").show();
-            //     return false; 
-            // }
-
             $.ajax({
             url: '/checkEmail' + '?emailAddress=' + $('#email').val(),
             type: 'GET',
             cache: false,
             statusCode : { 
                 200: function(){
-debugger;
                 Stripe.card.createToken({
                     name:$('.card-name').val(),
                     number: $('.card-number').val(),
@@ -76,15 +60,6 @@ debugger;
                     address_zip: $('.card-zip').val(),   
                     address_city: $('.card-city').val()
                 }, self.stripeResponseHandler);    
-                // StripeCheckout.open({
-                //     key:         window.stripePublishableKey,
-                //     address:     true,
-                //     amount:      window.finalPrice*100,
-                //     name:        'Resupply',
-                //     description: 'Subscription',
-                //     panelLabel:  'Subscription Per Month',
-                //     token:       self.stripeResponseHandler
-                // });
                 return this;
             },
                 500: function(){
@@ -127,11 +102,6 @@ debugger;
           data: { name: name,email:e,password:password,shippingAddress:shippingAddress,shippingAddress2:shippingAddress2,shippingZip:shippingZip,shippingState:shippingState,shippingPhone:shippingPhone,stripeToken:token,packageType:window.packageType,stripePlanIdentifier:window.stripePlanIdentifier,finalPrice:window.finalPrice},
           cache: false,
           success: function(){
-            // $("#billingDetails").hide();
-            // $("#packageHeader").hide();
-            // $("#signupSuccess").removeAttr("disabled");
-
-            // $("#signupSuccess").toggle();
             window.location.href = "/account";
           },
           error: function(){
