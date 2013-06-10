@@ -10,6 +10,7 @@ define(['jquery','underscore','backbone'], function($,_,Backbone) {
         },
 
         processSignup:function(e){
+            $('.alert-error').hide();
             self = this;
             e.preventDefault();
             $(".alert-error").hide();
@@ -44,22 +45,21 @@ define(['jquery','underscore','backbone'], function($,_,Backbone) {
                  $("#passwordLengthBad").show();
                 return false;
             }
-
             $.ajax({
             url: '/checkEmail' + '?emailAddress=' + $('#email').val(),
             type: 'GET',
             cache: false,
             statusCode : { 
                 200: function(){
-                StripeCheckout.open({
-                    key:         window.stripePublishableKey,
-                    address:     true,
-                    amount:      window.finalPrice*100,
-                    name:        'Resupply',
-                    description: 'Subscription',
-                    panelLabel:  'Subscription Per Month',
-                    token:       self.stripeResponseHandler
-                });
+                Stripe.card.createToken({
+                    name:$('.card-name').val(),
+                    number: $('.card-number').val(),
+                    cvc: $('.card-cvc').val(),
+                    exp_month: $('.card-expiry-month').val(),
+                    exp_year: $('.card-expiry-year').val(),
+                    address_zip: $('.card-zip').val(),   
+                    address_city: $('.card-city').val()
+                }, self.stripeResponseHandler);    
                 return this;
             },
                 500: function(){
@@ -78,14 +78,11 @@ define(['jquery','underscore','backbone'], function($,_,Backbone) {
 
         },
 
-    stripeResponseHandler :function(response) {
-    if (response.error) {
-     
-        // window.spinner.stop();
 
-        // // show the errors on the form
-        // $("#paymentErrorMessage").show("slow");
-        // $(".submit-button").removeAttr("disabled");
+    stripeResponseHandler :function(status,response) {
+    if (response.error) {
+        debugger;
+        $("#payment-errors").text(response.error.message).show();
       } else {
         var form$ = $("#payment-form");
         var token = response['id'];
@@ -97,33 +94,20 @@ define(['jquery','underscore','backbone'], function($,_,Backbone) {
         var shippingAddress2 = $('#shipping-address2').val();
         var shippingCity = $('#shipping-city').val();
         var shippingZip = $('#shipping-zipcode').val();
+        var shippingPhone = $('#shipping-phone').val();
+        var shippingState = $('#shipping-state').val();
         $.ajax({
           url: '/charge',
           type: 'post',
-          data: { name: name,email:e,password:password,shippingAddress:shippingAddress,shippingAddress2:shippingAddress2,shippingCity:shippingCity,shippingZip:shippingZip,stripeToken:token,packageType:window.packageType,stripePlanIdentifier:window.stripePlanIdentifier,finalPrice:window.finalPrice},
+          data: { name: name,email:e,password:password,shippingAddress:shippingAddress,shippingAddress2:shippingAddress2,shippingZip:shippingZip,shippingState:shippingState,shippingPhone:shippingPhone,stripeToken:token,packageType:window.packageType,stripePlanIdentifier:window.stripePlanIdentifier,finalPrice:window.finalPrice},
           cache: false,
           success: function(){
-            $("#billingDetails").hide();
-            $("#packageHeader").hide();
-            $("#signupSuccess").removeAttr("disabled");
-
-            $("#signupSuccess").toggle();
             window.location.href = "/account";
-            // window.spinner.stop();
-            // $("#successMessage").show("slow");
-            // $(".submit-button").removeAttr("disabled");
-            // $("#payment-form").find('input:text, input:password, input:file, select, textarea').val('');
-            // $("#payment-form").find('input:radio, input:checkbox').removeAttr('checked').removeAttr('selected');          
-        }   
-            ,
+          },
           error: function(){
-            alert('error');
             $("#signupFailure").show("slow");
-            //   $("#errorMessage").text()
-            // $("#errorMessage").show("slow");
           }
         });
-        // $(".submit-button").removeAttr("disabled");
         return false;
       }
     },

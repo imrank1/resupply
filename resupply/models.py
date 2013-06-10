@@ -25,6 +25,8 @@ class User(db.Document,UserMixin):
 	viaRefferal = db.BooleanField(required=False)
 	refferedBy = db.StringField(required=False)
 	reducedPrice = db.BooleanField(required=False)
+	phoneNumber = db.StringField(max_length=255,required=False)
+	state = db.StringField(max_length=255,required=False)
 
 
 
