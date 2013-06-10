@@ -42,7 +42,7 @@ elif env =='production':
 	app.config["checkoutRedirect"] = config.production['checkoutRedirect']
 	stripe.api_key=config.production['stripe_secret_key']
 
-
+app.config["bitlyAccessToken"] = "b9aa357f2106667319586b4d47b30441553e4098"
 sslify = SSLify(app)
 
 db = MongoEngine(app)
