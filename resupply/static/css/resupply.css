@@ -27,6 +27,11 @@ background-color: #e74c3c;
 	height:75px;
 }
 
+
+.chargeError {
+	width: 558px;
+}
+
 @font-face {
 	font-family: proxima;
 	src: url('../../static/fonts/ProximaNova-Light.otf');
@@ -77,6 +82,10 @@ font-size: 35;
 
 .checkout-hero-unit { 
 	background-color:#2ECC71;
+}
+
+#shipping-state {
+	margin-bottom: 10px;
 }
 
 .radio .icon-to-fade {
