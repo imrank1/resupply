@@ -17,7 +17,6 @@ from flask import make_response
 from functools import update_wrapper 
 import requests
 import os
-
 # import resupply.services.userservice
 login_manager.login_view = "/index"
 
@@ -476,8 +475,9 @@ def forgotPassword():
 def login():
     user = current_user
     refferal = Refferal.objects.get(originatorEmailAddress=user.emailAddress)
+    bitlyLink = refferal.bitlyLink
     return render_template('account_home.html', currentPackage=PricingService.getDisplayPackage(user.currentPackage.split("-",1)[0]),numFamily=PricingService.getHouseHouldSizeFromPackage(user.currentPackage), zipCode=user.zipCode,
-                           address=user.address, address2=user.address2, city=user.city,refferalCode=refferal.refferalCode,user=g.user)
+                           address=user.address, address2=user.address2, city=user.city,refferalCode=refferal.refferalCode,user=g.user,bitlyLink=bitlyLink)
 
 
 @app.route("/logout")

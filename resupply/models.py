@@ -93,6 +93,7 @@ class Refferal(db.Document):
 	created_at = db.DateTimeField(default=datetime.datetime.now, required=True)
 	originatorEmailAddress = db.StringField(max_length=255, required=True)
 	refferalCode = db.StringField(max_length=255,required=False)
+	bitlyLink = db.StringField(max_length=255,required=False)
 	countUsed = db.IntField(required=False)
 	def __unicode__(self):
 		return self.id
