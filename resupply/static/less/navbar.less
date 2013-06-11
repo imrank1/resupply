@@ -61,6 +61,7 @@
   &:focus {
     text-decoration: none;
   }
+  > a { color: @navbarBrandColor; }
 }
 
 // Plain text in topbar
@@ -237,16 +238,21 @@
 }
 .navbar .nav > li {
   float: left;
+  height: 80px;
 }
 
 // Links
 .navbar .nav > li > a {
   float: none;
   // Vertically center the text given @navbarHeight
-  padding: ((@navbarHeight - @baseLineHeight) / 2) 15px ((@navbarHeight - @baseLineHeight) / 2);
+  //padding: ((@navbarHeight - @baseLineHeight) / 2) 15px ((@navbarHeight - @baseLineHeight) / 2);
   color: @navbarLinkColor;
   text-decoration: none;
   text-shadow: 0 1px 0 @navbarBackgroundHighlight;
+  line-height: 26px;
+  margin: 28px 5px;
+  padding: 0 10px;
+  border-radius: 3px;
 }
 .navbar .nav .dropdown-toggle .caret {
   margin-top: 8px;
@@ -256,7 +262,7 @@
 .navbar .nav > li > a:focus,
 .navbar .nav > li > a:hover {
   background-color: @navbarLinkBackgroundHover; // "transparent" is default to differentiate :hover/:focus from .active
-  color: @navbarLinkColorHover;
+  //color: @navbarLinkColorHover;
   text-decoration: none;
 }
 
