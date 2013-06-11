@@ -19,3 +19,4 @@ Flask-Cache
 python-memcached
 Flask-SSLify
 bitly_api
+Flask-Bootstrap
