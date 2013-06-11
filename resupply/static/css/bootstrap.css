@@ -5228,7 +5228,7 @@ a.badge:focus {
   font-weight: 200;
   line-height: 30px;
   color: inherit;
-  background-color: #eeeeee;
+  background-color: #ff632e;
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
   border-radius: 6px;
@@ -5260,6 +5260,10 @@ a.badge:focus {
 }
 .affix {
   position: fixed;
+}
+.resupply-hero {
+  border-radius: 0;
+  padding-top: 130px;
 }
 .footer {
   margin-top: 20px;

@@ -1,8 +1,6 @@
 {% extends "bootstrap_base.html" %}
 <!-- refer to https://github.com/mbr/flask-bootstrap/blob/master/flask_bootstrap/templates/ -->
 
-{% import "bootstrap_wtf.html" as wtf %}
-
 {% block style_navbar_padding %}
     <link href="static/css/bootstrap.css" rel="stylesheet">
 {% endblock %}
@@ -34,9 +32,9 @@
 
 					<div class="nav-collapse">
 						<ul class="nav pull-right">
-							<li class=""><a href="/about" class="anchorLink">About</a></li>
-							<li class=""><a href="/pricing" class="anchorLink">Pricing</a></li>
-							<li class=""><a href="#contact" class="anchorLink">Contact</a></li>
+							<li><a href="/about" class="anchorLink">About</a></li>
+							<li><a href="/pricing" class="anchorLink">Pricing</a></li>
+							<li><a href="#contact" class="anchorLink">Contact</a></li>
 
 							{% if user and user.is_authenticated()  %}
 								<li><a href="/logout">Logout</a></li>
