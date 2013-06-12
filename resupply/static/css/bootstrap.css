@@ -5325,9 +5325,12 @@ a.badge:focus {
 .affix {
   position: fixed;
 }
+body {
+  padding-top: 80px;
+}
 .resupply-hero {
   border-radius: 0;
-  padding-top: 130px;
+  padding-top: 50px;
   background: #b99e81 url('../images/home-hero.jpg') 50% 0;
 }
 .resupply-hero .resupply-callout {
