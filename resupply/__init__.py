@@ -1,6 +1,5 @@
 from flask import Flask, url_for,redirect,request
 from flask.ext.mongoengine import MongoEngine
-from flask.ext.bootstrap import Bootstrap
 from resupply import *
 from resupply import config
 from flask import render_template
@@ -14,8 +13,6 @@ from flask_sslify import SSLify
 app = Flask(__name__)
 
 env = os.environ.get('FLASK_ENV', 'development')
-
-app.config['BOOTSTRAP_CUSTOM_CSS'] = True
 
 configuration = None
 if env =='development':
@@ -47,7 +44,6 @@ elif env =='production':
 app.config["bitlyAccessToken"] = "b9aa357f2106667319586b4d47b30441553e4098"
 sslify = SSLify(app)
 
-Bootstrap(app)
 
 db = MongoEngine(app)
 
