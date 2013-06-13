@@ -224,6 +224,10 @@ def newHome():
     else:
         return render_template('newHome.html',loggedIn=False,user=g.user)
 
+@app.route("/about")
+def about():
+    return render_template('public/about.html')
+
 @app.route("/pricing")
 def pricing():
     app.logger.info('showing the pricing page fadfa')
