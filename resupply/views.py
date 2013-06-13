@@ -203,7 +203,7 @@ def charge():
               'Confirmation of subscription to Resupp.ly', 'html',
               emailHtml)
 
-    return render_template('pricing.html')
+    return render_template('account.html')
 
 
 @app.route("/testConfirmationEmail")
@@ -213,7 +213,7 @@ def confirmEmailTest():
     send_mail('imrank1@gmail.com', 'imrank1@gmail.com',
               'Confirmation of subscription to Resupp.ly', 'html',
               emailHtml)
-    return render_template("pricing.html")
+    return render_template("index.html")
 
 
 @app.route("/newHome")
