@@ -16,7 +16,7 @@ def hello():
 		if(fbParam):
 			app.logger.info("received fb-ref= " + fbParam)
 			session['refferalCode']=fbParam
-	return render_template('public/newHome.html')
+	return render_template('public/index.html')
 
 @app.route("/index")
 def index():
