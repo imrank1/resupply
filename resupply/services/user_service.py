@@ -24,16 +24,16 @@ def updateUserShippingAddress(user, address, address2, zipcode):
 	return user
 
 def cancelAccount(user):
-	cancelledAccount = CancelledAccount(emailAddress=user.emailAddress,
-											packageAtTimeOfCancellation=user.currentPackage)
+	cancelledAccount = CancelledAccount(emailAddress=user.emailAddress,packageAtTimeOfCancellation=user.currentPackage)
 	customer = stripe.Customer.retrieve(user.stripeCustomerId)
 	if (customer):
 		customer.cancel_subscription()
 	else:
 		app.logger.info('could not find a customer in stripe with customer id ' + user.stripeCustomerId)
-		cancelledAccount.save()
-		user.closedAccount = True
-		user.save()
+	
+	cancelledAccount.save()
+	user.closedAccount = True
+	user.save()
 
 	return cancelledAccount
 
