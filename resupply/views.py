@@ -4,11 +4,11 @@ from flask.ext.mongoengine import MongoEngine
 from resupply import *
 from resupply import config
 from resupply.models import *
-from resupply.services.userservice import *
-from resupply.services.pricingService import *
-from resupply.services.passwordChangeService import *
-from resupply.services.refferalService import * 
-from resupply.services.taxService import * 
+from resupply.services import user_service
+from resupply.services import pricing_service
+from resupply.services import password_change_service 
+from resupply.services import refferal_service 
+from resupply.services import tax_service 
 from flask.ext.login import LoginManager, UserMixin, \
     login_required, login_user, logout_user, current_user
 from flask.ext.mongoengine import DoesNotExist
@@ -17,7 +17,6 @@ from flask import make_response
 from functools import update_wrapper 
 import requests
 import os
-# import resupply.services.userservice
 login_manager.login_view = "/index"
 
 env = os.environ.get('FLASK_ENV', 'development')
@@ -88,7 +87,7 @@ def stageCharge():
         taxRate = 0.06
     else:
         taxRate = 0.0
-#    taxRate = TaxService.getSalesTax(zipcode)
+#    taxRate = tax_service.getSalesTax(zipcode)
     taxRateString = '%2f'%taxRate
     app.logger.info('sales tax for zip' + zipcode + 'determined to be:' + taxRateString)
 
@@ -98,7 +97,7 @@ def stageCharge():
 
     packageType = session.get('packageType')
     app.logger.info('packageType is:' + packageType)
-    chargePrice = PricingService.getPackagePrice(packageType)*100
+    chargePrice = pricing_service.getPackagePrice(packageType)*100
     finalPrice = chargePrice * taxMultiplier
     stripePlanIdentifier = packageType + '-' + '%.2f'%chargePrice + '-' + '%.2f'%taxMultiplier +'-' + zipcode + '-' + shippingState
     currentStripePlans = stripe.Plan.all()
@@ -191,11 +190,11 @@ def charge():
         plan=stripePlanIdentifier,
         description=description)
 
-    createdUser = UserService.createUser(email, password, shippingAddress, shippingAddress2, shippingState,shippingPhone,zipcode,request.form['stripeToken'], stripePlanIdentifier, customer.id,sourceRefferer)
+    createdUser = user_service.createUser(email, password, shippingAddress, shippingAddress2, shippingState,shippingPhone,zipcode,request.form['stripeToken'], stripePlanIdentifier, customer.id,sourceRefferer)
 
-    RefferalService.createRefferal(createdUser.emailAddress)
+    refferal_service.createRefferal(createdUser.emailAddress)
     login_user(createdUser)
-    emailHtml = render_template('emails/signupConfirmationEmailTemplate.html',package=PricingService.getDisplayPackage(stripePlanIdentifier),pricePerMonth=chargePrice,shippingAddress=fullAddress)
+    emailHtml = render_template('emails/signupConfirmationEmailTemplate.html',package=pricing_service.getDisplayPackage(stripePlanIdentifier),pricePerMonth=chargePrice,shippingAddress=fullAddress)
     send_mail(createdUser.emailAddress, 'support@resupp.ly',
               'Confirmation of subscription to Resupp.ly', 'html',
               emailHtml)
@@ -203,7 +202,7 @@ def charge():
               'Confirmation of subscription to Resupp.ly', 'html',
               emailHtml)
 
-    return redirect('account.html')
+    return redirect('account')
 
 
 @app.route("/testConfirmationEmail")
@@ -247,14 +246,14 @@ def pricing():
     if(user.is_anonymous()==False):
         app.logger.info("there is a current user with " + user.currentPackage)
         currentPackage = user.currentPackage.split("-",1)[0]
-        pricingMap = PricingService.getPricingMap(int(PricingService.getHouseHouldSizeFromPackage(user.currentPackage)))
+        pricingMap = pricing_service.getPricingMap(int(pricing_service.getHouseHouldSizeFromPackage(user.currentPackage)))
         return render_template('product/pricingUpgrade.html',currentPackage=currentPackage,user=g.user,pricingMap=pricingMap)
     else:
         numFamily = session.get('houseHoldSize')
         if(numFamily==None):
             return redirect("/infoAboutYou")
         app.logger.info(numFamily)
-        pricingMap = PricingService.getPricingMap(int(numFamily))
+        pricingMap = pricing_service.getPricingMap(int(numFamily))
         return render_template('product/pricing_new.html',showGetStarted=showGetStarted,user=None,pricingMap=pricingMap)
 
     return render_template('product/pricing_new.html',showGetStarted=showGetStarted)
@@ -294,7 +293,7 @@ def step1():
     session['packageType'] = packageType
 
     return render_template('signup/signupStep2.html',name=session.get('name'),package=session.get('packageType'),email=session.get('email'),password=session.get('password'),shippingAddress=session.get('shippingAddress'),
-    shippingAddress2=session.get('shippingAddress2'),zipcode=session.get('targetZipCode'),finalPricePerMonth=session.get('finalPricePerMonth'),city=session.get('city'),packageType=PricingService.getDisplayPackage(packageType),packagePrice=PricingService.getPackagePrice(packageType))
+    shippingAddress2=session.get('shippingAddress2'),zipcode=session.get('targetZipCode'),finalPricePerMonth=session.get('finalPricePerMonth'),city=session.get('city'),packageType=pricing_service.getDisplayPackage(packageType),packagePrice=pricing_service.getPackagePrice(packageType))
 
 @app.route("/getStarted",methods=['POST'])
 def getStarted():
@@ -305,7 +304,7 @@ def getStarted():
     resp = None
     try:
         firstZip = int(zipCode[:1])
-        if(UserService.canShip(firstZip)==False):
+        if(user_service.canShip(firstZip)==False):
             app.logger.info("We can't ship  to " + zipCode)
             canShip = False
             resp = jsonify({'available': canShip})
@@ -345,7 +344,7 @@ def upgradeConfirmation():
     currentPackage = user.currentPackage
     upgradePackage = request.form['packageType']
     familySize = request.form['familySize']
-    return render_template('product/upgradeConfirmation.html',currentPackage=PricingService.getDisplayPackage(currentPackage),upgradePackageDisplay=PricingService.getDisplayPackage(upgradePackage),upgradePackage=upgradePackage,currentPrice=PricingService.getPackagePrice(currentPackage),upgradePrice=PricingService.getPackagePrice(upgradePackage),familySize=familySize)
+    return render_template('product/upgradeConfirmation.html',currentPackage=pricing_service.getDisplayPackage(currentPackage),upgradePackageDisplay=pricing_service.getDisplayPackage(upgradePackage),upgradePackage=upgradePackage,currentPrice=pricing_service.getPackagePrice(currentPackage),upgradePrice=pricing_service.getPackagePrice(upgradePackage),familySize=familySize)
 
 
 @app.route("/processUpgrade",methods=['POST'])
@@ -355,7 +354,7 @@ def processUpgrade():
     packageType = request.form['packageType']
     prevPackage = user.currentPackage
 
-    taxRate = TaxService.getSalesTax(user.zipCode)
+    taxRate = tax_service.getSalesTax(user.zipCode)
     taxRateString = '%2f'%taxRate
     app.logger.info('sales tax for zip' + user.zipCode + 'determined to be:' + taxRateString)
 
@@ -363,7 +362,7 @@ def processUpgrade():
     chargePrice = None
     taxMultiplier = 1 + taxRate
 
-    chargePrice = PricingService.getPackagePrice(packageType)*100
+    chargePrice = pricing_service.getPackagePrice(packageType)*100
 
     finalPrice = chargePrice * taxMultiplier
     stripePlanIdentifier = packageType + '-' + '%.2f'%chargePrice + '-' + '%.2f'%taxMultiplier +'-' + user.zipCode
@@ -391,8 +390,8 @@ def processUpgrade():
     customer.update_subscription(plan=stripePlanIdentifier)
     user.currentPackage = stripePlanIdentifier
     user.save()
-    emailHtml = render_template("emails/upgradeConfirmationEmail.html",newPackage=PricingService.getDisplayPackage(packageType),pricePerMonth=chargePrice/100,
-                                oldPackage=PricingService.getDisplayPackage(prevPackage.split("-",1)[0]))
+    emailHtml = render_template("emails/upgradeConfirmationEmail.html",newPackage=pricing_service.getDisplayPackage(packageType),pricePerMonth=chargePrice/100,
+                                oldPackage=pricing_service.getDisplayPackage(prevPackage.split("-",1)[0]))
     send_mail(user.emailAddress, 'support@resupp.ly',
         'Resupply Upgrade Confirmation', 'html',
         emailHtml)
@@ -426,7 +425,7 @@ def login():
     user = current_user
     refferal = Refferal.objects.get(originatorEmailAddress=user.emailAddress)
     bitlyLink = refferal.bitlyLink
-    return render_template('user/account_home.html', currentPackage=PricingService.getDisplayPackage(user.currentPackage.split("-",1)[0]),numFamily=PricingService.getHouseHouldSizeFromPackage(user.currentPackage), zipCode=user.zipCode,
+    return render_template('user/account_home.html', currentPackage=pricing_service.getDisplayPackage(user.currentPackage.split("-",1)[0]),numFamily=pricing_service.getHouseHouldSizeFromPackage(user.currentPackage), zipCode=user.zipCode,
                            address=user.address, address2=user.address2, city=user.city,refferalCode=refferal.refferalCode,user=g.user,bitlyLink=bitlyLink)
 
 
@@ -469,7 +468,7 @@ def infoAboutYou():
 @login_required
 def infoAboutYouUpgrade():
     user = g.user
-    return render_template('product/infoStepUpgrade.html',user=user,currentPackage=PricingService.getDisplayPackage(user.currentPackage.split("-",1)[0]),houseSize=PricingService.getHouseHouldSizeFromPackage(user.currentPackage))
+    return render_template('product/infoStepUpgrade.html',user=user,currentPackage=pricing_service.getDisplayPackage(user.currentPackage.split("-",1)[0]),houseSize=pricing_service.getHouseHouldSizeFromPackage(user.currentPackage))
 
 
 @app.route("/introUpgrade",methods=['POST'])
@@ -478,7 +477,7 @@ def processIntroUpgrade():
     user = g.user
     numFamily = request.form['numFamily']
     currentPackage = user.currentPackage.split("-",1)[0]
-    pricingMap = PricingService.getPricingMap(int(numFamily))
+    pricingMap = pricing_service.getPricingMap(int(numFamily))
     return render_template('product/pricingUpgrade.html',currentPackage=currentPackage,user=g.user,pricingMap=pricingMap)
 
 
@@ -490,7 +489,7 @@ def updateShippingAddress():
     shippingAddress2 = request.form['shippingAddress2']
     zipcode = request.form['shippingZip']
 
-    UserService.updateUserShippingAddress(current_user,shippingAddress,shippingAddress2,zipcode)
+    user_service.updateUserShippingAddress(current_user,shippingAddress,shippingAddress2,zipcode)
 
     data = {'updated':True}
     resp = jsonify(data)
@@ -523,7 +522,7 @@ def processForgotPasswordChange():
         now = datetime.datetime.now().microsecond
         linkRef = linkRef + str(now)
         link = app.config["passwordResetPrefix"] + '?linkRef=' + linkRef;
-        PasswordChangeService.createPasswordChangeRequest(user.emailAddress,linkRef)
+        password_change_service.createPasswordChangeRequest(user.emailAddress,linkRef)
 
         email =  render_template ("emails/passwordResetEmail.html",link=link)
 
@@ -543,7 +542,7 @@ def requestPasswordChange():
     now = datetime.datetime.now().microsecond
     linkRef = linkRef + str(now)
     link = app.config["passwordResetPrefix"] + '?linkRef=' + linkRef;
-    PasswordChangeService.createPasswordChangeRequest(user.emailAddress,linkRef)
+    password_change_service.createPasswordChangeRequest(user.emailAddress,linkRef)
 
 
     send_mail(user.emailAddress, 'support@resupp.ly',
@@ -566,7 +565,7 @@ def requestPasswordChange():
 def handlePasswordChange():
     newPassword = request.form['password']
     linkRef = request.form['linkRef']
-    PasswordChangeService.updateUserPassword(linkRef,newPassword)
+    password_change_service.updateUserPassword(linkRef,newPassword)
     res = jsonify({'passwordChanged':True})
     res.status_code = 202
     return res
@@ -576,7 +575,7 @@ def handlePasswordChange():
 @login_required
 def cancelAccount():
     user = current_user
-    UserService.cancelAccount(user)
+    user_service.cancelAccount(user)
 
     email =  render_template ("emails/cancelAccountConfirmationEmail.html")
 
@@ -594,7 +593,7 @@ def cancelAccount():
 @app.route("/addToSubscribe",methods=["POST"])
 def addToSubscribe():
     email = request.form['email']
-    UserService.addToSubscribe(email)
+    user_service.addToSubscribe(email)
     res = jsonify({'addedd':True})
     res.status_code = 200
     return res
