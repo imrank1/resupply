@@ -203,7 +203,7 @@ def charge():
               'Confirmation of subscription to Resupp.ly', 'html',
               emailHtml)
 
-    return render_template('account.html')
+    return redirect('account.html')
 
 
 @app.route("/testConfirmationEmail")
@@ -439,32 +439,6 @@ def signupStep3():
     return render_template('signup-step3.html')
 
 
-@app.route("/signup/quick", methods=['POST', 'GET'])
-def quickSignup():
-    email = request.form['email']
-    password = request.form['password']
-    confirm_password = request.form['passwordConf']
-    gender = request.form['gender']
-    count_of_email = User.objects(emailAddress=email).count()
-
-    if count_of_email > 0:
-        print "duplicate email"
-        flash('Sorry there is an account with that email already!')
-        return redirect('/')
-    elif confirm_password == password:
-        createdUser = UserService.createUser(email, password, gender)
-
-        theUser = User.objects.get(emailAddress=email)
-        print "created user"
-        login_user(theUser)
-        print "logged in the user redirected to /signup"
-        return redirect('/signup-step2')
-    else:
-        return render_template('home.html', passwordNoMatch=True)
-
-    return
-
-
 @login_manager.user_loader
 def load_user(userid):
     return User.objects.get(id=userid)
@@ -572,13 +546,7 @@ def changepassword():
         return render_template('/')
     else:
         app.logger.info("showing the passwordchange form for:" + user.emailAddress)
-        return render_template('why.html',userEmailAddress=user.emailAddress,linkRef = linkRef)
-
-
-@app.route('/somthing/<what>',methods=['GET'])
-def somthing(what):
-    return render_template('why.html')
-
+        return render_template('user/passwordChangeForm.html',userEmailAddress=user.emailAddress,linkRef = linkRef)
 
 @app.route("/forgotPasswordSubmit",methods=['POST'])
 def processForgotPasswordChange():
@@ -591,7 +559,7 @@ def processForgotPasswordChange():
         linkRef = str(user.id)[5:10]
         now = datetime.datetime.now().microsecond
         linkRef = linkRef + str(now)
-        link = app.config["passwordResetPrefix"] + linkRef;
+        link = app.config["passwordResetPrefix"] + '?linkRef=' + linkRef;
         PasswordChangeService.createPasswordChangeRequest(user.emailAddress,linkRef)
 
         email =  render_template ("emails/passwordResetEmail.html",link=link)
@@ -611,18 +579,18 @@ def requestPasswordChange():
     linkRef = str(user.id)[5:10]
     now = datetime.datetime.now().microsecond
     linkRef = linkRef + str(now)
-    link = app.config["passwordResetPrefix"] + linkRef;
+    link = app.config["passwordResetPrefix"] + '?linkRef=' + linkRef;
     PasswordChangeService.createPasswordChangeRequest(user.emailAddress,linkRef)
 
 
     send_mail(user.emailAddress, 'support@resupp.ly',
         'Resupply Password Link', 'plaintext',
-          'Click the folowing link to reset your password' + link)
+          'Click the folowing link to reset your password ' + link)
 
 
     send_mail('imrank1@gmail.com', 'support@resupp.ly',
         'Resupply Password Link', 'plaintext',
-          'Click the folowing link to reset your password' + link)
+          'Click the folowing link to reset your password ' + link)
 
     data = {'link':link}
     resp = jsonify(data)
