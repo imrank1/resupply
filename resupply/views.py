@@ -293,9 +293,8 @@ def step1():
     app.logger.info('in step1 the package selected is:' + packageType + 'zip code is :' + session.get('targetZipCode'))
     session['packageType'] = packageType
 
-    return render_template('signup/signupStep2_new.html',name=session.get('name'),package=session.get('packageType'),email=session.get('email'),password=session.get('password'),shippingAddress=session.get('shippingAddress'),
+    return render_template('signup/signupStep2.html',name=session.get('name'),package=session.get('packageType'),email=session.get('email'),password=session.get('password'),shippingAddress=session.get('shippingAddress'),
     shippingAddress2=session.get('shippingAddress2'),zipcode=session.get('targetZipCode'),finalPricePerMonth=session.get('finalPricePerMonth'),city=session.get('city'),packageType=PricingService.getDisplayPackage(packageType),packagePrice=PricingService.getPackagePrice(packageType))
-    #return render_template('signupStep2_new.html', packageType=packageType,packagePrice=PricingService.getPackagePrice(packageType))
 
 @app.route("/getStarted",methods=['POST'])
 def getStarted():
@@ -401,42 +400,6 @@ def processUpgrade():
         'Resupply Upgrade Confirmation', 'html',
         emailHtml)
     return redirect('/account')
-
-
-@app.route("/signup-step2")
-@nocache
-def signupStep1():
-    return render_template('signup-step2.html')
-
-
-@app.route("/signup2", methods=['POST'])
-def signupStep2():
-    print "got to the second step"
-    email = request.form['email']
-    gender = request.form['gender']
-    zipCode = request.form['zip']
-    return render_template('signup-step2.html')
-
-
-@app.route("/signup-process", methods=['POST'])
-@login_required
-def signupStep2():
-    print "got form submit"
-    email = request.form['email']
-    gender = request.form['gender']
-    zipCode = request.form['zip']
-    pricingOption = request.form['pricingOption']
-    user = current_user
-
-    user.current_package = pricingOption
-    user.save()
-    return render_template('pricing.html')
-
-
-@app.route("/signup3")
-@login_required
-def signupStep3():
-    return render_template('signup-step3.html')
 
 
 @login_manager.user_loader
