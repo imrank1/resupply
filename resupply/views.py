@@ -216,13 +216,13 @@ def confirmEmailTest():
     return render_template("index.html")
 
 
-@app.route("/newHome")
-def newHome():
+@app.route("/home")
+def home():
     user = current_user
     if(user.is_anonymous()==False):
-        return render_template('public/newHome.html',loggedIn=True,emailAddress=user.emailAddress,user=g.user)
+        return render_template('public/index.html',loggedIn=True,emailAddress=user.emailAddress,user=g.user)
     else:
-        return render_template('public/newHome.html',loggedIn=False,user=g.user)
+        return render_template('public/index.html',loggedIn=False,user=g.user)
 
 @app.route("/about")
 def about():
