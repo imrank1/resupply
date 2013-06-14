@@ -135,7 +135,7 @@ def stageCharge():
 
 @app.route("/finalStep",methods=['GET'])
 def finalStep():
-    return render_template("checkout.html",name=session.get('name'),package=session.get('packageType'),email=session.get('email'),password=session.get('password'),shippingAddress=session.get('shippingAddress'),shippingAddress2=session.get('shippingAddress2'),shippingCity=session.get('city'),zipcode=session.get('zipCode'),finalPricePerMonth=session.get('finalPricePerMonth')/100,stripePlanIdentifier=session.get('stripePlanIdentifier'),city=session.get('city'),state=session.get('state'),phone=session.get('phone'),stripePublishableKey=app.config["STRIPE_PUBLISHABLE_KEY"])
+    return render_template("signup/checkout.html",name=session.get('name'),package=session.get('packageType'),email=session.get('email'),password=session.get('password'),shippingAddress=session.get('shippingAddress'),shippingAddress2=session.get('shippingAddress2'),shippingCity=session.get('city'),zipcode=session.get('zipCode'),finalPricePerMonth=session.get('finalPricePerMonth')/100,stripePlanIdentifier=session.get('stripePlanIdentifier'),city=session.get('city'),state=session.get('state'),phone=session.get('phone'),stripePublishableKey=app.config["STRIPE_PUBLISHABLE_KEY"])
 
 
 
@@ -220,9 +220,9 @@ def confirmEmailTest():
 def newHome():
     user = current_user
     if(user.is_anonymous()==False):
-        return render_template('newHome.html',loggedIn=True,emailAddress=user.emailAddress,user=g.user)
+        return render_template('public/newHome.html',loggedIn=True,emailAddress=user.emailAddress,user=g.user)
     else:
-        return render_template('newHome.html',loggedIn=False,user=g.user)
+        return render_template('public/newHome.html',loggedIn=False,user=g.user)
 
 @app.route("/about")
 def about():
@@ -248,16 +248,16 @@ def pricing():
         app.logger.info("there is a current user with " + user.currentPackage)
         currentPackage = user.currentPackage.split("-",1)[0]
         pricingMap = PricingService.getPricingMap(int(PricingService.getHouseHouldSizeFromPackage(user.currentPackage)))
-        return render_template('pricingUpgrade.html',currentPackage=currentPackage,user=g.user,pricingMap=pricingMap)
+        return render_template('product/pricingUpgrade.html',currentPackage=currentPackage,user=g.user,pricingMap=pricingMap)
     else:
         numFamily = session.get('houseHoldSize')
         if(numFamily==None):
             return redirect("/infoAboutYou")
         app.logger.info(numFamily)
         pricingMap = PricingService.getPricingMap(int(numFamily))
-        return render_template('pricing_new.html',showGetStarted=showGetStarted,user=None,pricingMap=pricingMap)
+        return render_template('product/pricing_new.html',showGetStarted=showGetStarted,user=None,pricingMap=pricingMap)
 
-    return render_template('pricing_new.html',showGetStarted=showGetStarted)
+    return render_template('product/pricing_new.html',showGetStarted=showGetStarted)
 
 
 @app.route("/pricing2")
@@ -293,7 +293,7 @@ def step1():
     app.logger.info('in step1 the package selected is:' + packageType + 'zip code is :' + session.get('targetZipCode'))
     session['packageType'] = packageType
 
-    return render_template('signupStep2_new.html',name=session.get('name'),package=session.get('packageType'),email=session.get('email'),password=session.get('password'),shippingAddress=session.get('shippingAddress'),
+    return render_template('signup/signupStep2_new.html',name=session.get('name'),package=session.get('packageType'),email=session.get('email'),password=session.get('password'),shippingAddress=session.get('shippingAddress'),
     shippingAddress2=session.get('shippingAddress2'),zipcode=session.get('targetZipCode'),finalPricePerMonth=session.get('finalPricePerMonth'),city=session.get('city'),packageType=PricingService.getDisplayPackage(packageType),packagePrice=PricingService.getPackagePrice(packageType))
     #return render_template('signupStep2_new.html', packageType=packageType,packagePrice=PricingService.getPackagePrice(packageType))
 
@@ -346,7 +346,7 @@ def upgradeConfirmation():
     currentPackage = user.currentPackage
     upgradePackage = request.form['packageType']
     familySize = request.form['familySize']
-    return render_template('upgradeConfirmation.html',currentPackage=PricingService.getDisplayPackage(currentPackage),upgradePackageDisplay=PricingService.getDisplayPackage(upgradePackage),upgradePackage=upgradePackage,currentPrice=PricingService.getPackagePrice(currentPackage),upgradePrice=PricingService.getPackagePrice(upgradePackage),familySize=familySize)
+    return render_template('product/upgradeConfirmation.html',currentPackage=PricingService.getDisplayPackage(currentPackage),upgradePackageDisplay=PricingService.getDisplayPackage(upgradePackage),upgradePackage=upgradePackage,currentPrice=PricingService.getPackagePrice(currentPackage),upgradePrice=PricingService.getPackagePrice(upgradePackage),familySize=familySize)
 
 
 @app.route("/processUpgrade",methods=['POST'])
@@ -525,14 +525,14 @@ def processLogin():
 def infoAboutYou():
     user = g.user
     session.clear()
-    return render_template('infoStep.html',user=user)
+    return render_template('product/infoStep.html',user=user)
 
 
 @app.route("/infoAboutYouUpgrade",methods=["GET"])
 @login_required
 def infoAboutYouUpgrade():
     user = g.user
-    return render_template('infoStepUpgrade.html',user=user,currentPackage=PricingService.getDisplayPackage(user.currentPackage.split("-",1)[0]),houseSize=PricingService.getHouseHouldSizeFromPackage(user.currentPackage))
+    return render_template('product/infoStepUpgrade.html',user=user,currentPackage=PricingService.getDisplayPackage(user.currentPackage.split("-",1)[0]),houseSize=PricingService.getHouseHouldSizeFromPackage(user.currentPackage))
 
 
 @app.route("/introUpgrade",methods=['POST'])
@@ -542,7 +542,7 @@ def processIntroUpgrade():
     numFamily = request.form['numFamily']
     currentPackage = user.currentPackage.split("-",1)[0]
     pricingMap = PricingService.getPricingMap(int(numFamily))
-    return render_template('pricingUpgrade.html',currentPackage=currentPackage,user=g.user,pricingMap=pricingMap)
+    return render_template('product/pricingUpgrade.html',currentPackage=currentPackage,user=g.user,pricingMap=pricingMap)
 
 
 
