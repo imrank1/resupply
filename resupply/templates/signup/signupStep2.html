@@ -1,167 +1,115 @@
-{% extends "base.html" %}
-{% block head %}
+{% extends "layouts/base.html" %}
 
-    <meta charset="utf-8">
-    <title>Resupp.ly</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <!-- Le styles -->
-    <link href="static/css/bootstrap.css" rel="stylesheet">
-    <link href="static/css/bootstrap-responsive.css" rel="stylesheet">
-    <link href="static/css/m-styles.min.css" rel="stylesheet">
-    <link href="static/css/m-forms.min.css" rel="stylesheet">
-    <link href="static/css/m-buttons.css" rel="stylesheet">
-
-    <link href="static/css/custom.css" rel="stylesheet">
-    <link href="static/css/resupply.css" rel="stylesheet">
-    <script src="static/js/bootstrap.js"></script>
+{% block head_bottom %}
+	<script src="https://checkout.stripe.com/v2/checkout.js"></script>
+	<script data-main="/static/js/step2Loader" src="/static/js/ext/require.js"></script>
+	<script> window.packageType = "{{packageType}}"; </script>
+{% endblock %}
 
 
-    <script>
-        window.packageType = "{{packageType}}"
-    </script>
+{% block content%}
 
 
-    <script src="https://checkout.stripe.com/v2/checkout.js"></script>
+<div class="container hero-unit">
+	<ul class="breadcrumb">
+		<li><a href="/pricing">Package Selection</a> <span class="divider">/</span></li>
+		<li class="active"><a href="#">Account Details</a> <span class="divider">/</span></li>
+	</ul>
 
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
-
-
-    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-    <!-- Le fav and touch icons -->
-    <link rel="shortcut icon" href="ico/favicon.ico">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
-    <script data-main="/static/js/step2Loader" src="/static/js/ext/require.js"></script>
-    <!-- <link href="static/css/style.css" rel="stylesheet"> -->
-
-      {% endblock %}  
-      {% block content%}
-<!-- HEADER CONTAINER -->
+	<div id="packageHeader" class="offset3 span6 well" style="text-align:center">
+		<div class="signup-info">You are signing up for the {{ packageType }} package at ${{packagePrice}} per month!</div>
+		<div class="cancel-info">Don't forget, we have a 1 click cancel process.</div>
+	</div>
 
 
-<!-- CONTENT -->
+	<div id="signupSuccess" class="offset4 span6 well alert alert-success" style="text-align:center; display:none">
+		Awesome you've signed up! Look for an email for details on your first delivery!
+	</div>
+	<div id="signupFailure" class="offset4 span6 well alert alert-error" style="text-align:center; display:none">
+		Hmm looks like somthing went wrong with your submission. Please try again or contact support at <a href="mailto:support@resupp.ly">support@resupp.ly</a>
+	</div>
 
 
-<div class="container hero-unit" style="margin-top:100px;">
-<div class="span4 offset4">
-    <ul class="breadcrumb">
-        <li><a href="/pricing">Package Selection</a> <span class="divider">/</span></li>
-        <li class="active"><a href="#">Account Details</a> <span class="divider">/</span></li>
-    </ul>
-</div>
+	<div id="billing_container">
 
+		<div id="billingDetails" class="offset3 span6 well">
+			<legend>Please Enter Account Details: </legend>
+			<div class="alert alert-error" id="signupErrorMessage" style="display:none;">Please check the highlighted fields.</div>
 
-    <div id="packageHeader" class="offset3 span6 well" style="text-align:center">
-       <div class="signup-info">You are signing up for the {{ packageType }} package at ${{packagePrice}} per month!
-       <br></div>
-	   <div class="cancel-info">Don't forget, we have a 1 click cancel process.</div>
-       </span>
-    </div>
-    <div id="signupSuccess" class="offset4 span6 well alert alert-success" style="text-align:center; display:none">
-       Awesome you've signed up! Look for an email for details on your first delivery!
-    </div>
-     <div id="signupFailure" class="offset4 span6 well alert alert-error" style="text-align:center; display:none">
-       Hmm looks like somthing went wrong with your submission. Please try again or contact support at <a href="mailto:support@resupp.ly">support@resupp.ly</a>
-    </div>
-    <div id="billing_container">
+			<div class="alert alert-error" id="passwordMismatchError" class="alert alert-error" style="display:none;">Passwords don't match!</div>
+			<div class="alert alert-error" id="passwordLengthBad" class="alert alert-error" style="display:none;">Password must be at least 5 characters long!</div>
+			<div class="alert alert-error" id="emailInUse" class="alert alert-error" style="display:none;">Sorry that email is already in use!</div>
+			<form accept-charset="UTF-8" action="" data-validate="parsley" method="post" id="payment-form">
+				<input class="requiredStuff span3" id="name" name="name" placeholder="Full Name" type="text">
+				<input class="requiredStuff span3" id="email" name="email" data-required="true"placeholder="Email"  data-type="email"  type="text">
+				<input class="requiredStuff span3" id="password" name="password" data-required="true" placeholder="Password" type="password">
+				<input class="requiredStuff span3" id="passwordConfirm" name="passwordConfirm" data-required="true" placeholder="Confirm Password" type="password">
 
-<div id="billingDetails" class="offset3 span6 well">
-    <legend>Please Enter Account Details: </legend>
-     <div class="alert alert-error" id="signupErrorMessage" style="display:none;">Please check the highlighted fields.
-    </div>
-
-    <div class="alert alert-error" id="passwordMismatchError" class="alert alert-error" style="display:none;">Passwords don't match!
-    </div>
-     <div class="alert alert-error" id="passwordLengthBad" class="alert alert-error" style="display:none;">Password must be at least 5 characters long!
-    </div>
-    <div class="alert alert-error" id="emailInUse" class="alert alert-error" style="display:none;">Sorry that email is already in use!
-    </div>
-    <form accept-charset="UTF-8" action="" data-validate="parsley" method="post" id="payment-form">
-        <input class="requiredStuff span3" id="name" name="name" placeholder="Full Name" type="text">
-        <input class="requiredStuff span3" id="email" name="email" data-required="true"placeholder="Email"  data-type="email"  type="text">
-        <input class="requiredStuff span3" id="password" name="password" data-required="true" placeholder="Password" type="password">
-        <input class="requiredStuff span3" id="passwordConfirm" name="passwordConfirm" data-required="true" placeholder="Confirm Password" type="password">
-
-        <legend>Shipping Details</legend>
-        <input class="requiredStuff span3" id="shipping-address"  name="shipping-address" placeholder="Address" data-required="true" type="text">
-        <input class="span3" id="shipping-address2" name="shipping-address2" placeholder="Address Continued" data-required="true" type="text">
-        <input class="requiredStuff span3" id="shipping-city" name="shipping-city"  placeholder="City" data-required="true" type="text">
-                 <select id="shipping-state" name="shipping-state"> 
-                    <option value="AL" selected="selected">Alabama</option> 
-                    <option value="AK">Alaska</option> 
-                    <option value="AZ">Arizona</option> 
-                    <option value="AR">Arkansas</option> 
-                    <option value="CA">California</option> 
-                    <option value="CO">Colorado</option> 
-                    <option value="CT">Connecticut</option> 
-                    <option value="DE">Delaware</option> 
-                    <option value="DC">District Of Columbia</option> 
-                    <option value="FL">Florida</option> 
-                    <option value="GA">Georgia</option> 
-                    <option value="HI">Hawaii</option> 
-                    <option value="ID">Idaho</option> 
-                    <option value="IL">Illinois</option> 
-                    <option value="IN">Indiana</option> 
-                    <option value="IA">Iowa</option> 
-                    <option value="KS">Kansas</option> 
-                    <option value="KY">Kentucky</option> 
-                    <option value="LA">Louisiana</option> 
-                    <option value="ME">Maine</option> 
-                    <option value="MD">Maryland</option> 
-                    <option value="MA">Massachusetts</option> 
-                    <option value="MI">Michigan</option> 
-                    <option value="MN">Minnesota</option> 
-                    <option value="MS">Mississippi</option> 
-                    <option value="MO">Missouri</option> 
-                    <option value="MT">Montana</option> 
-                    <option value="NE">Nebraska</option> 
-                    <option value="NV">Nevada</option> 
-                    <option value="NH">New Hampshire</option> 
-                    <option value="NJ">New Jersey</option> 
-                    <option value="NM">New Mexico</option> 
-                    <option value="NY">New York</option> 
-                    <option value="NC">North Carolina</option> 
-                    <option value="ND">North Dakota</option> 
-                    <option value="OH">Ohio</option> 
-                    <option value="OK">Oklahoma</option> 
-                    <option value="OR">Oregon</option> 
-                    <option value="PA">Pennsylvania</option> 
-                    <option value="RI">Rhode Island</option> 
-                    <option value="SC">South Carolina</option> 
-                    <option value="SD">South Dakota</option> 
-                    <option value="TN">Tennessee</option> 
-                    <option value="TX">Texas</option> 
-                    <option value="UT">Utah</option> 
-                    <option value="VT">Vermont</option> 
-                    <option value="VA">Virginia</option> 
-                    <option value="WA">Washington</option> 
-                    <option value="WV">West Virginia</option> 
-                    <option value="WI">Wisconsin</option> 
-                    <option value="WY">Wyoming</option>
-                    </select>
-                     <input class="requiredStuff span3" id="shipping-phone" name="shipping-phone" value="{{ phone }}" placeholder="Your Phone Number" data-required="true" type="text">
-
-                           
-        <input class="requiredStuff span3" id="shipping-zipcode" disabled="disabled" name="shipping-zipcode" value="{{ zipcode }}" placeholder="Zip Code" data-required="true" type="text">
-
-         <input id="packageType" name="packageType" type="hidden" value=<%= packageType %>
-
-
-        <div style="text-align:center">
-            <button id="finalSignupButton" class="btn btn-warning" type="submit">Next Step!</button>
-        </div>
-    </form>
-</div>
-</div>
-</div>
+				<legend>Shipping Details</legend>
+				<input class="requiredStuff span3" id="shipping-address"  name="shipping-address" placeholder="Address" data-required="true" type="text">
+				<input class="span3" id="shipping-address2" name="shipping-address2" placeholder="Address Continued" data-required="true" type="text">
+				<input class="requiredStuff span3" id="shipping-city" name="shipping-city"  placeholder="City" data-required="true" type="text">
+				<select id="shipping-state" name="shipping-state"> 
+					<option value="AL" selected="selected">Alabama</option> 
+					<option value="AK">Alaska</option> 
+					<option value="AZ">Arizona</option> 
+					<option value="AR">Arkansas</option> 
+					<option value="CA">California</option> 
+					<option value="CO">Colorado</option> 
+					<option value="CT">Connecticut</option> 
+					<option value="DE">Delaware</option> 
+					<option value="DC">District Of Columbia</option> 
+					<option value="FL">Florida</option> 
+					<option value="GA">Georgia</option> 
+					<option value="HI">Hawaii</option> 
+					<option value="ID">Idaho</option> 
+					<option value="IL">Illinois</option> 
+					<option value="IN">Indiana</option> 
+					<option value="IA">Iowa</option> 
+					<option value="KS">Kansas</option> 
+					<option value="KY">Kentucky</option> 
+					<option value="LA">Louisiana</option> 
+					<option value="ME">Maine</option> 
+					<option value="MD">Maryland</option> 
+					<option value="MA">Massachusetts</option> 
+					<option value="MI">Michigan</option> 
+					<option value="MN">Minnesota</option> 
+					<option value="MS">Mississippi</option> 
+					<option value="MO">Missouri</option> 
+					<option value="MT">Montana</option> 
+					<option value="NE">Nebraska</option> 
+					<option value="NV">Nevada</option> 
+					<option value="NH">New Hampshire</option> 
+					<option value="NJ">New Jersey</option> 
+					<option value="NM">New Mexico</option> 
+					<option value="NY">New York</option> 
+					<option value="NC">North Carolina</option> 
+					<option value="ND">North Dakota</option> 
+					<option value="OH">Ohio</option> 
+					<option value="OK">Oklahoma</option> 
+					<option value="OR">Oregon</option> 
+					<option value="PA">Pennsylvania</option> 
+					<option value="RI">Rhode Island</option> 
+					<option value="SC">South Carolina</option> 
+					<option value="SD">South Dakota</option> 
+					<option value="TN">Tennessee</option> 
+					<option value="TX">Texas</option> 
+					<option value="UT">Utah</option> 
+					<option value="VT">Vermont</option> 
+					<option value="VA">Virginia</option> 
+					<option value="WA">Washington</option> 
+					<option value="WV">West Virginia</option> 
+					<option value="WI">Wisconsin</option> 
+					<option value="WY">Wyoming</option>
+				</select>
+				<input class="requiredStuff span3" id="shipping-phone" name="shipping-phone" value="{{ phone }}" placeholder="Your Phone Number" data-required="true" type="text">
+				<input class="requiredStuff span3" id="shipping-zipcode" disabled="disabled" name="shipping-zipcode" value="{{ zipcode }}" placeholder="Zip Code" data-required="true" type="text">
+				<input id="packageType" name="packageType" type="hidden" value=<%= packageType %>
+				<div style="text-align:center">
+					<button id="finalSignupButton" class="btn btn-warning" type="submit">Next Step!</button>
+				</div>
+			</form>
+		</div>
+	</div>
 </div>
 {% endblock %}
