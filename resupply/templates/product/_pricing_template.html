@@ -1,0 +1,201 @@
+<div class="row-fluid">
+	<div class="span1"></div>
+	<div class="span10">  
+		<img id="pricingInfoTop" src="static/img/pricing-header.png" alt="Resupply saves you time and money!" align="">
+	</div>
+	<div class="span1"></div>
+	<div class="span2"></div>
+	<div class="span3">
+		<div class="todo mrm">
+			<div class="todo-search pricingLabels">
+				${{pricingMap.basicPrice}}/month *
+			</div>
+			<ul>
+				<li>
+					<div class="todo-icon "></div>
+					<div class="todo-content">
+						<h4 class="todo-name">
+							<img src="static/img/resupply-logo.png" alt="Resupply">  
+						</h4>
+						{{pricingMap.basicLaundryAmt}} loads a month
+					</div>
+				</li>
+
+				<li>
+					<div class="todo-icon "></div>
+					<div class="todo-content">
+						<h4 class="todo-name">
+							<img src="static/img/resupply-logo.png" alt="Resupply">  
+						</h4>
+						{{pricingMap.basicDishwasherAmt}} cycles a month
+					</div>
+				</li>
+
+				<li>
+					<div class="todo-icon "></div>
+					<div class="todo-content">
+						<h4 class="todo-name">
+							<img src="static/img/brand/oralb.png" alt="Oral B">
+						</h4>
+						{{pricingMap.basicToothBrushAmt}} every 3 months
+					</div>
+				</li>
+
+				<li>
+					<div class="todo-icon "></div>
+					<div class="todo-content">
+						<h4 class="todo-name">
+							<img src="static/img/brand/aquafresh.png" alt="Aquafresh">
+						</h4>
+						{{pricingMap.basicToothPasteAmt}} every 6 weeks
+					</div>
+				</li>
+				<li>
+					<div class="todo-icon "></div>
+					<div class="todo-content">
+						<h4 class="todo-name">
+							<img src="static/img/brand/glide.png" alt="Glide Floss">
+						</h4>
+						{{pricingMap.basicFlossAmt}} every 6 weeks
+					</div>
+				</li>
+				<li>
+					<div class="todo-icon "></div>
+					<div class="todo-content">
+						<h4 class="todo-name">
+							<img src="static/img/resupply-logo.png" alt="Resupply">  
+						</h4>
+						{{pricingMap.basicTrashAmt}} a month
+					</div>
+				</li>
+
+				{% if internal %}
+					{% if currentPackage == pricingMap.basicResupplyPackageId %}
+						<form action="/confirmUpgrade" method="POST">
+							<button id="signupBasic" disabled="disabled" type="submit" class="buyButton todo-search  pricingLabels">Current Package</button>
+						</form>
+					{% else %}
+						<form action="/confirmUpgrade" method="POST">
+							<button id="signupBasic" type="submit" class="buyButton todo-search  pricingLabels">Upgrade Now!</button>
+							<input type="hidden" name="packageType" value="{{pricingMap.basicResupplyPackageId}}">
+							<input type="hidden" name="familySize" value="{{pricingMap.familySize}}">
+						</form>
+					{% endif %}
+				{% else %}
+					<form action="step1" method="POST">
+						<button id="signupBasic" type="submit" class="buyButton todo-search  pricingLables">Get This!
+						</button>
+						<input type="hidden" name="packageType" value="{{pricingMap.basicResupplyPackageId}}">
+					</form>
+				{% endif %}
+
+
+			</ul>
+		</div>
+	</div> <!-- /todo list -->
+	<div class=".hidden-phone span2 resupply-ul-list customFont" style="padding-top:70px;width:93px;">
+		<ul>
+			<li> laundry </li>
+			<li> Dishwasher </li>
+			<li> toothbrush </li>
+			<li> toothpaste </li>
+			<li> floss </li>
+			<li> trash bags </li>
+		</ul>
+	</div>
+	<div class="span3">
+		<div class="todo mrm">
+			<div class="todo-search pricingLabels">
+				${{pricingMap.premiumPrice}}/month *
+			</div>
+			<ul>
+				<li>
+					<div class="todo-icon "></div>
+					<div class="todo-content">
+						<h4 class="todo-name">
+							<img src="static/img/brand/tide-large.png" alt="Tide Pods">
+						</h4>
+						{{pricingMap.premiumLaundryAmt}} loads a month
+					</div>
+				</li>
+
+				<li>
+					<div class="todo-icon "></div>
+					<div class="todo-content">
+						<h4 class="todo-name">
+							<img src="static/img/brand/cascade.png" alt="Cascade">
+						</h4>
+						{{pricingMap.premiumDishwasherAmt}} cycles a month
+					</div>
+				</li>
+
+				<li>
+					<div class="todo-icon "></div>
+					<div class="todo-content">
+						<h4 class="todo-name">
+							<img src="static/img/brand/oralb.png" alt="Oral B Electric"> &nbsp; Electric
+						</h4>
+						{{pricingMap.premiumToothBrushAmt}}  every 3 months
+					</div>
+				</li>
+
+				<li>
+					<div class="todo-icon "></div>
+					<div class="todo-content">
+						<h4 class="todo-name">
+							<img src="static/img/brand/senso-small.png" alt="Sensodyne">
+						</h4>
+						{{pricingMap.premiumToothPasteAmt}} every 6 weeks
+					</div>
+				</li>
+				<li>
+					<div class="todo-icon "></div>
+					<div class="todo-content">
+						<h4 class="todo-name">
+							<img src="static/img/brand/glide.png" alt="Glide Floss">
+						</h4>
+						{{pricingMap.premiumFlossAmt}} every 6 weeks
+					</div>
+				</li>
+				<li>
+					<div class="todo-icon"></div>
+					<div class="todo-content">
+						<h4 class="todo-name">
+							<img src="static/img/brand/glad.png" alt="Glad Trash Bags">
+						</h4>
+						{{pricingMap.premiumTrashAmt}} a month
+					</div>
+				</li>
+
+				{% if internal %}
+					{% if currentPackage == pricingMap.premiumResupplyPackageId %}
+						<form action="/confirmUpgrade" method="POST">
+							<button id="signupBasic" disabled="disabled" type="submit" class="buyButton todo-search pricingLabels">Current Package
+							</button>
+						</form>
+					{% else %}
+						<form action="/confirmUpgrade" method="POST">
+							<button id="signupBasic" type="submit" class="buyButton todo-search  pricingLabels">Upgrade<br> Now!
+							</button>
+							<!--  <li id="signupBasic" class="footer_row"><button type="submit" class="sign_up radius3 disabled">Upgrade Now!</button></li> -->
+							<input type="hidden" name="packageType" value="{{pricingMap.premiumResupplyPackageId}}">
+							<input type="hidden" name="familySize" value="{{pricingMap.familySize}}">
+						</form>
+					{% endif %}
+				{% else %}
+					<form action="step1" method="POST">
+						<button id="signupPremium" type="submit" class="buyButton todo-search  pricingLables">Get This!
+						</button>
+						<input type="hidden" name="packageType" value="{{pricingMap.premiumResupplyPackageId}}">
+					</form>
+				{% endif %}
+
+			</ul>
+		</div>
+	</div>
+
+</div>
+
+<div style="text-align:center">
+	* Price indicated does not include sales tax which will be displayed at checkout
+</div>
