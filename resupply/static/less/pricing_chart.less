@@ -1,0 +1,49 @@
+.pricing_chart {
+	margin: 30px auto 0;
+
+	th.c2 { border-right: 1px solid #aab9bd; }
+	th {
+		.cost {
+			width: 240px;
+			padding: 25px 0 10px;
+			background: #222;
+			color: @white;
+		}
+		.currency {
+			font: normal 20px arial;
+			position: relative;
+			top: -20px;
+		}
+		.amount {
+			font-size: 50px;
+		}
+	}
+
+	tbody {
+		td {
+			text-align: center;
+			padding: 0 15px;
+			height: 70px;
+			p {
+				font: normal 12px "helvetica neue", arial;
+			}
+		}
+		td.c1 {
+			text-align: left;
+			background: #37393a;
+			border-bottom: 1px dotted #5f6161;
+			padding: 0 50px 0 20px;
+			font: normal 14px "helvetica neue", arial;
+			color: @white;
+		}
+		td.c2 {
+			background: #eff8f9;
+			border-bottom: 1px dotted #aab9bd;
+			border-right: 1px solid #aab9bd;
+		}
+		td.c3 {
+			background: #dff0f4;
+			border-bottom: 1px dotted #aab9bd;
+		}
+	}
+}

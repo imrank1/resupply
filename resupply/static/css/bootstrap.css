@@ -5442,3 +5442,48 @@ body {
 .navbar .nav > li.nav-login > a:hover {
   background-color: transparent;
 }
+.pricing_chart {
+  margin: 30px auto 0;
+}
+.pricing_chart th.c2 {
+  border-right: 1px solid #aab9bd;
+}
+.pricing_chart th .cost {
+  width: 240px;
+  padding: 25px 0 10px;
+  background: #222;
+  color: #ffffff;
+}
+.pricing_chart th .currency {
+  font: normal 20px arial;
+  position: relative;
+  top: -20px;
+}
+.pricing_chart th .amount {
+  font-size: 50px;
+}
+.pricing_chart tbody td {
+  text-align: center;
+  padding: 0 15px;
+  height: 70px;
+}
+.pricing_chart tbody td p {
+  font: normal 12px "helvetica neue", arial;
+}
+.pricing_chart tbody td.c1 {
+  text-align: left;
+  background: #37393a;
+  border-bottom: 1px dotted #5f6161;
+  padding: 0 50px 0 20px;
+  font: normal 14px "helvetica neue", arial;
+  color: #ffffff;
+}
+.pricing_chart tbody td.c2 {
+  background: #eff8f9;
+  border-bottom: 1px dotted #aab9bd;
+  border-right: 1px solid #aab9bd;
+}
+.pricing_chart tbody td.c3 {
+  background: #dff0f4;
+  border-bottom: 1px dotted #aab9bd;
+}
