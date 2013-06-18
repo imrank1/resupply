@@ -69,7 +69,7 @@
 					</div>
 				</li>
 
-				{% if internal %}
+				{% if user and user.is_authenticated()  %}
 					{% if currentPackage == pricingMap.basicResupplyPackageId %}
 						<form action="/confirmUpgrade" method="POST">
 							<button id="signupBasic" disabled="disabled" type="submit" class="buyButton todo-search  pricingLabels">Current Package</button>
@@ -167,7 +167,7 @@
 					</div>
 				</li>
 
-				{% if internal %}
+				{% if user and user.is_authenticated()  %}
 					{% if currentPackage == pricingMap.premiumResupplyPackageId %}
 						<form action="/confirmUpgrade" method="POST">
 							<button id="signupBasic" disabled="disabled" type="submit" class="buyButton todo-search pricingLabels">Current Package

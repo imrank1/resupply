@@ -247,7 +247,7 @@ def pricing():
         app.logger.info("there is a current user with " + user.currentPackage)
         currentPackage = user.currentPackage.split("-",1)[0]
         pricingMap = pricing_service.getPricingMap(int(pricing_service.getHouseHouldSizeFromPackage(user.currentPackage)))
-        return render_template('product/pricing.html',currentPackage=currentPackage,user=g.user,pricingMap=pricingMap, internal=True)
+        return render_template('product/pricing.html',currentPackage=currentPackage,user=g.user,pricingMap=pricingMap)
     else:
         numFamily = session.get('houseHoldSize')
         if(numFamily==None):
@@ -478,7 +478,7 @@ def processIntroUpgrade():
     numFamily = request.form['numFamily']
     currentPackage = user.currentPackage.split("-",1)[0]
     pricingMap = pricing_service.getPricingMap(int(numFamily))
-    return render_template('product/pricing.html',currentPackage=currentPackage,user=g.user,pricingMap=pricingMap, internal=True)
+    return render_template('product/pricing.html',currentPackage=currentPackage,user=g.user,pricingMap=pricingMap)
 
 
 
