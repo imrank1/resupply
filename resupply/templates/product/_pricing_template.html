@@ -96,9 +96,7 @@
 			<td class="c2">
 				{% if user and user.is_authenticated()  %}
 					{% if currentPackage == pricingMap.basicResupplyPackageId %}
-						<form action="/confirmUpgrade" method="POST">
-							<button id="signupBasic" disabled="disabled" type="submit" class="btn btn-primary">Current Package</button>
-						</form>
+						<button id="signupBasic" disabled="disabled" type="submit" class="btn">Current Package</button>
 					{% else %}
 						<form action="/confirmUpgrade" method="POST">
 							<button id="signupBasic" type="submit" class="btn btn-primary">Upgrade Now!</button>
@@ -117,10 +115,7 @@
 			<td class="c3">
 				{% if user and user.is_authenticated()  %}
 					{% if currentPackage == pricingMap.premiumResupplyPackageId %}
-						<form action="/confirmUpgrade" method="POST">
-							<button id="signupBasic" disabled="disabled" type="submit" class="btn btn-primary">Current Package
-							</button>
-						</form>
+						<button id="signupBasic" disabled="disabled" type="submit" class="btn">Current Package</button>
 					{% else %}
 						<form action="/confirmUpgrade" method="POST">
 							<button id="signupBasic" type="submit" class="btn btn-primary">Upgrade<br> Now!</button>
