@@ -1,0 +1,20 @@
+.navbar .nav > li {
+	font-size: .9em;
+	text-transform: uppercase;
+}
+.navbar .nav > li.nav-login {
+	background: @primary;
+	margin-left: 20px;
+	font-size: 1.3em;
+
+	&:hover {
+		background: @white;
+		> a {
+			color: @grayDark;
+			text-shadow: none;
+		}
+	}
+	> a:hover {
+		background-color: transparent;
+	}
+}

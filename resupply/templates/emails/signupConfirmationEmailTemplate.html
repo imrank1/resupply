@@ -1,0 +1,23 @@
+{% extends "emails/baseEmailTemplate.html" %}
+      {% block content%}
+
+                                                                <center>Thank you for signing up!</center>
+                                                                
+                                                                 You've signed up for the <strong>{{ package }}</strong> package at ${{ pricePerMonth }} per month. 
+                                                                 We'll send out an email every time we ship out your scheduled delivery. You'll receive your first one shortly describing your first shipment.
+                                                                <br />
+                                                                <br />
+
+                                                                We will ship your goods to the following address : <br><bold>{{shippingAddress}}</bold>.
+                                                                <br></br>
+                                                            </br>
+                                                                <br>
+                                                                At any time if you want to change your account type or even cancel you can login to  <a href="https://https://resupply-staging.heroku.com/account" target="_blank">account</a>, to make any changes. 
+                                                                If you have any questions please email us at support@resupply.com
+
+                                                                <br>Thank you!</br>	
+                                                            </br>
+
+                                                          {% endblock %}
+
+                                                     

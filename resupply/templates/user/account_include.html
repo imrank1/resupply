@@ -1,0 +1,125 @@
+
+<div id="updateShippingSection">
+	<div class="container">
+
+		<div class="well well-large ui-state-default">
+			<h4> Share your purchase and get a discount!</h4>
+
+			<div class="fb-like" data-href="https://www.facebook.com/getresupply" data-send="true" data-ref="rspllySrc-{{refferalCode}}" data-width="450" data-show-faces="true" data-font="verdana"></div>
+
+			<div>
+				<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://bit.ly/{{bitlyLink}}" data-text="Just Saved a Bunch of money on common house items through Resupply!" data-hashtags="resupply">Tweet and Get a Discount on your plan!</a>
+				<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+			</div>
+		</div>
+
+
+
+		<div class="well well-large ui-state-default">
+			<label>You're currently signed up for the {{currentPackage}} package for household size of {{numFamily}}.<a href="/infoAboutYouUpgrade"> Want to to upgrade? </a></label>
+
+			<form action="/updateShippingAddress" method="POST" class="form-horizontal">
+				<div class="alert alert-success" id="successShippingAddressChange" class="alert alert-error" style="display:none;"> Shipping address updated!
+				</div>
+				<div class="alert alert-error" id="updateBillingFailure" class="alert alert-error" style="display:none;">Sorry we could not update your shipping address. Please contact support. 
+				</div>
+				<fieldset>
+
+					<!-- Form Name -->
+					<legend>Account</legend>
+					<label>Shipping Address</label>
+
+					<!-- Text input-->
+					<div class="control-group">
+						<label class="control-label">Address</label>
+						<div class="controls">
+							<input id="shippingAddress" name="shippingAddress" type="text" placeholder="placeholder" class="input-xlarge" value="{{ address }}">
+
+						</div>
+					</div>
+
+					<!-- Text input-->
+					<div class="control-group">
+						<label class="control-label">Apt/Suite</label>
+						<div class="controls">
+							<input id="shippingAddress2" name="shippingAddress2" type="text" placeholder="placeholder" class="input-xlarge"value="{{ address2 }}">
+
+						</div>
+					</div>
+
+					<!-- Text input-->
+					<div class="control-group">
+						<label class="control-label">Zip Code</label>
+						<div class="controls">
+							<input id="shippingZip" name="shippingZip" type="text" placeholder="placeholder" class="input-xlarge" value="{{ zipCode }}">
+
+						</div>
+					</div>
+
+					<!-- Button -->
+					<div class="control-group">
+						<label class="control-label"></label>
+						<div class="controls">
+							<button id="updateAddress" name="updateAddress" class="btn btn-primary">Update Shipping Address</button>
+						</div>
+					</div>
+
+				</fieldset>
+			</form>
+			<legend>Password</legend>
+			<form class="form-horizontal">
+				<div class="control-group">
+					<label class="control-label"></label>
+					<div class="controls">
+						<button id="passwordChangeRequestButton" name="passwordChangeRequestButton" class="btn btn-primary">Request Password Change</button>
+						<div id="passwordChangeEmailSent" class="alert alert-success" id="successCancel"  style="display:none;">We've sent an email with a link to reset your password. Please check your email shortly.  
+						</div>
+					</div>
+				</div>
+			</form>
+			<form class="form-horizontal">
+				<fieldset>
+
+					<legend>Cancellation</legend>
+
+					<div class="control-group">
+						<label class="control-label"></label>
+						<div class="controls">
+							<button id="cancelAccountButton" name="cancelAccountButton" class="btn btn-primary">Close account</button>
+						</div>
+						<div id="cancelAccountConfirm" style="display:none;text-align:center;">
+							By cancelling your account you will miss out on some great savings.
+
+							<div >
+								<button id="confirmCancelButton" class="btn btn-danger">Yes Cancel My Account</a>
+							</div>
+						</div>
+						<div class="alert alert-success" id="successCancel"  style="display:none;">We successfully canclelled your account. You'll receive a confirmaiton email shortly. You've been logged out and will be redirected in to the home page in 10 seconds.   
+						</div>
+						<div class="alert alert-error" id="failureCancel"  style="display:none;">We were not able to cancel your account. Sorry for the inconveniance. Please contact support at support@resupply.com  
+						</div>
+						<div id="passwordChangeConfirm" class="modal hide fade">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+								<h3>Request Password Change</h3>
+							</div>
+							<div class="modal-body">
+								<p>Click the confirm button and you'll receive an email link to change your password.  </p>
+							</div>
+							<div class="alert alert-success" id="successCancel"  style="display:none;">We've sent an email with a link to reset your password. Please check your email shortly.   
+							</div>
+							<div class="alert alert-error" id="failureCancel"  style="display:none;">We were not able to process your request to change your password. Please contact support at support@resupply.com  
+							</div>
+							<div class="modal-footer">
+								<button id="confirmPasswordResetButton" class="btn btn-danger">Confirm</a>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+			</fieldset>
+		</form>
+
+	</div>
+</div>

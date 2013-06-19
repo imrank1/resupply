@@ -1,0 +1,140 @@
+{% extends "layouts/base.html" %}
+
+
+
+{% block content%}
+
+<!-- Rotator Cuff -->
+<link href='http://fonts.googleapis.com/css?family=Bree+Serif|Open+Sans+Condensed:700,300,300italic' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" type="text/css" href="static/css/demo-r.css" />
+<link rel="stylesheet" type="text/css" href="static/css/styler-r.css" />
+<script src="static/js/ext/modernizr.custom.79849.js"></script>
+<style>
+	.no-cssanimations .rw-wrapper .rw-sentence span:first-child{
+		opacity: 1;
+	}
+</style>
+<!--[if lt IE 9]> 
+<style>
+	.rw-wrapper{ display: none; }
+	.rw-sentence-IE{ display: block;  }
+</style>
+<![endif]-->
+<!-- END Rotator Cuff -->
+
+
+<!--<link href="static/css/resupply.css" rel="stylesheet">-->
+<script data-main="/static/js/home" src="/static/js/ext/require.js"></script>
+
+
+
+<div class="resupply-hero hero-unit ">
+	<div class="container">
+		<div class="row">
+			<div class="span8 resupply-callout">
+				<h3>You spend too much time buying home supplies.</h3>
+				<h2>Get it on time without a thought.</h2>
+				<p>
+					We customize our packs for you, Pack them with the <strong>top brands</strong> in America,
+					and deliver them to your door. So you get those 36 hours back and save money.<br></br>
+					Get Resupplied. Never <strong>Run</strong> Out.
+				</p>
+			</div>
+			<div class="span4">
+				<img src="static/img/explain_shadow.png" alt="" align="right">
+			</div>
+		</div>
+		<div class="row">
+			<div class="offset4">
+				<a href="/infoAboutYou" class="btn btn-large btn-white">Get Started In Seconds!</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="container">
+	<div class="row">
+		<section class="rw-wrapper">
+		<h2 class="rw-sentence">
+			<span>With all the extra time you could</span>	
+			<div class="rw-words rw-words-1">
+				<span>find the perfect wine pairing for popcorn</span>
+				<span>learn to surf</span>
+				<span>write a screenplay</span>
+				<span>cook sous vide</span>
+				<span>drive to Mexico</span>
+				<span>sleep more</span>
+			</div>
+		</h2>
+		</section>
+		<h2 class="rw-sentence-IE">With all the extra time you could learn to ride a motorcycle</h2>
+		<!-- Rotator Cuff --></div>
+
+
+	<div class="well" align="center">
+		<div class="span2"><h6>Our Brands</h6></div>
+		<ul style="width: 100%; list-style-type: none;">
+			<li style="display: inline; margin: 1.5%;"><img src="static/img/brand/tide-large.png"></li>
+			<li style="display: inline; margin: 1.5%;"><img src="static/img/brand/senso-small.png"></li>
+			<li style="display: inline; margin: 1.5%;"><img src="static/img/brand/glide.png"></li>
+			<li style="display: inline; margin: 1.5%;"><img src="static/img/brand/cascade.png"></li>
+			<li style="display: inline; margin: 1.5%;"><img src="static/img/brand/glad.png"></li>
+			<li style="display: inline; margin: 1.5%;"><img src="static/img/bootmetrologo2.png"></li>
+			<li style="display: inline; margin: 1.5%;"><img src="static/img/brand/oralb.png"></li>
+		</ul>
+	</div>
+	<div class="row-fluid">
+		<div class="span4">
+			<div>
+				<h2>
+					Super Smart
+				</h2>
+				<p>
+				At Resupply we bring a smart solution to lifes inconveniences.
+				We studied how much each person uses consumer products
+				like Toothpaste, Dishwasher Soap and Laundry Detergent as well as
+				what dentists recommend when it comes to toothbrushes and floss.
+				<br>Resupply uses this data to send what you need as you need it.
+				The best part: You don't even have to tell us when you run out!
+
+				<!--At Resupply we realized that many Americans had no idea how much they 
+				were actually spending on home products. How many loads of laundry they 
+				were doing, how many dish washer cycles were being run. We decided to 
+				figure it out and build a company dedicated to giving you smart solutions 
+				to lifes inconveniences.-->
+				</p>
+			</div>
+
+		</div>
+		<div class="span4">
+			<div>
+				<h2>
+					Exceedingly Simple
+				</h2>
+				<p>
+				We make it simple to outsource the boring stuff about life like buying
+				detergent and remembering to change your toothbrush. We're about simplicity
+				and using data to improve your life. <br>To get customized you just answer
+				3 questions: Gender, Zipcode, and number of people you live with.
+				We take care of the rest and you get 36 hours of your life back yearly!
+				</p>
+			</div>
+		</div>
+		<div class="span4">
+			<div>
+				<h2>
+					Top Notch Quality
+				</h2>
+				<p>
+				Quality is our top priority. We sell the nations top brands and make our own 
+				brand of staples. Our members choose the awesome products delivered to their 
+				door without compromising on quality.<br>Even the nations top brands are at a price point
+				40% cheaper than your local grocery store and more than 15% cheaper than online
+				retailers.
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

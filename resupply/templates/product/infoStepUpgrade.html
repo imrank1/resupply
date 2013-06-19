@@ -1,0 +1,40 @@
+{% extends "layouts/base.html" %}
+
+
+{% block content%}
+
+
+<script>
+	window.packageType = "{{currentPackage}}"
+</script>
+
+
+<div id="infoContainer" class="container hero-unit checkout-hero-unit">
+
+	<div id="packageHeader" class="offset2 span7 well">
+		<div class="modal-body resupply-modal-body">
+			<p>
+				Interested in  upgrading?, You currently have the {{ currentPackage }} package for a household size of {{ houseSize }} people.<br> Tell us your household size to get a better package!
+			</p>
+			<form action="/introUpgrade" method="POST" class="form-horizontal" > 
+				<div class="control-group">
+					<label class="control-label" for="inputEmail" style="margin-left:64px;">Size of your household:</label>
+					<div class="controls">
+						<select id="numFamily" style="text-align:center;width:80px; margin-right:195px;" name="numFamily">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4+</option>
+						</select>    
+					</div>
+				</div>
+				<div class="alert alert-error" id="cantShipThere" style="display:none;">Sorry we currently do not ship to that area of the country! <br>Please subscribe below to get the latest updates! 
+				</div>
+				<input type="submit" value="Show me the upgrade prices!" class="btn " name="ontoPricingUpgrade" id="ontoPricingUpgrade">
+			</form>
+		</div>
+	</div>
+</div>
+
+
+{% endblock %}
