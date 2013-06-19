@@ -14,7 +14,6 @@ app = Flask(__name__)
 
 env = os.environ.get('FLASK_ENV', 'development')
 
-
 configuration = None
 if env =='development':
 	app.config["SECRET_KEY"] = config.dev['secret_key']
@@ -44,6 +43,7 @@ elif env =='production':
 
 app.config["bitlyAccessToken"] = "b9aa357f2106667319586b4d47b30441553e4098"
 sslify = SSLify(app)
+
 
 db = MongoEngine(app)
 

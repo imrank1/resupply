@@ -1,0 +1,31 @@
+{% extends "layouts/base.html" %}
+
+
+{% block content%}
+
+<script> window.packageType = "{{packageType}}" </script>
+
+<div class="container">
+
+	<h3>Upgrade Confirmation</h3>
+
+	<div id="packageHeader" class="container hero-unit checkout-hero-unit offset4 span6">
+		<p>Your upgrading to the {{ upgradePackageDisplay }} package for a household size of {{ familySize }} at ${{upgradePrice}} per month!</p>
+
+		<form action="/processUpgrade" method="POST">
+			<button type="submit" class="buyButton sign_up">Do it!</button>
+			<input type="hidden" name="packageType" value="{{ upgradePackage }}" >
+		</form>
+	</div>
+
+	<div id="signupSuccess" class="offset4 span6 well alert alert-success" style="text-align:center; display:none">
+		Awesome you've upgraded up! Look for an email for details on your first delivery with your're new package!
+	</div>
+
+	<div id="signupFailure" class="offset4 span6 well alert alert-error" style="text-align:center; display:none">
+		Hmm looks like somthign went wrong with your submission. Please try again or contact support at support at resupp.ly
+	</div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,138 @@
+<table class="pricing_chart" cellpadding="0" cellspacing="0" border="0">
+	<thead>
+		<tr>
+			<th>&nbsp;</th>
+			<th class="c2">
+				<div class="cost">
+					<span class="currency">$</span>
+					<span class="amount">{{pricingMap.basicPrice}}</span>
+					<p>Per month</p>
+				</div>
+			</th>
+			<th class="c3">
+				<div class="cost">
+					<span class="currency">$</span>
+					<span class="amount">{{pricingMap.premiumPrice}}</span>
+					<p>Per month</p>
+				</div>
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td class="c1">Laundry</td>
+			<td class="c2">
+				<img src="static/img/resupply-logo.png" alt="Resupply">
+				<p>{{pricingMap.basicLaundryAmt}} loads a month</p>
+			</td>
+			<td class="c3">
+				<img src="static/img/brand/tide-large.png" alt="Tide Pods">
+				<p>{{pricingMap.premiumLaundryAmt}} loads a month</p>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="c1">Dishwasher</td>
+			<td class="c2">
+				<img src="static/img/resupply-logo.png" alt="Resupply">
+				<p>{{pricingMap.basicDishwasherAmt}} cycles a month</p>
+			</td>
+			<td class="c3">
+				<img src="static/img/brand/cascade.png" alt="Cascade">
+				<p>{{pricingMap.premiumDishwasherAmt}} cycles a month</p>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="c1">Toothbrush</td>
+			<td class="c2">
+				<img src="static/img/brand/oralb.png" alt="Oral B">
+				<p>{{pricingMap.basicToothBrushAmt}} every 3 months</p>
+			</td>
+			<td class="c3">
+				<img src="static/img/brand/oralb.png" alt="Oral B Electric"> &nbsp; Electric
+				<p>{{pricingMap.premiumToothBrushAmt}}  every 3 months</p>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="c1">Toothpaste</td>
+			<td class="c2">
+				<img src="static/img/brand/aquafresh.png" alt="Aquafresh">
+				<p>{{pricingMap.basicToothPasteAmt}} every 6 weeks</p>
+			</td>
+			<td class="c3">
+				<img src="static/img/brand/senso-small.png" alt="Sensodyne">
+				<p>{{pricingMap.premiumToothPasteAmt}} every 6 weeks</p>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="c1">Floss</td>
+			<td class="c2">
+				<img src="static/img/brand/glide.png" alt="Glide Floss">
+				<p>{{pricingMap.basicFlossAmt}} every 6 weeks</p>
+			</td>
+			<td class="c3">
+				<img src="static/img/brand/glide.png" alt="Glide Floss">
+				<p>{{pricingMap.premiumFlossAmt}} every 6 weeks</p>
+			</td>
+		</tr>
+
+		<tr>
+			<td class="c1">Trash Bags</td>
+			<td class="c2">
+				<img src="static/img/resupply-logo.png" alt="Resupply">  
+				<p>{{pricingMap.basicTrashAmt}} a month</p>
+			</td>
+			<td class="c3">
+				<img src="static/img/brand/glad.png" alt="Glad Trash Bags">
+				<p>{{pricingMap.premiumTrashAmt}} a month</p>
+			</td>
+		</tr>
+
+		<tr class="action">
+			<td></td>
+			<td class="c2">
+				{% if user and user.is_authenticated()  %}
+					{% if currentPackage == pricingMap.basicResupplyPackageId %}
+						<button id="signupBasic" disabled="disabled" type="submit" class="btn">Current Package</button>
+					{% else %}
+						<form action="/confirmUpgrade" method="POST">
+							<button id="signupBasic" type="submit" class="btn btn-primary">Upgrade Now!</button>
+							<input type="hidden" name="packageType" value="{{pricingMap.basicResupplyPackageId}}">
+							<input type="hidden" name="familySize" value="{{pricingMap.familySize}}">
+						</form>
+					{% endif %}
+				{% else %}
+					<form action="step1" method="POST">
+						<button id="signupBasic" type="submit" class="btn btn-primary">Get This!</button>
+						<input type="hidden" name="packageType" value="{{pricingMap.basicResupplyPackageId}}">
+					</form>
+				{% endif %}
+
+			</td>
+			<td class="c3">
+				{% if user and user.is_authenticated()  %}
+					{% if currentPackage == pricingMap.premiumResupplyPackageId %}
+						<button id="signupBasic" disabled="disabled" type="submit" class="btn">Current Package</button>
+					{% else %}
+						<form action="/confirmUpgrade" method="POST">
+							<button id="signupBasic" type="submit" class="btn btn-primary">Upgrade<br> Now!</button>
+							<input type="hidden" name="packageType" value="{{pricingMap.premiumResupplyPackageId}}">
+							<input type="hidden" name="familySize" value="{{pricingMap.familySize}}">
+						</form>
+					{% endif %}
+				{% else %}
+					<form action="step1" method="POST">
+						<button id="signupPremium" type="submit" class="btn btn-primary">Get This!</button>
+						<input type="hidden" name="packageType" value="{{pricingMap.premiumResupplyPackageId}}">
+					</form>
+				{% endif %}
+			</td>
+		</tr>
+	</tbody>
+	</tbody>
+</table>
+
+<!--<div>* Price indicated does not include sales tax which will be displayed at checkout</div>-->

@@ -8,7 +8,7 @@ dev = {
   'mongodb_port': 10038,
   'mongodb_db':'resupply-dev-fh',
   'secret_key':'cyrus',
-  'passwordResetPrefix':'http://localhost:5000/passwordChange/',
+  'passwordResetPrefix':'http://localhost:5000/changePassword',
   'checkoutRedirect':'https://resupply-production.heroku.com/finalStep'
 }
 
@@ -21,6 +21,6 @@ production = {
 	'mongodb_host': 'alex.mongohq.com',
 	'mongodb_port': 10046,
 	'secret_key': 'p0c0n0$CyrusImranOnlySirah',
-	'passwordResetPrefix':'http://resupply-production.heroku.com/passwordChange/',
+	'passwordResetPrefix':'http://resupply-production.heroku.com/changePassword',
   'checkoutRedirect':'localhost:500/finalStep'
 }

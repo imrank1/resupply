@@ -1,0 +1,19 @@
+{% extends "emails/baseEmailTemplate.html" %}
+{% block content%}
+<center><h1>You've upgraded to {{ newPackage }}!</h1></center>
+
+You've upgraded from the {{oldPackage}} package to <strong>{{ newPackage }}</strong> package at ${{ pricePerMonth }} per month. You're scheduled to receive (the first item to be delivered ) on your first delivery.
+We'll send out an email every time we ship out your scheduled delivery.  
+<br />
+<br />
+<br></br>
+</br>
+<br>
+At any time if you want to change your account type or even cancel you can login to  <a href="http://www.geresupply.com/account" target="_blank">account</a>, to make any changes. 
+If you have any questions please email us at support@resupply.com
+
+<br>Thank you!</br>	
+</br>
+
+
+{% endblock %}
