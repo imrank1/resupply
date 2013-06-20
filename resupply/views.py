@@ -196,16 +196,6 @@ def charge():
     return redirect('account')
 
 
-@app.route("/testConfirmationEmail")
-def confirmEmailTest():
-    emailHtml = render_template('emails/signupConfirmationEmailTemplate.html',package="Premium",pricePerMonth=2000/100,
-                                shippingAddress="11945 Little Seneca Parkway, Clarksburg , MD, 20871")
-    email_service.send_mail('imrank1@gmail.com', 'imrank1@gmail.com',
-              'Confirmation of subscription to Resupp.ly', 'html',
-              emailHtml)
-    return render_template("index.html")
-
-
 @app.route("/home")
 def home():
     user = current_user
