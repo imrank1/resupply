@@ -26,9 +26,11 @@ body {
 	-webkit-transition: all .3s;
 	-moz-transition: all .3s;
 	transition: all .3s;
+	&:hover { color: lighten(@primary, 10%); }
 }
 .logo-light {
 	color: @white;
+	&:hover { color: darken(@white, 10%); }
 }
 .logo-small {
 	font-size: 18px;

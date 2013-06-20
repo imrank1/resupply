@@ -5348,8 +5348,14 @@ body {
   -moz-transition: all .3s;
   transition: all .3s;
 }
+.logo:hover {
+  color: #ff8961;
+}
 .logo-light {
   color: #ffffff;
+}
+.logo-light:hover {
+  color: #e6e6e6;
 }
 .logo-small {
   font-size: 18px;
