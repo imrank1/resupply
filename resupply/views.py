@@ -260,19 +260,21 @@ def pricing():
 
 @app.route('/pricingChart')
 def pricingChart():
-	currentPackage = None
+	user = current_user
+	currentPackage = ''
 	refferalCode = session.get('refferalCode')
-	zipcode = session.get('targetZipCode')
-	numFamily = session.get('houseHoldSize')
-	if(current_user.is_anonymous()==False):
+	zipcode = session.get('targetZipCode') or 0
+	household = session.get('houseHoldSize') or 0
+	if(user.is_anonymous()==False):
+		household = int(pricing_service.getHouseHouldSizeFromPackage(user.currentPackage))
 		currentPackage = current_user.currentPackage.split("-",1)[0]
 
 	return render_template(
 		'product/pricing_chart.html',
-		user=current_user,
-		zipcode=zipcode or 0,
-		household=numFamily or 0,
-		currentPackage=currentPackage or '',
+		user=user,
+		zipcode=zipcode,
+		household=household,
+		currentPackage=currentPackage,
 		pricingData=pricing_service.getFullPricingData()
 	)
 
