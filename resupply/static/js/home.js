@@ -10,7 +10,7 @@ require.config({
 		}
 	},
 	paths: {
-		jquery: 'ext/jquery',
+		jquery: '//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min',
 		underscore: 'ext/underscore',
 		backbone: 'ext/backbone',
 		templates: '../templates'
