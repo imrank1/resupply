@@ -258,6 +258,25 @@ def pricing():
 
     return render_template('product/pricing.html',showGetStarted=showGetStarted)
 
+@app.route('/pricingChart')
+def pricingChart():
+	currentPackage = None
+	refferalCode = session.get('refferalCode')
+	zipcode = session.get('targetZipCode')
+	numFamily = session.get('houseHoldSize')
+	if(current_user.is_anonymous()==False):
+		currentPackage = current_user.currentPackage.split("-",1)[0]
+
+	return render_template(
+		'product/pricing_chart.html',
+		zipcode=zipcode,
+		household=numFamily,
+		currentPackage=currentPackage,
+		pricingData=pricing_service.getFullPricingData()
+	)
+
+
+
 
 @app.route("/pricing2")
 def pricing2():
