@@ -270,9 +270,9 @@ def pricingChart():
 	return render_template(
 		'product/pricing_chart.html',
 		user=current_user,
-		zipcode=zipcode,
-		household=numFamily,
-		currentPackage=currentPackage,
+		zipcode=zipcode or 0,
+		household=numFamily or 0,
+		currentPackage=currentPackage or '',
 		pricingData=pricing_service.getFullPricingData()
 	)
 
