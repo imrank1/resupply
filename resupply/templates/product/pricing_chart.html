@@ -1,0 +1,22 @@
+{% extends "layouts/base.html" %}
+
+
+{% block content%}
+<div class="container resupply-pricing-container">
+</div>
+{% endblock %}
+
+
+{% block body_bottom %}
+	<script>
+		window.resupply = {
+			zipcode: {{zipcode}},
+			household: {{household}},
+			currentPackage: '{{currentPackage}}',
+		};
+		window.pricingData = {{pricingData|tojson|safe}};</script>
+	</script>
+    <script src="https://checkout.stripe.com/v2/checkout.js"></script>
+	<script data-main="/static/js/views/pricing/pricingView" src="/static/js/ext/require.js"></script>
+{% endblock %}
+
