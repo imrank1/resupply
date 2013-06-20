@@ -20,8 +20,10 @@ require.config({
 define(['backbone', 'models/household/HouseholdList'], function(Backbone, HouseholdList) {
 	var PricingView = Backbone.View.extend({
 		initialize: function() {
-			this.collection = new HouseholdList(window.pricingData);
-			console.log(this.collection.toJSON());
+			this.model = new Backbone.Model(window.resupply);
+			this.householdList = new HouseholdList(window.pricingData);
+			console.log(this.model.toJSON());
+			console.log(this.householdList.toJSON());
 		}
 	});
 	return new PricingView();

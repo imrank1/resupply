@@ -269,6 +269,7 @@ def pricingChart():
 
 	return render_template(
 		'product/pricing_chart.html',
+		user=current_user,
 		zipcode=zipcode,
 		household=numFamily,
 		currentPackage=currentPackage,

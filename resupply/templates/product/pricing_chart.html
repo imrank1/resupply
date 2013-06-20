@@ -10,8 +10,8 @@
 {% block body_bottom %}
 	<script>
 		window.resupply = {
-			zipcode: '{{zipcode}}',
-			household: '{{household}}',
+			zipcode: {{zipcode}},
+			household: {{household}},
 			currentPackage: '{{currentPackage}}',
 		};
 		window.pricingData = {{pricingData|tojson|safe}};</script>
