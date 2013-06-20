@@ -5336,13 +5336,39 @@ body {
 }
 .footer {
   margin-top: 20px;
-  padding: 20px 0;
+  padding: 12px 0;
+  line-height: 33px;
   background: #eeeeee;
+}
+.footer-social {
+  float: left;
+}
+.footer-social .social-icon {
+  width: 33px;
+  height: 33px;
+  float: left;
+  overflow: hidden;
+  text-indent: -200px;
+  margin-right: 10px;
+}
+.footer-social .social-twitter {
+  background: transparent url('../images/icons/twitter.png') 0 0;
+}
+.footer-social .social-facebook {
+  background: transparent url('../images/icons/facebook.png') 0 0;
+}
+.footer-social .logo {
+  float: left;
+  line-height: 33px;
+}
+.footer-copyright {
+  float: right;
+  color: #999999;
 }
 .logo {
   color: #ff632e;
   font: normal 24px/24px Arvo;
-  text-shadow: 0 2px 0 #111;
+  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.6);
   -webkit-mask-image: -webkit-gradient(linear, left top, left bottombottom, from(#000000), color-stop(50%, rgba(0, 0, 0, 0)), to(#000000));
   -webkit-transition: all .3s;
   -moz-transition: all .3s;
@@ -5352,20 +5378,20 @@ body {
   color: #ff8961;
 }
 .logo-light {
-  color: #ffffff;
+  color: #999999;
 }
 .logo-light:hover {
-  color: #e6e6e6;
+  color: #808080;
 }
 .logo-small {
   font-size: 18px;
   line-height: 18px;
-  text-shadow: 0 2px 0 #111;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.6);
 }
 .logo-large {
   font-size: 36px;
   line-height: 36px;
-  text-shadow: 0 3px 0 #111;
+  text-shadow: 0 3px 0 rgba(0, 0, 0, 0.6);
 }
 .resupply-hero {
   background-color: #e74c3c;
