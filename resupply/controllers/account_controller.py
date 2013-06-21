@@ -22,7 +22,7 @@ def account():
 							   address=user.address, address2=user.address2, city=user.city,refferalCode=refferal.refferalCode,user=g.user,bitlyLink=bitlyLink)
 
 
-@app.route("/process-login")
+@app.route("/process-login",methods=['POST'])
 def processLogin():
 	email = request.form['email']
 	password = request.form['password']
@@ -247,3 +247,23 @@ def forgotPasswordSubmit( ):
 		email_service.send_mail('imrank1@gmail.com', 'support@resupp.ly','Resupply Password Reset', 'html',email)
 
 		return render_template ("user/forgotPassword.html",userNotFound=False,emailSent=True)
+
+
+
+
+
+@app.route("/signin")
+def signin():
+    return render_template('user/login.html',user=None)
+
+
+@app.route("/forgotPassword")
+def forgotPassword():
+    return render_template('user/forgotPassword.html',user=None)
+
+
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    return redirect("/")

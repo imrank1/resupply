@@ -4,11 +4,6 @@ from flask.ext.mongoengine import MongoEngine
 from resupply import *
 from resupply import config
 from resupply.models import *
-from resupply.services import user_service
-from resupply.services import pricing_service
-from resupply.services import password_change_service 
-from resupply.services import refferal_service 
-from resupply.services import tax_service 
 from resupply.services import email_service
 from flask.ext.login import LoginManager, UserMixin, \
     login_required, login_user, logout_user, current_user
@@ -50,7 +45,7 @@ def add_header(response):
     return response
 
 
-
+### IS this even used???###
 @app.route("/home")
 def home():
     user = current_user
@@ -65,26 +60,6 @@ def home():
 def load_user(userid):
     return User.objects.get(id=userid)
 
-
-
-@app.route("/signin")
-def signin():
-    return render_template('user/login.html',user=None)
-
-
-
-
-@app.route("/forgotPassword")
-def forgotPassword():
-    return render_template('user/forgotPassword.html',user=None)
-
-
-
-@app.route("/logout")
-@login_required
-def logout():
-    logout_user()
-    return redirect("/")
 
 
 @app.route("/testemail",methods=["GEt"])
