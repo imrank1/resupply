@@ -54,4 +54,6 @@ login_manager.login_view = "login"
 
 
 import resupply.views
-import resupply.controllers.homeController
+from resupply.controllers.account_view import *
+from resupply.controllers.signup_view import * 
+from resupply.controllers.static_view import * 
