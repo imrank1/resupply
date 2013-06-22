@@ -53,7 +53,6 @@ define(['jquery','underscore','backbone'], function($,_,Backbone) {
             cache: false,
             statusCode : { 
                 200: function(){
-                    debugger;
                     var name = $('#name').val();
                     var e = $('#email').val();
                     var password = $('#password').val();
