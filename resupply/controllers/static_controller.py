@@ -22,6 +22,9 @@ def root():
 def index(self):
 	return redirect("/")
 
+@app.route("/contact")
+def contact():
+    return render_template('public/contact.html')
 
 @app.route("/about")
 def about():

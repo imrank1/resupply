@@ -5338,7 +5338,7 @@ body {
   margin-top: 20px;
   padding: 12px 0;
   line-height: 33px;
-  background: #eeeeee;
+  border-top: 1px solid #eeeeee;
 }
 .footer a {
   color: #b3b3b3;
@@ -5395,6 +5395,9 @@ body {
   font-size: 36px;
   line-height: 36px;
   text-shadow: 0 3px 0 rgba(0, 0, 0, 0.6);
+}
+.contact-info {
+  list-style-type: none;
 }
 .resupply-hero {
   background-color: #e74c3c;

@@ -1,0 +1,33 @@
+{% extends "layouts/base.html" %}
+
+{% block content%}
+<div class="container">
+
+    <h2>Contact</h2>
+    <div class="row">
+        <div class="span8">
+            <form>
+                <div class="controls controls-row">
+                    <input id="name" name="name" type="text" class="span4" placeholder="Name">
+                    <input id="email" name="email" type="email" class="span4" placeholder="Email address">
+                </div>
+                <div class="controls">
+                    <textarea id="message" name="message" class="span8" placeholder="Your Message" rows="10"></textarea>
+                </div>
+
+                <div class="controls">
+                    <button id="contact-submit" type="submit" class="btn btn-primary input-medium pull-right">Send</button>
+                </div>
+            </form>
+        </div>
+        <div class="span4">
+            <ul class="contact-info">
+                <li>Box 32121, Calvert Station</li>
+                <li>Washington, DC 20007</li>
+                <li>Phone: (202) 630-7865</li>
+                <li>Email: support[at]resupp.ly</li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
