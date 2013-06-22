@@ -5396,6 +5396,59 @@ body {
   line-height: 36px;
   text-shadow: 0 3px 0 rgba(0, 0, 0, 0.6);
 }
+.static-info li {
+  color: #000000;
+  font-size: 11pt;
+  font-family: "Calibri";
+}
+.static-info p {
+  color: #000000;
+  font-size: 11pt;
+  margin: 0 0 10px;
+  font-family: "Calibri";
+}
+.static-info h1,
+.static-info h2,
+.static-info h3,
+.static-info h4,
+.static-info h5,
+.static-info h6 {
+  line-height: 1.15;
+  text-align: left;
+  color: #000000;
+  font-family: "Calibri";
+  font-weight: bold;
+}
+.static-info h1 {
+  padding-top: 24pt;
+  font-size: 24pt;
+  padding-bottom: 6pt;
+}
+.static-info h2 {
+  padding-top: 18pt;
+  font-size: 18pt;
+  padding-bottom: 4pt;
+}
+.static-info h3 {
+  padding-top: 14pt;
+  font-size: 14pt;
+  padding-bottom: 4pt;
+}
+.static-info h4 {
+  padding-top: 12pt;
+  font-size: 12pt;
+  padding-bottom: 2pt;
+}
+.static-info h5 {
+  padding-top: 11pt;
+  font-size: 11pt;
+  padding-bottom: 2pt;
+}
+.static-info h6 {
+  padding-top: 10pt;
+  font-size: 10pt;
+  padding-bottom: 2pt;
+}
 .contact-info {
   list-style-type: none;
 }

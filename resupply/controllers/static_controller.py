@@ -24,19 +24,19 @@ def index(self):
 
 @app.route("/contact")
 def contact():
-    return render_template('public/contact.html')
+    return render_template('public/contact.html', user=current_user)
 
 @app.route("/about")
 def about():
-	return render_template('public/about.html')
+	return render_template('public/about.html', user=current_user)
 
 @app.route("/privacy-policy")
 def privacy():
-    return render_template('public/privacy.html')
+    return render_template('public/privacy.html', user=current_user)
 
 @app.route("/terms-of-service")
 def terms():
-    return render_template('public/terms.html')
+    return render_template('public/terms.html', user=current_user)
 
 #ehh this might fit somewhere else.
 @app.route("/pricing")
