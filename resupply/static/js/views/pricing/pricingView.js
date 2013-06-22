@@ -19,7 +19,7 @@ require.config({
 	}
 
 });
-define(['backbone', 'models/household/HouseholdList', 'text!views/pricing/template.html'], function(Backbone, HouseholdList, tmpl) {
+define(['backbone', 'models/household/HouseholdList', 'text!views/pricing/pricingTmpl.html'], function(Backbone, HouseholdList, tmpl) {
 	var PricingView = Backbone.View.extend({
 		initialize: function() {
 			// note: currentPackage key only set if user is logged in
