@@ -28,7 +28,7 @@ def about():
 	return render_template('public/about.html')
 
 #ehh this might fit somewhere else.
-@app.route("/pricing")
+@app.route("/pricing_old")
 def pricing():
 	app.logger.info('showing the pricing page fadfa')
 	refferalCode = None
@@ -60,7 +60,7 @@ def pricing():
 	return render_template('product/pricing.html',showGetStarted=showGetStarted)
 
 
-@app.route('/pricingChart')
+@app.route('/pricing')
 def pricingChart():
 	user = current_user
 	currentPackage = ''
