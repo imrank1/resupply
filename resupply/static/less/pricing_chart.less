@@ -48,3 +48,44 @@
 		form { margin: 0; }
 	}
 }
+
+.resupply-pricing-chart {
+  &.collapsed {
+    display: none;
+  }
+}
+
+.household-input-container {
+  float: none;
+  margin: 10px auto 0;
+  h3 {
+    margin: 15px 10px;
+    font: bold 26px/35px arvo;
+  }
+  .household-inputs {
+    margin-top: 14px;
+    label {
+      float: left;
+      input { display: none; }
+      margin: 15px 10px;
+      font: bold 26px/35px arvo;
+      height: 35px;
+      width: 16px;
+      background: @grayLighter;
+      padding: 0 10px;
+      border-radius: 50px;
+      text-align: center;
+
+      &.active { background: @primary; }
+    }
+  }
+}
+
+.zip-container {
+  float: none;
+  background: #fff;
+  background: rgba(255,255,255,.3);
+  padding: 10px 30px;
+  margin: 0 auto 40px;
+  border-radius: 4px;
+}

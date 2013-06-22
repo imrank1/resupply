@@ -10,7 +10,7 @@ from resupply.services import pricing_service
 def root():
 	user = current_user
 	if(user.is_anonymous()==False):
-		return redirect("/account")   
+		return redirect("/account")
 	else:
 		fbParam = request.args.get('fb_ref')
 		if(fbParam):
@@ -41,8 +41,8 @@ def pricing():
 
 	if(targetZipCode==None):
 		showGetStarted=True
-		app.logger.info("showing getStartedModal on pricing screen")    
-	
+		app.logger.info("showing getStartedModal on pricing screen")
+
 	user = current_user
 	if(user.is_anonymous()==False):
 		app.logger.info("there is a current user with " + user.currentPackage)
@@ -67,9 +67,11 @@ def pricingChart():
 	refferalCode = session.get('refferalCode')
 	zipcode = session.get('targetZipCode') or 0
 	household = session.get('houseHoldSize') or 0
-	if(user.is_anonymous()==False):
+	if(not user.is_anonymous()):
 		household = int(pricing_service.getHouseHouldSizeFromPackage(user.currentPackage))
-		currentPackage = current_user.currentPackage.split("-",1)[0]
+		currentPackage = user.currentPackage.split("-",1)[0]
+        if hasattr(user, 'zipCode'):
+            zipcode = user.zipCode
 
 	return render_template(
 		'product/pricing_chart.html',

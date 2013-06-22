@@ -21,18 +21,69 @@ require.config({
 });
 define(['backbone', 'models/household/HouseholdList', 'text!views/pricing/pricingTmpl.html'], function(Backbone, HouseholdList, tmpl) {
 	var PricingView = Backbone.View.extend({
+        el: '.resupply-pricing-container',
+
+        events: {
+            'keypress #zipCode': 'zipPress',
+            'change .household': 'householdChange'
+        },
+
+        zipPress: function(e) {
+            if(e.keyCode === 13) this.setZip();
+        },
+
+        setZip: function() {
+            var zip = this.$zip.val();
+            if(!/^\d{5}(-\d{4})?$/.test(zip)) return this.$alert.show().html('Invalid zipcode');
+            if(parseInt(zip.substr(0,1),10) > 2) return this.$alert.show().html('Sorry we currently do not ship to that area of the country!');
+            this.$alert.hide();
+            this.$('.resupply-hero').slideUp();
+            this.$chartContainer.slideDown();
+
+            // makes request to store session zipcode
+            $.ajax({
+                url: '/getStarted',
+                type: 'POST',
+                data:{ zipCode: zip, numFamily: 1, gender: this.$gender.filter(':checked').val() },
+                cache: false
+            });
+        },
+
+        householdChange: function(e) {
+            this.model.set('household', parseInt(e.currentTarget.value, 10));
+        },
+
 		initialize: function() {
-			// note: currentPackage key only set if user is logged in
 			this.model = new Backbone.Model(window.resupply);
+            this.model.on('change:household', this.render, this);
+
 			this.householdList = new HouseholdList(window.pricingData);
 
-			console.log(this.model.toJSON());
-			console.log(this.householdList.toJSON());
-			console.log(tmpl);
+            this.$chartContainer = this.$('.resupply-pricing-chart');
+            this.$zip = this.$('#zipCode');
+            this.$alert = this.$('.alert');
+            this.$gender = this.$('.gender');
+
+            this.render();
 		},
 
 		render: function() {
+            var household = this.model.get('household') || 1
+            var chart = this.householdList.findWhere({familySize: household}).toJSON();
+            var currentPackage = this.model.get('currentPackage');
+            this.$chartContainer.html(_.template(tmpl, {
+                chart: chart,
+                household: household,
+
+                // note: currentPackage key only set if user is logged in
+                authed: !!currentPackage,
+                currentPackage: currentPackage
+            }));
+
+            // selects the current package
+            this.$('.household-inputs label').removeClass('active');
+            this.$('.household[value="'+household+'"]').prop('checked', true).parent().addClass('active');
 		}
 	});
-	return new PricingView();
+    $(function(){ return new PricingView(); });
 });

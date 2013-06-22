@@ -1,1 +1,150 @@
-qwerty
+<div class="span8 clearfix household-input-container">
+    <h3 class="span3">Select Household</h3>
+    <div class="span4 household-inputs">
+        <label><input type="radio" name="household" class="household" value="1"/>1</label>
+        <label><input type="radio" name="household" class="household" value="2"/>2</label>
+        <label><input type="radio" name="household" class="household" value="3"/>3</label>
+        <label><input type="radio" name="household" class="household" value="4"/>4</label>
+    </div>
+</div>
+<div class="row">
+    <table class="pricing_chart" cellpadding="0" cellspacing="0" border="0">
+        <thead>
+            <tr>
+                <th>&nbsp;</th>
+                <th class="c2">
+                    <div class="cost">
+                        <span class="currency">$</span>
+                        <span class="amount"><%=chart.basic.price%></span>
+                        <p>Per month</p>
+                    </div>
+                </th>
+                <th class="c3">
+                    <div class="cost">
+                        <span class="currency">$</span>
+                        <span class="amount"><%=chart.premium.price%></span>
+                        <p>Per month</p>
+                    </div>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="c1">Laundry</td>
+                <td class="c2">
+                    <img src="static/img/resupply-logo.png" alt="Resupply">
+                    <p><%=chart.amount.laundry%> loads a month</p>
+                </td>
+                <td class="c3">
+                    <img src="static/img/brand/tide-large.png" alt="Tide Pods">
+                    <p><%=chart.amount.laundry%> loads a month</p>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="c1">Dishwasher</td>
+                <td class="c2">
+                    <img src="static/img/resupply-logo.png" alt="Resupply">
+                    <p><%=chart.amount.dishwater%> cycles a month</p>
+                </td>
+                <td class="c3">
+                    <img src="static/img/brand/cascade.png" alt="Cascade">
+                    <p><%=chart.amount.dishwasher%> cycles a month</p>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="c1">Toothbrush</td>
+                <td class="c2">
+                    <img src="static/img/brand/oralb.png" alt="Oral B">
+                    <p><%=chart.amount.toothbrush%> every 3 months</p>
+                </td>
+                <td class="c3">
+                    <img src="static/img/brand/oralb.png" alt="Oral B Electric"> &nbsp; Electric
+                    <p><%=chart.amount.toothbrush%> every 3 months</p>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="c1">Toothpaste</td>
+                <td class="c2">
+                    <img src="static/img/brand/aquafresh.png" alt="Aquafresh">
+                    <p><%=chart.amount.toothpaste%> every 6 weeks</p>
+                </td>
+                <td class="c3">
+                    <img src="static/img/brand/senso-small.png" alt="Sensodyne">
+                    <p><%=chart.amount.toothpaste%> every 6 weeks</p>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="c1">Floss</td>
+                <td class="c2">
+                    <img src="static/img/brand/glide.png" alt="Glide Floss">
+                    <p><%=chart.amount.floss%> every 6 weeks</p>
+                </td>
+                <td class="c3">
+                    <img src="static/img/brand/glide.png" alt="Glide Floss">
+                    <p><%=chart.amount.floss%> every 6 weeks</p>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="c1">Trash Bags</td>
+                <td class="c2">
+                    <img src="static/img/resupply-logo.png" alt="Resupply">
+                    <p><%=chart.amount.trash%> a month</p>
+                </td>
+                <td class="c3">
+                    <img src="static/img/brand/glad.png" alt="Glad Trash Bags">
+                    <p><%=chart.amount.trash%> a month</p>
+                </td>
+            </tr>
+
+            <tr class="action">
+                <td></td>
+                <td class="c2">
+                    <% if(authed){ %>
+                        <% if(currentPackage === chart.basic.id){ %>
+                            <button id="signupBasic" disabled="disabled" type="submit" class="btn">Current Package</button>
+                        <% } else { %>
+                            <form action="/confirmUpgrade" method="POST">
+                                <button id="signupBasic" type="submit" class="btn btn-primary">Upgrade Now!</button>
+                                <input type="hidden" name="packageType" value="<%=chart.basic.id%>">
+                                <input type="hidden" name="familySize" value="<%=household%>">
+                            </form>
+                        <% } %>
+                    <% } else { %>
+                        <form action="step1" method="POST">
+                            <button id="signupBasic" type="submit" class="btn btn-primary">Get This!</button>
+                            <input type="hidden" name="packageType" value="<%=chart.basic.id%>">
+                            <input type="hidden" name="familySize" value="<%=household%>">
+                        </form>
+                    <% } %>
+
+                </td>
+                <td class="c3">
+                    <% if(authed){ %>
+                        <% if(currentPackage === chart.premium.id){ %>
+                            <button id="signupBasic" disabled="disabled" type="submit" class="btn">Current Package</button>
+                        <% } else { %>
+                            <form action="/confirmUpgrade" method="POST">
+                                <button id="signupBasic" type="submit" class="btn btn-primary">Upgrade Now!</button>
+                                <input type="hidden" name="packageType" value="<%=chart.premium.id%>">
+                                <input type="hidden" name="familySize" value="<%=household%>">
+                            </form>
+                        <% } %>
+                    <% } else { %>
+                        <form action="step1" method="POST">
+                            <button id="signupPremium" type="submit" class="btn btn-primary">Get This!</button>
+                            <input type="hidden" name="packageType" value="<%=chart.premium.id%>">
+                            <input type="hidden" name="familySize" value="<%=household%>">
+                        </form>
+                    <% } %>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+    <!--<div>* Price indicated does not include sales tax which will be displayed at checkout</div>-->

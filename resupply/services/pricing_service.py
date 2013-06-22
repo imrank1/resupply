@@ -62,7 +62,7 @@ def getFullPricingData():
 			"id": "resupplyPremium",
 			"price": 25
 		},
-		"ammount": {
+		"amount": {
 			"laundry": 10,
 			"dishwasher": 10,
 			"toothbrush": 1,
@@ -80,7 +80,7 @@ def getFullPricingData():
 			"id": "resupplyPremium2",
 			"price": 33
 		},
-		"ammount": {
+		"amount": {
 			"laundry": 12,
 			"dishwasher": 10,
 			"toothbrush": 2,
@@ -98,7 +98,7 @@ def getFullPricingData():
 			"id": "resupplyPremium3",
 			"price": 41
 		},
-		"ammount": {
+		"amount": {
 			"laundry": 16,
 			"dishwasher": 16,
 			"toothbrush": 3,
@@ -116,7 +116,7 @@ def getFullPricingData():
 			"id": "resupplyPremium4",
 			"price": 49
 		},
-		"ammount": {
+		"amount": {
 			"laundry": 18,
 			"dishwasher": 16,
 			"toothbrush": 4,
