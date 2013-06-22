@@ -5340,6 +5340,9 @@ body {
   line-height: 33px;
   background: #eeeeee;
 }
+.footer a {
+  color: #b3b3b3;
+}
 .footer-social {
   float: left;
 }

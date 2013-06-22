@@ -27,6 +27,14 @@ def index(self):
 def about():
 	return render_template('public/about.html')
 
+@app.route("/privacy-policy")
+def privacy():
+    return render_template('public/privacy.html')
+
+@app.route("/terms-of-service")
+def terms():
+    return render_template('public/terms.html')
+
 #ehh this might fit somewhere else.
 @app.route("/pricing")
 def pricing():
