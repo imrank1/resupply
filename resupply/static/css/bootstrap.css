@@ -5600,3 +5600,42 @@ body {
 .pricing_chart tbody form {
   margin: 0;
 }
+.resupply-pricing-chart.collapsed {
+  display: none;
+}
+.household-input-container {
+  float: none;
+  margin: 10px auto 0;
+}
+.household-input-container h3 {
+  margin: 15px 10px;
+  font: bold 26px/35px arvo;
+}
+.household-input-container .household-inputs {
+  margin-top: 14px;
+}
+.household-input-container .household-inputs label {
+  float: left;
+  margin: 15px 10px;
+  font: bold 26px/35px arvo;
+  height: 35px;
+  width: 16px;
+  background: #eeeeee;
+  padding: 0 10px;
+  border-radius: 50px;
+  text-align: center;
+}
+.household-input-container .household-inputs label input {
+  display: none;
+}
+.household-input-container .household-inputs label.active {
+  background: #ff632e;
+}
+.zip-container {
+  float: none;
+  background: #fff;
+  background: rgba(255, 255, 255, 0.3);
+  padding: 10px 30px;
+  margin: 0 auto 40px;
+  border-radius: 4px;
+}

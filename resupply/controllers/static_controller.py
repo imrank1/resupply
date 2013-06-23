@@ -10,7 +10,7 @@ from resupply.services import pricing_service
 def root():
 	user = current_user
 	if(user.is_anonymous()==False):
-		return redirect("/account")   
+		return redirect("/account")
 	else:
 		fbParam = request.args.get('fb_ref')
 		if(fbParam):
@@ -39,7 +39,7 @@ def terms():
     return render_template('public/terms.html', user=current_user)
 
 #ehh this might fit somewhere else.
-@app.route("/pricing")
+@app.route("/pricing_old")
 def pricing():
 	app.logger.info('showing the pricing page fadfa')
 	refferalCode = None
@@ -52,8 +52,8 @@ def pricing():
 
 	if(targetZipCode==None):
 		showGetStarted=True
-		app.logger.info("showing getStartedModal on pricing screen")    
-	
+		app.logger.info("showing getStartedModal on pricing screen")
+
 	user = current_user
 	if(user.is_anonymous()==False):
 		app.logger.info("there is a current user with " + user.currentPackage)
@@ -70,3 +70,25 @@ def pricing():
 
 	return render_template('product/pricing.html',showGetStarted=showGetStarted)
 
+
+@app.route('/pricing')
+def pricingChart():
+	user = current_user
+	currentPackage = ''
+	refferalCode = session.get('refferalCode')
+	zipcode = session.get('targetZipCode') or 0
+	household = session.get('houseHoldSize') or 0
+	if(not user.is_anonymous()):
+		household = int(pricing_service.getHouseHouldSizeFromPackage(user.currentPackage))
+		currentPackage = user.currentPackage.split("-",1)[0]
+        if hasattr(user, 'zipCode'):
+            zipcode = user.zipCode
+
+	return render_template(
+		'product/pricing_chart.html',
+		user=user,
+		zipcode=zipcode,
+		household=household,
+		currentPackage=currentPackage,
+		pricingData=pricing_service.getFullPricingData()
+	)

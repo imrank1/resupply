@@ -37,7 +37,16 @@
 					<div class="nav-collapse">
 						<ul class="nav pull-right">
 							<li><a href="/about" class="anchorLink">About</a></li>
-							<li><a href="/pricing" class="anchorLink">Pricing</a></li>
+
+							<li>
+                                <a href="/pricing" class="anchorLink">
+                                    {% if user and user.is_authenticated()  %}
+                                        Upgrade
+                                    {% else %}
+                                        Pricing
+                                    {% endif %}
+                                </a>
+                            </li>
 							<li><a href="/contact" class="anchorLink">Contact</a></li>
 
 							{% if user and user.is_authenticated()  %}
