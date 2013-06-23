@@ -1,0 +1,49 @@
+{% extends "layouts/base.html" %}
+
+{% block head_bottom %}
+    <script>
+        window.resupply = {
+            zipcode: {{zipcode}},
+            household: {{household}},
+            currentPackage: '{{currentPackage}}'
+        };
+        window.pricingData = {{pricingData|tojson|safe}};</script>
+    </script>
+    <script data-main="/static/js/views/pricing/pricingView" src="/static/js/ext/require.js"></script>
+    <script src="https://checkout.stripe.com/v2/checkout.js"></script>
+{% endblock %}
+
+{% block content%}
+<div class="resupply-pricing-container">
+    {% if not zipcode %}
+        <div class="resupply-hero">
+            <div class="container">
+                <div class="span5 zip-container form-horizontal">
+                    <h3>Tell us a little about yourself</h3>
+                    <div class="control-group">
+                        <label class="control-label" for="gender">Your Gender</label>
+                        <div class="controls">
+                            <label class="radio">
+                                <input type="radio" class="gender" name="gender" value="male" checked> Male
+                            </label>
+                            <label class="radio">
+                                <input type="radio" class="gender" name="gender" value="female"> Female
+                            </label>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="alert alert-error hide"></div>
+                        <label class="control-label" for="zipCode">Shipping Zip Code</label>
+                        <div class="controls">
+                            <input class="span2" type="text" id="zipCode" name="zipCode" placeholder="Zip Code">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {%  endif %}
+
+    <div class="container resupply-pricing-chart {% if not zipcode %}hide{% endif %}"></div>
+</div>
+{% endblock %}
+

@@ -55,14 +55,14 @@ def getStartedUpgrade():
 		resp.status_code = 200
 		return resp
 
-		@app.route("/confirmUpgrade",methods=['POST'])
-		@login_required
-		def upgradeConfirmation( ):
-			user = current_user
-			currentPackage = user.currentPackage
-			upgradePackage = request.form['packageType']
-			familySize = request.form['familySize']
-			return render_template('product/upgradeConfirmation.html',currentPackage=pricing_service.getDisplayPackage(currentPackage),upgradePackageDisplay=pricing_service.getDisplayPackage(upgradePackage),upgradePackage=upgradePackage,currentPrice=pricing_service.getPackagePrice(currentPackage),upgradePrice=pricing_service.getPackagePrice(upgradePackage),familySize=familySize)
+@app.route("/confirmUpgrade",methods=['POST'])
+@login_required
+def upgradeConfirmation( ):
+    user = current_user
+    currentPackage = user.currentPackage
+    upgradePackage = request.form['packageType']
+    familySize = request.form['familySize']
+    return render_template('product/upgradeConfirmation.html',currentPackage=pricing_service.getDisplayPackage(currentPackage),upgradePackageDisplay=pricing_service.getDisplayPackage(upgradePackage),upgradePackage=upgradePackage,currentPrice=pricing_service.getPackagePrice(currentPackage),upgradePrice=pricing_service.getPackagePrice(upgradePackage),familySize=familySize)
 
 
 @app.route("/processUpgrade",methods=['POST'])

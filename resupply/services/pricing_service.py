@@ -50,3 +50,78 @@ def getPricingMap(numFamily):
 		"premiumResupplyPackageId":"resupplyPremium4","premiumPrice":49,"premiumLaundryAmt":18,"premiumDishwasherAmt":16,"premiumToothBrushAmt":4,"premiumToothPasteAmt":3,"premiumFlossAmt":2,"premiumTrashAmt":18}
 		
 	return pricingMap
+
+def getFullPricingData():
+	return [{
+		"familySize": 1,
+		"basic": {
+			"id": "resupplyBasic",
+			"price": 17
+		},
+		"premium": {
+			"id": "resupplyPremium",
+			"price": 25
+		},
+		"amount": {
+			"laundry": 10,
+			"dishwasher": 10,
+			"toothbrush": 1,
+			"toothpaste": 1,
+			"floss": 1,
+			"trash": 12
+		}
+	},{
+		"familySize": 2,
+		"basic": {
+			"id": "resupplyBasic2",
+			"price": 25
+		},
+		"premium": {
+			"id": "resupplyPremium2",
+			"price": 33
+		},
+		"amount": {
+			"laundry": 12,
+			"dishwasher": 10,
+			"toothbrush": 2,
+			"toothpaste": 1,
+			"floss": 1,
+			"trash": 14
+		}
+	},{
+		"familySize": 3,
+		"basic": {
+			"id": "resupplyBasic3",
+			"price": 33
+		},
+		"premium": {
+			"id": "resupplyPremium3",
+			"price": 41
+		},
+		"amount": {
+			"laundry": 16,
+			"dishwasher": 16,
+			"toothbrush": 3,
+			"toothpaste": 2,
+			"floss": 2,
+			"trash": 18
+		}
+	},{
+		"familySize": 4,
+		"basic": {
+			"id": "resupplyBasic4",
+			"price": 41
+		},
+		"premium": {
+			"id": "resupplyPremium4",
+			"price": 49
+		},
+		"amount": {
+			"laundry": 18,
+			"dishwasher": 16,
+			"toothbrush": 4,
+			"toothpaste": 3,
+			"floss": 2,
+			"trash": 18
+		}
+	}]
