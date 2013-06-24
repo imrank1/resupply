@@ -1,11 +1,20 @@
 {% extends "layouts/base.html" %}
-
+{% block head_bottom %}
+    <script data-main="/static/js/contact" src="/static/js/ext/require.js"></script>
+{% endblock %}
 {% block content%}
 <div class="container">
 
     <h2>Contact</h2>
     <div class="row">
-        <div class="span8">
+        <div id="contactForm" class="span8">
+
+            <div class="alert " id="submitted"  style="display:none;">We've received your question! We'll be in touch shortly!
+            </div>
+
+            <div class="alert alert-error" id="error"  style="display:none;">Sorry there was an error submitting your request! Please try again later or email support@resupp.ly. 
+            </div>
+
             <form>
                 <div class="controls controls-row">
                     <input id="name" name="name" type="text" class="span4" placeholder="Name">

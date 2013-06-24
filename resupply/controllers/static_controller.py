@@ -1,10 +1,12 @@
-from flask import Flask, url_for,redirect,request,session, g
+from flask import Flask, url_for,redirect,request,session, g, jsonify
 from flask.ext.mongoengine import MongoEngine
 from resupply import *
 from flask import render_template
 from flask.ext.login import LoginManager, UserMixin, \
 	login_required, login_user, logout_user, current_user
 from resupply.services import pricing_service
+from resupply.services import email_service
+
 
 @app.route("/")
 def root():
@@ -25,6 +27,23 @@ def index(self):
 @app.route("/contact")
 def contact():
     return render_template('public/contact.html', user=current_user)
+
+
+@app.route("/contact-submit",methods=["POST"])
+def contactSubmit():
+	name = request.form['name']
+	email = request.form['email']
+	message = request.form['message']
+
+	contents = "From:" + name + ' email:' + email + ' message:' + message
+	email_service.send_mail('imrank1@gmail.com', 'support@resupp.ly','Contact Submission!', 'html',contents)
+	resp = None
+	resp = jsonify({'submitted': True})
+	resp.status_code = 200
+	return resp
+
+
+
 
 @app.route("/about")
 def about():
