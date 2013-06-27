@@ -28,6 +28,11 @@ def index(self):
 def contact():
     return render_template('public/contact.html', user=current_user)
 
+@app.route("/faq")
+def contact():
+    return render_template('public/faq.html', user=current_user)
+
+
 
 @app.route("/contact-submit",methods=["POST"])
 def contactSubmit():
