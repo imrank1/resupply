@@ -7,14 +7,14 @@
 
 <div class="container">
 
-	<h3>Upgrade Confirmation</h3>
-
-	<div id="packageHeader" class="container hero-unit checkout-hero-unit offset4 span6">
-		<p>Your upgrading to the {{ upgradePackageDisplay }} package for a household size of {{ familySize }} at ${{upgradePrice}} per month!</p>
-
+	<div id="packageHeader" class="resupply-hero hero-unit offset2 span7">
+		<div class="well  span6 "><div class="signup-info">Your upgrading to the {{ upgradePackageDisplay }} package for a household size of {{ familySize }} at ${{upgradePrice}} per month!</div>
+		</div>
 		<form action="/processUpgrade" method="POST">
-			<button type="submit" class="buyButton sign_up">Do it!</button>
+		<div style="text-align:center;">
+			<button type="submit" class="btn-large btn-warning">Confirm</button>
 			<input type="hidden" name="packageType" value="{{ upgradePackage }}" >
+		</div>
 		</form>
 	</div>
 
