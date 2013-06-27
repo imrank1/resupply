@@ -11,14 +11,13 @@ define(['jquery','underscore','backbone'], function($,_,Backbone) {
         },
 
         processSignup:function(e){
-
+            debugger;
             self = this;
             e.preventDefault();
             $(".alert-error").hide();
             var missingFields = false;
             var error=false;
             var passwordMatch = true;
-            var price = this.getPackagePrice();
             $(".requiredStuff").each(function(){
                 if($(this).val()==""){
                     $(this).addClass("errorState");
@@ -53,32 +52,15 @@ define(['jquery','underscore','backbone'], function($,_,Backbone) {
             cache: false,
             statusCode : { 
                 200: function(){
-                    var name = $('#name').val();
-                    var e = $('#email').val();
-                    var password = $('#password').val();
-                    var shippingAddress = $('#shipping-address').val();
-                    var shippingAddress2 = $('#shipping-address2').val();
-                    var shippingCity = $('#shipping-city').val();
-                    var shippingZip = $('#shipping-zipcode').val();
-                    var shippingState = $('#shipping-state').val();
-                    var phone = $('#shipping-phone').val();
-                    $.ajax({
-                      url: '/stageCharge',
-                      type: 'post',
-                      async: true,
-                      data: { name: name,email:e,password:password,shippingAddress:shippingAddress,shippingAddress2:shippingAddress2,shippingCity:shippingCity,shippingZip:shippingZip,shippingState:shippingState,shippingPhone:phone,packageType:window.packageType},
-                      cache: false,
-                      success: function(){
-
-                        window.location= "/finalStep";
-                             }   
-                        ,
-                      error: function(){
-                        alert('error');
-                        $("#signupFailure").show("slow");
-                        }
-                    });
-
+                Stripe.card.createToken({
+                    name:$('.card-name').val(),
+                    number: $('.card-number').val(),
+                    cvc: $('.card-cvc').val(),
+                    exp_month: $('.card-expiry-month').val(),
+                    exp_year: $('.card-expiry-year').val(),
+                    address_zip: $('.card-zip').val(),   
+                    address_city: $('.card-city').val()
+                }, self.stripeResponseHandler);    
                 return this;
             },
                 500: function(){
@@ -97,33 +79,42 @@ define(['jquery','underscore','backbone'], function($,_,Backbone) {
 
         },
 
-        getPackagePrice:function(){
-            var packagePrice; 
-            switch(window.packageType)
-            {
-                case "basic":
-                    packagePrice = 17*100;
-                    break;
-                case "basicPlus":
-                    packagePrice = 20*100;
-                    break;
-                case "premium":
-                    packagePrice =  25*100;
-                    break;
-                case "premiumPlus":
-                    packagePrice =  28*100;
-                    break;
-                default:
-                    packagePrice =  17*100;
-            }
-            return packagePrice;
-        },
 
-        render: function() {
-            // var self = this;
-            // var variables = { packageType: window.packageType };
-            // $(self.el).template(TEMPLATE_URL + '/templates/billing_include.html', variables);
+    stripeResponseHandler :function(status,response) {
+    if (response.error) {
+        $("#payment-errors").text(response.error.message).show();
+      } else {
+        var token = response['id'];
 
+        var name = $('#name').val();
+        var e = $('#email').val();
+        var password = $('#password').val();
+        var shippingAddress = $('#shipping-address').val();
+        var shippingAddress2 = $('#shipping-address2').val();
+        var shippingCity = $('#shipping-city').val();
+        var shippingZip = $('#shipping-zipcode').val();
+        var shippingPhone = $('#shipping-phone').val();
+        var shippingState = $('#shipping-state').val();
+        $.ajax({
+          url: '/charge',
+          type: 'post',
+          data: { name: name,email:e,password:password,shippingAddress:shippingAddress,shippingAddress2:shippingAddress2,shippingZip:shippingZip,shippingState:shippingState,shippingPhone:shippingPhone,stripeToken:token,packageType:window.packageType},
+          cache: false,
+          success: function(){
+            window.location.href = "/account";
+          },
+          error: function(){
+            $("#signupFailure").show("slow");
+          }
+        });
+        return false;
+      }
+    },
+
+    render: function() {
+        // var self = this;
+        // var variables = { packageType: window.packageType };
+        // $(self.el).template(TEMPLATE_URL + '/templates/billing_include.html', variables);
             //  return this;
         }
 

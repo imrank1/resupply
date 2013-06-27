@@ -87,19 +87,22 @@ def processUpgrade( ):
 	currentStripePlans = stripe.Plan.all()
 	targetStripePlan = None
 	for plan in currentStripePlans.data:
-		if plan.name == stripePlanIdentifier:
+		if plan.name.strip() == stripePlanIdentifier.strip():
 			app.logger.info("Found existing stripe plan:" + stripePlanIdentifier)
 			targetStripePlan = plan
 			break
 
 	if targetStripePlan == None:
 		app.logger.info("Creating new stripe plan for:"  + stripePlanIdentifier)
-		stripe.Plan.create(
+		try:
+			stripe.Plan.create(
 			amount='%.0f'%finalPrice,
 			interval='month',
 			name=stripePlanIdentifier,
 			currency='usd',
 			id=stripePlanIdentifier)
+		except Exception:
+			app.logger.info("The plan " + stripePlanIdentifier + " already exists in stripe")
 
 	app.logger.info('package price upgrade is :' + '%.2f'%chargePrice)
 	app.logger.info('with tax package upgrade  price is : ' + '%.2f'%finalPrice)
@@ -113,7 +116,7 @@ def processUpgrade( ):
 	email_service.send_mail(user.emailAddress, 'support@resupp.ly',
 		'Resupply Upgrade Confirmation', 'html',
 		emailHtml)
-	email_service.send_mail(user.emailAddress, 'imrank1@gmail.com',
+	email_service.send_mail('imrank1@gmail.com', 'support@resupp.ly',
 		'Resupply Upgrade Confirmation', 'html',
 		emailHtml)
 	return redirect('/account')

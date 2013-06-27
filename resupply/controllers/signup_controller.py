@@ -20,28 +20,35 @@ import requests
 import os
 
 
-@app.route("/stageCharge" ,methods=['POST'])
-def stageCharge():
+@app.route("/checkEmail", methods=['GET'])
+def checkEmail():
+    count_of_email = User.objects(emailAddress=request.args.get('emailAddress')).count()
+    resp = None
+    if count_of_email > 0:
+        data = {'available': False}
+        resp = jsonify(data)
+        resp.status_code = 500
+    else:
+        resp = jsonify({'available': True})
+        resp.status_code = 200
+    return resp
+
+
+@app.route("/charge", methods=['POST'])
+def charge():
+	app.logger.info("starting charge")
 	name = request.form['name']
 	email = request.form['email']
 	password = request.form['password']
 	shippingAddress = request.form['shippingAddress']
-	shippingAddress2 = request.form['shippingAddress']
-	city = request.form['shippingCity']
+	shippingAddress2 = request.form['shippingAddress2']
 	zipcode = request.form['shippingZip']
 	refferal = session.get('refferalCode')
 	phone = request.form['shippingPhone']
 	shippingState = request.form['shippingState']
-	session['name'] = name
-	session['email']=email
-	session['password'] = password
-	session['shippingAddress'] = shippingAddress
-	session['shippingAddress2'] = shippingAddress2
-	session['city'] = city
-	session['zipCode'] = zipcode
-	session['password'] = password
-	session['phone'] = phone
-	session['state'] = shippingState
+	shippingPhone = request.form['shippingPhone']
+	sourceRefferer = None
+
 
 	taxRate = None
 	if shippingState == 'VA':
@@ -64,67 +71,32 @@ def stageCharge():
 	currentStripePlans = stripe.Plan.all()
 	targetStripePlan = None
 	for plan in currentStripePlans.data:
-		if plan.name == stripePlanIdentifier:
+		if stripePlanIdentifier.strip() == plan.name.strip():
 			app.logger.info("Found existing stripe plan:" + stripePlanIdentifier)
 			targetStripePlan = plan
 			break
 
 	if targetStripePlan == None:
 		app.logger.info("Creating new stripe plan for:"  + stripePlanIdentifier)
-		stripe.Plan.create(
-			amount='%.0f'%finalPrice,
+		try:
+			stripe.Plan.create(
+			amount='%.0f' % finalPrice,
 			interval='month',
 			name=stripePlanIdentifier,
 			currency='usd',
 			id=stripePlanIdentifier)
+		except Exception:
+			app.logger.info("The plan " + stripePlanIdentifier + " already exists in stripe")
 
 	app.logger.info('package price is :' + '%.2f'%chargePrice)
 	app.logger.info('with tax package price is : ' + '%.2f'%finalPrice)
 
 	session['stripePlanIdentifier'] = stripePlanIdentifier
 	session['finalPricePerMonth'] = round(finalPrice,2)
-	session.modified = True
-	app.logger.info(session)
-
-	res = jsonify({'staged':True})
-	res.status_code = 200
-	return res
 
 
 
-@app.route("/finalStep",methods=['GET'])
-def finalStep():
-	return render_template("signup/checkout.html",name=session.get('name'),package=session.get('packageType'),email=session.get('email'),password=session.get('password'),shippingAddress=session.get('shippingAddress'),shippingAddress2=session.get('shippingAddress2'),shippingCity=session.get('city'),zipcode=session.get('zipCode'),finalPricePerMonth=session.get('finalPricePerMonth')/100,stripePlanIdentifier=session.get('stripePlanIdentifier'),city=session.get('city'),state=session.get('state'),phone=session.get('phone'),stripePublishableKey=app.config["STRIPE_PUBLISHABLE_KEY"])
 
-
-
-@app.route("/checkEmail", methods=['GET'])
-def checkEmail():
-    count_of_email = User.objects(emailAddress=request.args.get('emailAddress')).count()
-    resp = None
-    if count_of_email > 0:
-        data = {'available': False}
-        resp = jsonify(data)
-        resp.status_code = 500
-    else:
-        resp = jsonify({'available': True})
-        resp.status_code = 200
-    return resp
-
-
-@app.route("/charge", methods=['POST'])
-def charge():
-	app.logger.info("starting charge")
-	email = request.form['email']
-	password = request.form['password']
-	shippingAddress = request.form['shippingAddress']
-	shippingAddress2 = request.form['shippingAddress2']
-	zipcode = request.form['shippingZip']
-	refferal = session.get('refferalCode')
-	phone = request.form['shippingPhone']
-	shippingState = request.form['shippingState']
-	shippingPhone = request.form['shippingPhone']
-	sourceRefferer = None
 	if(refferal):
 		refferalCode = refferal.split('-')[1]
 		refferalObject = Refferal.objects.get(refferalCode=refferalCode)
@@ -143,11 +115,8 @@ def charge():
 						email_service.send_mail(refferalObject.originatorEmailAddress, 'support@resupp.ly','We\'ve reduced your subscription amount!', 'html',couponAppliedHtml)
 						email_service.send_mail('imrank1@gmail.com', 'support@resupp.ly','We\'ve reduced your subscription amount!', 'html',couponAppliedHtml)
 
-
-	stripePlanIdentifier = session.get('stripePlanIdentifier')
-
 	packageType = stripePlanIdentifier
-	chargePrice = request.form['finalPrice']
+	chargePrice = finalPrice
 
 	description = "Charging customer with email : " + email + " for " + packageType + " at address :" + shippingAddress + " " + shippingAddress2  + " " + zipcode
 	fullAddress = shippingAddress + ',' 
@@ -185,7 +154,7 @@ def step1():
 	session['packageType'] = packageType
 
 	return render_template('signup/signupStep2.html',name=session.get('name'),package=session.get('packageType'),email=session.get('email'),password=session.get('password'),shippingAddress=session.get('shippingAddress'),
-	shippingAddress2=session.get('shippingAddress2'),zipcode=session.get('targetZipCode'),finalPricePerMonth=session.get('finalPricePerMonth'),city=session.get('city'),packageType=pricing_service.getDisplayPackage(packageType),packagePrice=pricing_service.getPackagePrice(packageType))
+	shippingAddress2=session.get('shippingAddress2'),zipcode=session.get('targetZipCode'),finalPricePerMonth=session.get('finalPricePerMonth'),city=session.get('city'),packageType=pricing_service.getDisplayPackage(packageType),packagePrice=pricing_service.getPackagePrice(packageType),stripePublishableKey=app.config["STRIPE_PUBLISHABLE_KEY"])
 
 
 
