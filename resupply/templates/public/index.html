@@ -27,6 +27,7 @@
 <script data-main="/static/js/home" src="/static/js/ext/require.js"></script>
 <script>
 mixpanel.track("Landing Page");
+mixpanel.track_links('#getStartedSection a','clicked getStarted');
 </script>
 
 
@@ -47,7 +48,7 @@ mixpanel.track("Landing Page");
 			</div>
 		</div>
 		<div class="row">
-			<div class="offset4">
+			<div id="getStartedSection" class="offset4">
 				<a href="/pricing" class="btn btn-large btn-white">Get Started In Seconds!</a>
 			</div>
 		</div>
