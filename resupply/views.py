@@ -62,10 +62,11 @@ def load_user(userid):
 
 
 
-@app.route("/testemail",methods=["GEt"])
+@app.route("/testemail",methods=["GET"])
 def testEmail():
+    emailHtml = render_template('emails/signupConfirmationEmailTemplate.html',package='TestPackage',pricePerMonth=17.00,shippingAddress='Test Address')
     email_service.send_mail('imrank1@gmail.com', 'support@resupp.ly',
-        'Test', 'plaintext',
-          'Click the folowing link to reset your password ')
+              'Confirmation of subscription to Resupp.ly', 'html',
+              emailHtml)
     return redirect('/')
 
