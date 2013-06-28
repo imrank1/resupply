@@ -136,7 +136,7 @@ def charge():
 
 	refferal_service.createRefferal(createdUser.emailAddress)
 	login_user(createdUser)
-	emailHtml = render_template('emails/signupConfirmationEmailTemplate.html',package=pricing_service.getDisplayPackage(stripePlanIdentifier),pricePerMonth=chargePrice,shippingAddress=fullAddress)
+	emailHtml = render_template('emails/signupConfirmationEmailTemplate.html',package=pricing_service.getDisplayPackage(stripePlanIdentifier),pricePerMonth=chargePrice/100,shippingAddress=fullAddress)
 	email_service.send_mail(createdUser.emailAddress, 'support@resupp.ly',
 			  'Confirmation of subscription to Resupp.ly', 'html',
 			  emailHtml)

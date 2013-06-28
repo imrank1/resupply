@@ -5,7 +5,8 @@
         
         <!-- Facebook sharing information tags -->
         <meta property="og:title" content="*|MC:SUBJECT|*" />
-        
+        <link rel="stylesheet" type="text/css" href="https://www.getresupply.com/static/css/bootstrap.css" />
+
         <title>*|MC:SUBJECT|*</title>
 		<style type="text/css">
 			/* Client-specific Styles */
@@ -358,7 +359,13 @@
                                             <td class="headerContent">
                                             
                                             	<!-- // Begin Module: Standard Header Image \\ -->
-                                            	<center><img src="httpss://s3.amazonaws.com/resupply-static/img/bootmetrologo.png" style="max-width:600px;" id="headerImage campaign-icon" mc:label="header_image" mc:edit="header_image" mc:allowdesigner mc:allowtext /></center>
+                                            	<center>
+<h1 class="brand">
+						<a href="https://www.getresupply.com" class="logo">Resupply</a>
+					</h1>
+                         <!--                    		<img src="httpss://s3.amazonaws.com/resupply-static/img/bootmetrologo.png" style="max-width:600px;" id="headerImage campaign-icon" mc:label="header_image" mc:edit="header_image" mc:allowdesigner mc:allowtext />
+ -->
+                                            	</center>
                                             	<!-- // End Module: Standard Header Image \\ -->
                                             
                                             </td>
@@ -382,22 +389,6 @@
 
     														{% block content %}{% endblock %}
 <!-- 
-                                                                <center>Thank you for signing up!</center>
-                                                                
-                                                                 You've signed up for the <strong>{{ package }}</strong> package at ${{ pricePerMonth }} per month. You're scheduled to receive (the first item to be delivered ) on your first delivery.
-                                                                 We'll send out an email every time we ship out your scheduled delivery.  
-                                                                <br />
-                                                                <br />
-
-                                                                We will ship your goods to the following address : <br><bold>{{shippingAddress}}</bold>.
-                                                                <br></br>
-                                                            </br>
-                                                                <br>
-                                                                At any time if you want to change your account type or even cancel you can login to  <a href="https://https://resupply-staging.heroku.com/account" target="_blank">account</a>, to make any changes. 
-                                                                If you have any questions please email us at support@resupply.com
-
-                                                                <br>Thank you!</br>	
-                                                            </br> -->
                                                             </div>
 														</td>
                                                     </tr>
@@ -422,17 +413,15 @@
                                                     <tr>
                                                         <td colspan="2" valign="middle" id="social">
                                                             <div mc:edit="std_social">
-                                                                &nbsp;<a href="*|TWITTER:PROFILEURL|*">follow on Twitter</a> | <a href="http://www.facebook.com/getresupply">friend on Facebook</a> &nbsp;
+                                                                &nbsp;<a href="http://www.twitter.com/resupplycorp">follow on Twitter</a> | <a href="http://www.facebook.com/getresupply">friend on Facebook</a> &nbsp;
                                                             </div>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td valign="top" width="350">
                                                             <div mc:edit="std_footer">
-																<em>Copyright &copy; 2013 *Resupp.ly*, All rights reserved.</em>
-																<br><strong>Our mailing address is:</strong>
+																<em>Copyright &copy; 2013 <a href="https://www.getresupply.com">Resupp.ly</a>, All rights reserved.</em>
 																<br />
-																*|HTML:LIST_ADDRESS_HTML|**|END:IF|* 
 															</br>
                                                             </div>
                                                         </td>
