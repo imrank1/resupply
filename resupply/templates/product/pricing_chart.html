@@ -2,6 +2,7 @@
 
 {% block head_bottom %}
     <script>
+        mixpanel.track("Pricing Page");
         window.resupply = {
             zipcode: {{zipcode}},
             household: {{household}},

@@ -3,7 +3,8 @@
 {% block head_bottom %}
     <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 	<script data-main="/static/js/step2Loader" src="/static/js/ext/require.js"></script>
-	<script> 
+	<script>
+		mixpanel.track("Signup Details Page");
 	    window.packageType = "{{packageType}}";
         Stripe.setPublishableKey('{{stripePublishableKey}}');
     </script>

@@ -1,5 +1,6 @@
 {% extends "layouts/base.html" %}
 {% block head_bottom %}
+    <script>mixpanel.track("Contact Page");</script>
     <script data-main="/static/js/contact" src="/static/js/ext/require.js"></script>
 {% endblock %}
 {% block content%}
