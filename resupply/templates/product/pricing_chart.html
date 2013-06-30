@@ -37,8 +37,21 @@
                         <label class="control-label" for="zipCode">Shipping Zip Code</label>
                         <div class="controls">
                             <input class="span2" type="text" id="zipCode" name="zipCode" placeholder="Zip Code">
+                        <div><a class="btn btn-warning" style="margin-top:15px;" id="nextStep" id="subscribe">Go!</a></div>
                         </div>
+
+
                     </div>
+
+                <div class="alert alert-success" id="subscribeBox" style="display:none;">
+                    Sorry we don't ship to that zip yet. Sign up and we'll notify you when we launch in your area!   
+                    <input type="text" class="requiredSforSubscribe" id="emailAddressSubscribe" name="emailAddressSubscribe" placeholder="youremail@email.com">
+                    <a class="btn " name="subscribe" id="subscribe">Subscribe!</a>
+                    <div class="alert alert-success" id="subscribeSuccess" style="display:none;">Thanks! We'll be in touch!
+                    </div>
+                    <div class="alert alert-error" id="subscribeError" style="display:none;">Sorry somthing wen't wrong please try again.
+                    </div>
+                </div>
                 </div>
             </div>
         </div>

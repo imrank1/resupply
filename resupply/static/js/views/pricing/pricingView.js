@@ -25,7 +25,10 @@ define(['backbone', 'models/household/HouseholdList', 'text!views/pricing/pricin
 
         events: {
             'keypress #zipCode': 'zipPress',
-            'change .household': 'householdChange'
+            'click #nextStep' : 'setZip',
+            'change .household': 'householdChange',
+            'click #subscribe' : 'addToSubscribe',
+            'click #backToInfo' : 'backtoInfo'
         },
 
         zipPress: function(e) {
@@ -35,7 +38,11 @@ define(['backbone', 'models/household/HouseholdList', 'text!views/pricing/pricin
         setZip: function() {
             var zip = this.$zip.val();
             if(!/^\d{5}(-\d{4})?$/.test(zip)) return this.$alert.show().html('Invalid zipcode');
-            if(parseInt(zip.substr(0,1),10) > 2) return this.$alert.show().html('Sorry we currently do not ship to that area of the country!');
+            if(parseInt(zip.substr(0,1),10) > 2) {
+                $("#cantShipThere").show("slow");
+                $("#subscribeBox").show("slow");
+                return;
+            } 
             this.$alert.hide();
             this.$('.resupply-hero').slideUp();
             this.$chartContainer.slideDown();
@@ -47,6 +54,67 @@ define(['backbone', 'models/household/HouseholdList', 'text!views/pricing/pricin
                 data:{ zipCode: zip, numFamily: 1, gender: this.$gender.filter(':checked').val() },
                 cache: false
             });
+        },
+
+        backtoInfo:function(){
+            $.ajax({
+                url: '/clearSession',
+                type: 'POST',
+                cache: false,
+                statusCode : {
+                        200: function(){
+                            window.location = "/pricing";
+                            return this;
+                        },
+                        500: function(){
+                            window.location = "/pricing";
+                            return this;
+                        }
+                    }
+            });
+
+        },
+        addToSubscribe:function(e){
+            var self = this;
+            e.preventDefault();
+            var missingFields = false;
+            var error=false;
+            $(".requiredforSubscribe").each(function(){
+                var $input = $(this);
+                if(!$input.val()){
+                    $input.addClass("errorState");
+                    missingFields=true;
+                }
+            });
+
+            if(missingFields){
+                $("#subscribeErrorMessage").show();
+            }else {
+
+                var email = $("#emailAddressSubscribe").val();
+
+
+                $.ajax({
+                    url: '/addToSubscribe',
+                    type: 'POST',
+                    data:{email:email,},
+                    cache: false,
+                    statusCode : {
+                        200: function(){
+                            $("#subscribeSuccess").show();
+                            return this;
+                        },
+                        500: function(){
+                            $("#subscribeError").show("slow");
+                            return false;
+                        }
+                    }
+                });
+                return false;
+            }
+
+            return this;
+
         },
 
         householdChange: function(e) {

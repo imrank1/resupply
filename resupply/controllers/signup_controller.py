@@ -33,6 +33,12 @@ def checkEmail():
         resp.status_code = 200
     return resp
 
+@app.route("/clearSession", methods=['POST'])
+def clearSession():
+    session.clear();
+    resp = jsonify({'cleared': True})
+    resp.status_code = 200
+    return resp
 
 @app.route("/charge", methods=['POST'])
 def charge():
@@ -197,7 +203,7 @@ def infoAboutYou():
 
 
 @app.route("/addToSubscribe",methods=["POST"])
-def addToSubscribe(self):
+def addToSubscribe():
 	email = request.form['email']
 	user_service.addToSubscribe(email)
 	res = jsonify({'addedd':True})
