@@ -38,11 +38,13 @@ define(['backbone', 'models/household/HouseholdList', 'text!views/pricing/pricin
         setZip: function() {
             var zip = this.$zip.val();
             if(!/^\d{5}(-\d{4})?$/.test(zip)) return this.$alert.show().html('Invalid zipcode');
+            mixpanel.track("Requested Target ZipCode", {"zip": zip});
             if(parseInt(zip.substr(0,1),10) > 2) {
                 $("#cantShipThere").show("slow");
                 $("#subscribeBox").show("slow");
                 return;
-            } 
+            }
+
             this.$alert.hide();
             this.$('.resupply-hero').slideUp();
             this.$chartContainer.slideDown();
