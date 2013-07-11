@@ -5533,6 +5533,10 @@ body {
   font-size: 12;
   color: #e67e22;
 }
+.founders .founder {
+  float: left;
+  margin-right: 20px;
+}
 .navbar .nav > li {
   font-size: .9em;
   text-transform: uppercase;
