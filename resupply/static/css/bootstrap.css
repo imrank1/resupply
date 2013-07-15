@@ -5368,6 +5368,14 @@ body {
   float: right;
   color: #999999;
 }
+.resupply-logo {
+  background-image: url(https://s3.amazonaws.com/resupply-static/img/bootmetrologo.png);
+  display: block;
+  height: 46px;
+  text-indent: -9999px;
+  width: 460px;
+  background-repeat: no-repeat;
+}
 .logo {
   color: #ff632e;
   font: normal 24px/24px Arvo;
