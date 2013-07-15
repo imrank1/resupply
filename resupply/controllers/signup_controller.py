@@ -156,7 +156,7 @@ def charge():
 @app.route("/step1", methods=['POST', 'GET'])
 def step1():
 	packageType = request.form['packageType']
-	app.logger.info('in step1 the package selected is:' + packageType + 'zip code is :' + session.get('targetZipCode'))
+	app.logger.info('in step1 the package selected is:' + packageType)
 	session['packageType'] = packageType
 
 	return render_template('signup/signupStep2.html',name=session.get('name'),package=session.get('packageType'),email=session.get('email'),password=session.get('password'),shippingAddress=session.get('shippingAddress'),
