@@ -13,7 +13,6 @@ from flask_sslify import SSLify
 app = Flask(__name__)
 
 env = os.environ.get('FLASK_ENV', 'development')
-
 configuration = None
 if env =='development':
 	app.config["SECRET_KEY"] = config.dev['secret_key']
