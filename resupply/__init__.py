@@ -45,6 +45,8 @@ app.config["bitlyAccessToken"] = "b9aa357f2106667319586b4d47b30441553e4098"
 
 db = MongoEngine(app)
 
+sslify = SSLify(app)
+
 login_manager = LoginManager()
 login_manager.setup_app(app)
 login_manager.login_view = "login"
